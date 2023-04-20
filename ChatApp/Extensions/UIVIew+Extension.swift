@@ -26,7 +26,7 @@ extension UIView {
         heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
-    func setWitdh(_ width: CGFloat) {
+    func setWidth(_ width: CGFloat) {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
