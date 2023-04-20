@@ -18,7 +18,19 @@ class ViewController: UIViewController {
     private let switchingItemStackView = UIStackView()
     
     private let bubbles: Bubbles = {
-        let view = Bubbles()
+        let view = Bubbles(for: .recipient)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let mediumBubble: Bubbles.MediumBubble = {
+        let view = Bubbles.MediumBubble(for: .recipient)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let smallBubble: Bubbles.SmallBubble = {
+        let view = Bubbles.SmallBubble(for: .recipient)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -36,12 +48,14 @@ class ViewController: UIViewController {
         setUpDarkModeItemBackgroundView()
         setUpDarkModeItemView()
         setBubbleContainer()
+        setMediumBubbleContainer()
+        setSmallBubble()
     }
-    
     
     private func setBubbleContainer() {
         view.addSubview(bubbles)
 
+        // TODO: remove height after adding message label
         bubbles.setHeight(50.0)
         bubbles.setWidth(144.0)
 
@@ -55,6 +69,37 @@ class ViewController: UIViewController {
         bubbles.layer.cornerRadius = 25
     }
     
+    private func setMediumBubbleContainer() {
+        view.addSubview(mediumBubble)
+
+        mediumBubble.setHeight(17.4)
+        mediumBubble.setWidth(18.18)
+        
+        NSLayoutConstraint.activate([
+            mediumBubble.topAnchor.constraint(equalTo: view.topAnchor, constant: 128),
+            mediumBubble.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 27.82)
+        ])
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        mediumBubble.layer.cornerRadius = 25
+    }
+    
+    private func setSmallBubble() {
+        view.addSubview(smallBubble)
+
+        smallBubble.setHeight(9.57)
+        smallBubble.setWidth(10)
+        
+        NSLayoutConstraint.activate([
+            smallBubble.topAnchor.constraint(equalTo: view.topAnchor, constant: 140.43),
+            smallBubble.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16)
+        ])
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        smallBubble.layer.cornerRadius = 25
+    }
     
     //MARK: - switcher view
     

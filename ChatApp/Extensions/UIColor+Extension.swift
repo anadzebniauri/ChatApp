@@ -17,3 +17,13 @@ extension UIColor {
         )
     }
 }
+
+let bubbleSenserColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
+let bubbleRecipientColor = UIColor(red: 218, green: 194, blue: 255, alpha: 1)
+
+
+extension UIColor {
+    var chatColor: UIColor {
+        UIColor(red: 123, green: 44, blue: 55, alpha: 1)
+    }
+}
