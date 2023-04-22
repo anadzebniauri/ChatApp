@@ -64,4 +64,9 @@ extension UIView {
         centreHorizontally(in: superview)
     }
     
+    func forAutoLayout() -> Self {
+        translatesAutoresizingMaskIntoConstraints = false
+        return self
+    }
+    
 }

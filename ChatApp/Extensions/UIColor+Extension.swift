@@ -16,14 +16,8 @@ extension UIColor {
             alpha: alpha
         )
     }
+    
+    static let messageTextColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
+    static let dateTextColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
 }
 
-let bubbleSenserColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
-let bubbleRecipientColor = UIColor(red: 218, green: 194, blue: 255, alpha: 1)
-
-
-extension UIColor {
-    var chatColor: UIColor {
-        UIColor(red: 123, green: 44, blue: 55, alpha: 1)
-    }
-}
