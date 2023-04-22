@@ -112,9 +112,10 @@ enum BubbleType {
     var color: UIColor {
         switch self {
         case .sender:
-            return UIColor(red: 241, green: 241, blue: 241, alpha: 1)
-        case .recipient:
             return UIColor(red: 218, green: 194, blue: 255, alpha: 1)
+        case .recipient:
+            return UIColor(red: 241, green: 241, blue: 241, alpha: 1)
+
         }
     }
 }

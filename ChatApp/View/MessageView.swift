@@ -13,7 +13,6 @@ class MessageView: UIView {
     private let mediumBubble = Bubble(for: .recipient).forAutoLayout()
     private let smallBubble = Bubble(for: .recipient).forAutoLayout()
     
-    
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
@@ -24,8 +23,8 @@ class MessageView: UIView {
         setUpCapsuleView()
         setUpMediumBubble()
         setUpSmallBubble()
-        
     }
+    
     func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
         
@@ -52,7 +51,7 @@ class MessageView: UIView {
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
-        // Add constraints to position and size the label within the bubble
+
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 149),
             dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 46)
@@ -103,7 +102,6 @@ class MessageView: UIView {
         
         smallBubble.layer.cornerRadius = 25
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
