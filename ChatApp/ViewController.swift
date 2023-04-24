@@ -32,7 +32,8 @@ class ViewController: UIViewController {
             typingArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             typingArea.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             typingArea.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            typingArea.heightAnchor.constraint(equalToConstant: 20)
+            typingArea.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
+//            typingArea.heightAnchor.constraint(equalToConstant: <#T##CGFloat#>)()
         ])
     }
     
