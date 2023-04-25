@@ -57,7 +57,7 @@ class SenderMessageView: UIView {
         dateLabel.setHeight(10)
 
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 54),
+            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 52),
             dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
         ])
         
@@ -104,7 +104,8 @@ class SenderMessageView: UIView {
         
         NSLayoutConstraint.activate([
             smallBubble.topAnchor.constraint(equalTo: topAnchor, constant: 43),
-            smallBubble.rightAnchor.constraint(equalTo: rightAnchor)
+            smallBubble.rightAnchor.constraint(equalTo: rightAnchor),
+            smallBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
         ])
         smallBubble.layer.cornerRadius = 25
     }

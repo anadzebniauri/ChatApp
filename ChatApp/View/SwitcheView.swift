@@ -129,12 +129,12 @@ class ColorSchemeSwitcherComponent: UIView {
     @objc func viewTapped() {
         darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
         if darkModeItemBackgroundView.isHighlighted {
-            viewController?.view.backgroundColor = .DarkModeBackgroundColor
-            backgroundColor = .DarkModeBackgroundColor
+            viewController?.view.backgroundColor = .darkModeBackgroundColor
+            backgroundColor = .SwitcherDarkModeBackgroundColor
             lightModeItemBackgroundView.tintColor = .clear
             lightModeItemView.tintColor = .ItemViewColor
             darkModeItemBackgroundView.tintColor = .BackgroundItemViewColor
-            darkModeItemView.tintColor = .DarkModeBackgroundColor
+            darkModeItemView.tintColor = .SwitcherDarkModeBackgroundColor
         } else {
             viewController?.view.backgroundColor = .white
             backgroundColor = .switcherLightModeBackgroundColor
