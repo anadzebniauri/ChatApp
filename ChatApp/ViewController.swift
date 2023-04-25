@@ -22,8 +22,9 @@ class ViewController: UIViewController {
     //Do any additional setup after loading the view.
         setUpColorSchemeSwitcherComponent()
 //        setUpRecipientMessageView()
-        setUpSenderMessageView()
         setUpTypingArea()
+
+        setUpSenderMessageView()
 //        overrideUserInterfaceStyle = .dark
     }
     
@@ -51,10 +52,11 @@ class ViewController: UIViewController {
     
     private func setUpSenderMessageView() {
         view.addSubview(senderMessageView)
-        
+
         NSLayoutConstraint.activate([
-            senderMessageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 95),
+            senderMessageView.bottomAnchor.constraint(equalTo: typingArea.topAnchor, constant: -16),
             senderMessageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+//            senderMessageView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
     }
     

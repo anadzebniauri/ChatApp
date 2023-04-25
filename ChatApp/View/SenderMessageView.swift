@@ -16,6 +16,7 @@ class SenderMessageView: UIView {
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpMessageLabel()
@@ -36,22 +37,24 @@ class SenderMessageView: UIView {
         messageLabel.textColor = .messageTextColor
         messageLabel.textAlignment = .left
         messageLabel.numberOfLines = 0
+//        messageLabel.layer.cornerRadius = 25
+        
         
         // Add constraints to position and size the label within the bubble
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
-            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),
+            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 15),
+            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -15),
             messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
             messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
         ])
-        messageLabel.text = "გამარჯობა, ანა"
+        messageLabel.text = "მზია"
     }
     
     func setUpDateLabel() {
         addSubview(dateLabel)
         
         dateLabel.font = UIFont.systemFont(ofSize: 10)
-        dateLabel.textColor = .dateTextColor
+        dateLabel.textColor = .SystemGreyTextColor
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
@@ -70,16 +73,15 @@ class SenderMessageView: UIView {
     
     func setUpCapsuleView() {
         addSubview(capsuleView)
-        
+
         NSLayoutConstraint.activate([
-            capsuleView.topAnchor.constraint(equalTo: topAnchor),
-            capsuleView.leftAnchor.constraint(equalTo: leftAnchor),
+//            capsuleView.topAnchor.constraint(equalTo: topAnchor),
+            capsuleView.leftAnchor.constraint(equalTo: leftAnchor, constant: -41),
             capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
             capsuleView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
-            
+
         ])
         capsuleView.layer.cornerRadius = 25
-        
     }
     
     func setUpMediumBubble() {

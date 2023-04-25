@@ -19,7 +19,7 @@ extension UIColor {
     
     //MARK: - Typing Area Colors
     static let messageTextColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
-    static let dateTextColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
+    static let SystemGreyTextColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
     static let typeAreaBoaderColor = UIColor(red: 159, green: 96, blue: 255, alpha: 1)
 
     //MARK: - Bubble Colors

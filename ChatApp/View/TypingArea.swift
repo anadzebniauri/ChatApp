@@ -11,6 +11,7 @@ class TypingArea: UIView {
 
     private let messageTextView = UITextView().forAutoLayout()
     private let sendButton = UIButton().forAutoLayout()
+    let placeholderLabel = UILabel().forAutoLayout()
     
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -29,6 +30,7 @@ class TypingArea: UIView {
     func setUp() {
         setUpMessageTextView()
         setUpSendButton()
+        setUpMessageTextViewPlaceholder()
     }
 
     func setUpView() {
@@ -55,19 +57,34 @@ class TypingArea: UIView {
         let heightConstraint = messageTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40)
         heightConstraint.isActive = true
         heightConstraint.priority = .defaultHigh
-        
+
         NSLayoutConstraint.activate([
             messageTextView.topAnchor.constraint(equalTo: topAnchor, constant: 19),
             messageTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
             messageTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
             messageTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -19),
         ])
-        
+
         messageTextView.delegate = self
         messageTextView.becomeFirstResponder()
 }
     
-
+    func setUpMessageTextViewPlaceholder() {
+        messageTextView.addSubview(placeholderLabel)
+        
+        placeholderLabel.text = "დაწერე შეტყობინება..."
+        placeholderLabel.font = UIFont(name: "Myriad GEO", size: 14)
+        placeholderLabel.textColor = .SystemGreyTextColor
+        placeholderLabel.sizeToFit()
+        placeholderLabel.isHidden = !messageTextView.text.isEmpty
+        
+        NSLayoutConstraint.activate([
+            placeholderLabel.topAnchor.constraint(equalTo: messageTextView.topAnchor, constant: 8),
+            placeholderLabel.leadingAnchor.constraint(equalTo: messageTextView.leadingAnchor, constant: 34),
+            placeholderLabel.bottomAnchor.constraint(equalTo: messageTextView.bottomAnchor, constant: -12),
+        ])
+}
+    
     func setUpSendButton() {
         addSubview(sendButton)
         sendButton.setImage(UIImage(named: "sendButton"), for: .normal)
@@ -85,25 +102,45 @@ class TypingArea: UIView {
         // Add your send button action here
     }
 }
-
+//
 extension TypingArea: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        guard let lineHeight = textView.font?.lineHeight else { return }
-        let maxHeight: CGFloat = lineHeight * 5 + textView.textContainerInset.top + textView.textContainerInset.bottom
-        let fixedWidth = textView.frame.size.width
-        
-        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        let clampedHeight = min(newSize.height, maxHeight)
-        
-        var newFrame = textView.frame
-        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: clampedHeight)
-        textView.frame = newFrame
-        
-        textView.isScrollEnabled = newSize.height >= maxHeight
-        
+//    func textViewDidChange(_ textView: UITextView) {
+//        guard let lineHeight = textView.font?.lineHeight else { return }
+//        let maxHeight: CGFloat = lineHeight * 5 + textView.textContainerInset.top + textView.textContainerInset.bottom
+//        let fixedWidth = textView.frame.size.width
+//
+//        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+//        let clampedHeight = min(newSize.height, maxHeight)
+//
+//        var newFrame = textView.frame
+//        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: clampedHeight)
+//        textView.frame = newFrame
+//
+//        textView.isScrollEnabled = newSize.height >= maxHeight
+//
+//    }
+//}
+func textViewDidChange(_ textView: UITextView) {
+    // Update placeholder label
+    if let placeholderLabel = textView.subviews.first(where: { $0 is UILabel }) as? UILabel {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
+
+    guard let lineHeight = textView.font?.lineHeight else { return }
+    let maxHeight: CGFloat = lineHeight * 5 + textView.textContainerInset.top + textView.textContainerInset.bottom
+    let fixedWidth = textView.frame.size.width
+
+    let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+    let clampedHeight = min(newSize.height, maxHeight)
+
+    var newFrame = textView.frame
+    newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: clampedHeight)
+    textView.frame = newFrame
+
+    textView.isScrollEnabled = newSize.height >= maxHeight
 }
 
+}
 
 
 

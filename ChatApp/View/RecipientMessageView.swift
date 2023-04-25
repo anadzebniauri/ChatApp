@@ -51,7 +51,7 @@ class RecipientMessageView: UIView {
         addSubview(dateLabel)
         
         dateLabel.font = UIFont.systemFont(ofSize: 10)
-        dateLabel.textColor = .dateTextColor
+        dateLabel.textColor = .SystemGreyTextColor
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
