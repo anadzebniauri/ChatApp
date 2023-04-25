@@ -14,19 +14,28 @@ class CapsuleBubble: UIView {
         bounds.height/2
     }
     
-    private let bubbleType: BubbleType
+    //    private var bubbleType: BubbleType
+    //
+    //    init(for type: BubbleType) {
+    //        bubbleType = type
+    //        super.init(frame: .zero)
+    //        backgroundColor = .clear
+    //    }
     
-    init(for type: BubbleType) {
-        bubbleType = type
-        super.init(frame: .zero)
-        backgroundColor = .clear
-    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("storyboard and .xib is not supported")
     }
     
+    override required init(frame: CGRect) {
+        super.init(frame: .zero)
+        backgroundColor = .clear
+        
+    }
+    
     override func draw(_ rect: CGRect) {
+        
+        
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: radius, y: 0))
@@ -62,7 +71,7 @@ class CapsuleBubble: UIView {
             clockwise: true
         )
         
-        bubbleType.color.setFill()
+        UIColor.recipientColor.setFill()
         path.fill()
     }
 }
@@ -74,10 +83,16 @@ class Bubble: UIView {
         bounds.height/2
     }
     
-    private let type: BubbleType
+    //    private let type: BubbleType
     
-    init(for type: BubbleType) {
-        self.type = type
+    //    init(for type: BubbleType) {
+    //        self.type = type
+    //        super.init(frame: .zero)
+    //        backgroundColor = .clear
+    //    }
+    
+    
+    override required init(frame: CGRect) {
         super.init(frame: .zero)
         backgroundColor = .clear
     }
@@ -100,21 +115,24 @@ class Bubble: UIView {
         path.addLine(to: CGPoint(x: 0, y: radius))
         path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
         
-        type.color.setFill()
+        UIColor.recipientColor.setFill()
         path.fill()
     }
 }
 
-enum BubbleType {
-    case sender
-    case recipient
-    
-    var color: UIColor {
-        switch self {
-        case .sender:
-            return UIColor(red: 218, green: 194, blue: 255, alpha: 1)
-        case .recipient:
-            return UIColor(red: 241, green: 241, blue: 241, alpha: 1)
-        }
-    }
-}
+
+//enum BubbleType {
+//    case sender
+//    case recipient
+//
+//    var color: UIColor {
+//        switch self {
+//        case .recipient:
+//
+//            return .recipientColor
+//        case .sender:
+//            return .senderColor
+//        }
+//    }
+//}
+

@@ -11,7 +11,8 @@ class ViewController: UIViewController {
 
     private let colorSchemeSwitcherComponent = ColorSchemeSwitcherComponent().forAutoLayout()
     
-    private let messageview = MessageView().forAutoLayout()
+    private let recipientMessageview = RecipientMessageView().forAutoLayout()
+    private let senderMessageView = SenderMessageView().forAutoLayout()
     
     private let typingArea = TypingArea().forAutoLayout()
 
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     //Do any additional setup after loading the view.
         setUpColorSchemeSwitcherComponent()
-        setUpMessageView()
+        setUpRecipientMessageView()
         setUpTypingArea()
     }
     
@@ -31,17 +32,23 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             typingArea.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             typingArea.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            typingArea.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            typingArea.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
+            typingArea.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            typingArea.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
         ])
     }
     
 //    MARK: - Message VIew
-    private func setUpMessageView() {
-        view.addSubview(messageview)
-
-//        messageview.transform = CGAffineTransform(rotationAngle: -.pi/2)
-//        messageview.transform = CGAffineTransform(rotationAngle: .pi/2)
+    private func setUpRecipientMessageView() {
+        view.addSubview(recipientMessageview)
+        
+        NSLayoutConstraint.activate([
+            recipientMessageview.topAnchor.constraint(equalTo: view.topAnchor, constant: 95),
+            recipientMessageview.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+        ])
+    }
+    
+    private func setUpSenderMessageView() {
+        
     }
     
     //MARK: - Switcher
@@ -55,3 +62,4 @@ class ViewController: UIViewController {
         colorSchemeSwitcherComponent.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
     }
 }
+

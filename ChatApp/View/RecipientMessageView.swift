@@ -7,12 +7,12 @@
 
 import UIKit
 
-class MessageView: UIView {
+class RecipientMessageView: UIView {
     
-    private let capsuleView = CapsuleBubble(for: .recipient).forAutoLayout()
-    private let mediumBubble = Bubble(for: .recipient).forAutoLayout()
-    private let smallBubble = Bubble(for: .recipient).forAutoLayout()
-    
+    private let capsuleView = CapsuleBubble().forAutoLayout()
+    private let mediumBubble = Bubble().forAutoLayout()
+    private let smallBubble = Bubble().forAutoLayout()
+        
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
@@ -23,6 +23,10 @@ class MessageView: UIView {
         setUpCapsuleView()
         setUpMediumBubble()
         setUpSmallBubble()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("!")
     }
     
     func setUpMessageLabel() {
@@ -53,8 +57,8 @@ class MessageView: UIView {
         dateLabel.setHeight(10)
 
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 149),
-            dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 46)
+            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 54),
+            dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 30),
         ])
         
         let dateFormatter = DateFormatter()
@@ -68,11 +72,14 @@ class MessageView: UIView {
         addSubview(capsuleView)
         
         NSLayoutConstraint.activate([
-            capsuleView.topAnchor.constraint(equalTo: topAnchor, constant: 95),
-            capsuleView.leftAnchor.constraint(equalTo: leftAnchor, constant: 32)
+            capsuleView.topAnchor.constraint(equalTo: topAnchor),
+            capsuleView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
+            capsuleView.rightAnchor.constraint(equalTo: rightAnchor)
+            
         ])
-        
         capsuleView.layer.cornerRadius = 25
+        
     }
     
     func setUpMediumBubble() {
@@ -82,8 +89,8 @@ class MessageView: UIView {
         mediumBubble.setWidth(18.18)
         
         NSLayoutConstraint.activate([
-            mediumBubble.topAnchor.constraint(equalTo: topAnchor, constant: 128),
-            mediumBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: 27.82)
+            mediumBubble.topAnchor.constraint(equalTo: topAnchor, constant: 33),
+            mediumBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: 11.82)
         ])
         
         mediumBubble.layer.cornerRadius = 25
@@ -96,16 +103,12 @@ class MessageView: UIView {
         smallBubble.setWidth(10)
         
         NSLayoutConstraint.activate([
-            smallBubble.topAnchor.constraint(equalTo: topAnchor, constant: 140.43),
-            smallBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
+            smallBubble.topAnchor.constraint(equalTo: topAnchor, constant: 45.43),
         ])
         
         smallBubble.layer.cornerRadius = 25
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 
