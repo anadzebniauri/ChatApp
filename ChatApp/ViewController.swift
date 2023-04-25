@@ -24,6 +24,7 @@ class ViewController: UIViewController {
 //        setUpRecipientMessageView()
         setUpSenderMessageView()
         setUpTypingArea()
+//        overrideUserInterfaceStyle = .dark
     }
     
     //MARK: - Typing Area

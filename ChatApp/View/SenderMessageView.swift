@@ -9,9 +9,9 @@ import UIKit
 
 class SenderMessageView: UIView {
     
-    private let capsuleView = CapsuleBubble().forAutoLayout()
-    private let mediumBubble = Bubble().forAutoLayout()
-    private let smallBubble = Bubble().forAutoLayout()
+    private let capsuleView = SenderCapsuleBubble().forAutoLayout()
+    private let mediumBubble = SenderBubble().forAutoLayout()
+    private let smallBubble = SenderBubble().forAutoLayout()
         
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
@@ -106,7 +106,6 @@ class SenderMessageView: UIView {
             smallBubble.topAnchor.constraint(equalTo: topAnchor, constant: 43),
             smallBubble.rightAnchor.constraint(equalTo: rightAnchor)
         ])
-        
         smallBubble.layer.cornerRadius = 25
     }
     

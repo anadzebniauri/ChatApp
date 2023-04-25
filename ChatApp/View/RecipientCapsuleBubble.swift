@@ -8,7 +8,8 @@
 import UIKit
 
 // MARK: - Bubbles
-class CapsuleBubble: UIView {
+
+class RecipientCapsuleBubble: UIView {
     
     private var radius: CGFloat {
         bounds.height/2
@@ -76,7 +77,7 @@ class CapsuleBubble: UIView {
 }
 
 // MARK: - Bubble
-class Bubble: UIView {
+class RecipientBubble: UIView {
     // subclass definition goes here
     private var radius: CGFloat {
         bounds.height/2

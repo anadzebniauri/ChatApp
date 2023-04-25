@@ -9,9 +9,9 @@ import UIKit
 
 class RecipientMessageView: UIView {
     
-    private let capsuleView = CapsuleBubble().forAutoLayout()
-    private let mediumBubble = Bubble().forAutoLayout()
-    private let smallBubble = Bubble().forAutoLayout()
+    private let capsuleView = RecipientCapsuleBubble().forAutoLayout()
+    private let mediumBubble = RecipientBubble().forAutoLayout()
+    private let smallBubble = RecipientBubble().forAutoLayout()
         
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
@@ -104,8 +104,7 @@ class RecipientMessageView: UIView {
         
         NSLayoutConstraint.activate([
             smallBubble.topAnchor.constraint(equalTo: topAnchor, constant: 45.43),
-        ])
-        
+        ])        
         smallBubble.layer.cornerRadius = 25
     }
     
