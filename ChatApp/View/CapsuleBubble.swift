@@ -35,7 +35,6 @@ class CapsuleBubble: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: radius, y: 0))

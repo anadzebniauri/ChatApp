@@ -21,7 +21,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     //Do any additional setup after loading the view.
         setUpColorSchemeSwitcherComponent()
-        setUpRecipientMessageView()
+//        setUpRecipientMessageView()
+        setUpSenderMessageView()
         setUpTypingArea()
     }
     
@@ -48,7 +49,12 @@ class ViewController: UIViewController {
     }
     
     private func setUpSenderMessageView() {
+        view.addSubview(senderMessageView)
         
+        NSLayoutConstraint.activate([
+            senderMessageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 95),
+            senderMessageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+        ])
     }
     
     //MARK: - Switcher
