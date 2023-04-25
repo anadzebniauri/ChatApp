@@ -33,7 +33,7 @@ class SenderMessageView: UIView {
     func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
         
-        messageLabel.font = UIFont(name: "Myriad GEO", size: 14)
+        messageLabel.font = UIFont.systemFont(ofSize: 14)
         messageLabel.textColor = .messageTextColor
         messageLabel.textAlignment = .left
         messageLabel.numberOfLines = 0

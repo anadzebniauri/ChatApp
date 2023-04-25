@@ -11,7 +11,7 @@ class TypingArea: UIView {
 
     private let messageTextView = UITextView().forAutoLayout()
     private let sendButton = UIButton().forAutoLayout()
-    let placeholderLabel = UILabel().forAutoLayout()
+    private let placeholderLabel = UILabel().forAutoLayout()
     
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -39,7 +39,7 @@ class TypingArea: UIView {
 
     func setUpMessageTextView() {
         addSubview(messageTextView)
-        messageTextView.font = UIFont(name: "Myriad GEO", size: 14)
+        messageTextView.font = UIFont.systemFont(ofSize: 14)
         messageTextView.textAlignment = .left
         messageTextView.backgroundColor = .clear
         messageTextView.layer.borderWidth = 1.0
@@ -73,13 +73,13 @@ class TypingArea: UIView {
         messageTextView.addSubview(placeholderLabel)
         
         placeholderLabel.text = "დაწერე შეტყობინება..."
-        placeholderLabel.font = UIFont(name: "Myriad GEO", size: 14)
+        placeholderLabel.font = UIFont.systemFont(ofSize: 14)
         placeholderLabel.textColor = .SystemGreyTextColor
         placeholderLabel.sizeToFit()
         placeholderLabel.isHidden = !messageTextView.text.isEmpty
         
         NSLayoutConstraint.activate([
-            placeholderLabel.topAnchor.constraint(equalTo: messageTextView.topAnchor, constant: 8),
+            placeholderLabel.topAnchor.constraint(equalTo: messageTextView.topAnchor, constant: 12),
             placeholderLabel.leadingAnchor.constraint(equalTo: messageTextView.leadingAnchor, constant: 34),
             placeholderLabel.bottomAnchor.constraint(equalTo: messageTextView.bottomAnchor, constant: -12),
         ])
@@ -104,28 +104,13 @@ class TypingArea: UIView {
 }
 //
 extension TypingArea: UITextViewDelegate {
-//    func textViewDidChange(_ textView: UITextView) {
-//        guard let lineHeight = textView.font?.lineHeight else { return }
-//        let maxHeight: CGFloat = lineHeight * 5 + textView.textContainerInset.top + textView.textContainerInset.bottom
-//        let fixedWidth = textView.frame.size.width
-//
-//        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-//        let clampedHeight = min(newSize.height, maxHeight)
-//
-//        var newFrame = textView.frame
-//        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: clampedHeight)
-//        textView.frame = newFrame
-//
-//        textView.isScrollEnabled = newSize.height >= maxHeight
-//
-//    }
-//}
+    
 func textViewDidChange(_ textView: UITextView) {
     // Update placeholder label
     if let placeholderLabel = textView.subviews.first(where: { $0 is UILabel }) as? UILabel {
         placeholderLabel.isHidden = !textView.text.isEmpty
     }
-
+    //update message text view height + scroll
     guard let lineHeight = textView.font?.lineHeight else { return }
     let maxHeight: CGFloat = lineHeight * 5 + textView.textContainerInset.top + textView.textContainerInset.bottom
     let fixedWidth = textView.frame.size.width
