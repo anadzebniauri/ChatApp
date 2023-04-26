@@ -73,7 +73,7 @@ class SenderMessageView: UIView {
         dateLabel.setHeight(10)
 
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 52),
+            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
         ])
         
@@ -92,7 +92,6 @@ class SenderMessageView: UIView {
             capsuleView.leftAnchor.constraint(equalTo: leftAnchor),
             capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
             capsuleView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
-
         ])
         capsuleView.layer.cornerRadius = 25
     }
