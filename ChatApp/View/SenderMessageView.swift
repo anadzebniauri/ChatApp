@@ -13,12 +13,13 @@ class SenderMessageView: UIView {
     private let mediumBubble = SenderBubble().forAutoLayout()
     private let smallBubble = SenderBubble().forAutoLayout()
         
-    private let messageLabel = UILabel().forAutoLayout()
+    private let messageLabel = UILabel()
     private let dateLabel = UILabel().forAutoLayout()
     
         
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUpView()
         setUpMessageLabel()
         setUpDateLabel()
         setUpCapsuleView()
@@ -30,24 +31,36 @@ class SenderMessageView: UIView {
         fatalError("!")
     }
     
+    func setUpView() {
+        clipsToBounds = true
+    }
+    
     func setUpMessageLabel() {
-        capsuleView.addSubview(messageLabel)
+        let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
+        messageStackView.isLayoutMarginsRelativeArrangement = true
+        messageStackView.layoutMargins = .make(horizontal: 18, vertical: 15)
+
+        let capsuleStackView = UIStackView(arrangedSubviews: [messageStackView]).forAutoLayout()
+        
+        capsuleView.addSubview(capsuleStackView)
+        capsuleStackView.stretchOnParent()
         
         messageLabel.font = UIFont.systemFont(ofSize: 14)
         messageLabel.textColor = .messageTextColor
         messageLabel.textAlignment = .left
+        messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.numberOfLines = 0
 //        messageLabel.layer.cornerRadius = 25
         
         
-        // Add constraints to position and size the label within the bubble
-        NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 15),
-            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -15),
-            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
-            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
-        ])
-        messageLabel.text = "მზია"
+//         Add constraints to position and size the label within the bubble
+//        NSLayoutConstraint.activate([
+//            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 15),
+//            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -15),
+//            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
+//            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
+//        ])
+        messageLabel.text = "მზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jk"
     }
     
     func setUpDateLabel() {
@@ -75,8 +88,8 @@ class SenderMessageView: UIView {
         addSubview(capsuleView)
 
         NSLayoutConstraint.activate([
-//            capsuleView.topAnchor.constraint(equalTo: topAnchor),
-            capsuleView.leftAnchor.constraint(equalTo: leftAnchor, constant: -41),
+            capsuleView.topAnchor.constraint(equalTo: topAnchor),
+            capsuleView.leftAnchor.constraint(equalTo: leftAnchor),
             capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
             capsuleView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
 
@@ -91,7 +104,7 @@ class SenderMessageView: UIView {
         mediumBubble.setWidth(18.18)
         
         NSLayoutConstraint.activate([
-            mediumBubble.topAnchor.constraint(equalTo: topAnchor, constant: 31),
+            mediumBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -13),
             mediumBubble.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
         ])
         
@@ -105,7 +118,6 @@ class SenderMessageView: UIView {
         smallBubble.setWidth(10)
         
         NSLayoutConstraint.activate([
-            smallBubble.topAnchor.constraint(equalTo: topAnchor, constant: 43),
             smallBubble.rightAnchor.constraint(equalTo: rightAnchor),
             smallBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
         ])
@@ -114,3 +126,8 @@ class SenderMessageView: UIView {
     
 }
 
+extension UIEdgeInsets {
+    static func make(horizontal: CGFloat, vertical: CGFloat) -> UIEdgeInsets {
+        UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
+    }
+}

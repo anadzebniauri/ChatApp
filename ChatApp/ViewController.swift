@@ -52,11 +52,15 @@ class ViewController: UIViewController {
     
     private func setUpSenderMessageView() {
         view.addSubview(senderMessageView)
+//        senderMessageView.leftAnchor.constraint(equalTo: view.leftAnchor)
+//        let leadingConstraint =
+//        leadingConstraint.priority = .defaultLow
+//        leadingConstraint.isActive = true
 
         NSLayoutConstraint.activate([
             senderMessageView.bottomAnchor.constraint(equalTo: typingArea.topAnchor, constant: -16),
             senderMessageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-//            senderMessageView.leftAnchor.constraint(equalTo: view.leftAnchor)
+            senderMessageView.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor)
         ])
     }
     
