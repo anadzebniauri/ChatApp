@@ -1,20 +1,22 @@
-////
-////  SwitcherView.swift
-////  chatApp.test
-////
-////  Created by Ana Dzebniauri on 19.04.23.
-////
+//
+//  SwitcherView.swift
+//  chatApp.test
+//
+//  Created by Ana Dzebniauri on 19.04.23.
+//
 
 import UIKit
 
 
 class ColorSchemeSwitcherComponent: UIView {
     
+    //MARK: - properties
     @objc private let lightModeItemBackgroundView = UIImageView()
     private let lightModeItemView = UIImageView()
     @objc private let darkModeItemBackgroundView = UIImageView()
     private let darkModeItemView = UIImageView()
     private let switchingItemStackView = UIStackView()
+    
     
     required init?(coder: NSCoder) {
         fatalError("!")
@@ -33,7 +35,8 @@ class ColorSchemeSwitcherComponent: UIView {
         setUp()
     }
     
-    func setUp() {
+    //MARK: - Functions
+    private func setUp() {
         setUpView()
         setUpSwitchingItemStackView()
         setUpLightModeItemBackgroundView()
@@ -43,18 +46,19 @@ class ColorSchemeSwitcherComponent: UIView {
         viewTapped()
     }
     
-    func setUpView() {
+    private func setUpView() {
         layer.cornerRadius = 12
     }
     
-    func setUpLightModeItemBackgroundView() {
+    //MARK: - Light Mode
+    private func setUpLightModeItemBackgroundView() {
         lightModeItemBackgroundView.addSubview(lightModeItemView)
 
-        lightModeItemBackgroundView.image = UIImage(systemName: "circle.fill")
-        lightModeItemBackgroundView.tintColor = .BackgroundItemViewColor
+        lightModeItemBackgroundView.image = .circleImage
+        lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
         
-        lightModeItemBackgroundView.setHeight(21)
-        lightModeItemBackgroundView.setWidth(21)
+//        lightModeItemBackgroundView.setHeight(lightModeItemBackgroundViewHeight)
+//        lightModeItemBackgroundView.setWidth(lightModeItemBackgroundViewWitdth)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         lightModeItemBackgroundView.addGestureRecognizer(tapGestureRecognizer)
@@ -62,8 +66,8 @@ class ColorSchemeSwitcherComponent: UIView {
         lightModeItemBackgroundView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func setUpLightModeItemView() {
-        lightModeItemView.image = UIImage(systemName: "sun.min.fill")
+    private func setUpLightModeItemView() {
+        lightModeItemView.image = .sunImage
         lightModeItemView.tintColor = .white
         
         lightModeItemView.setWidth(11)
@@ -74,10 +78,11 @@ class ColorSchemeSwitcherComponent: UIView {
         lightModeItemView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func setUpDarkModeItemBackgroundView() {
+    //MARK: - Dark Mode
+    private func setUpDarkModeItemBackgroundView() {
         darkModeItemBackgroundView.addSubview(darkModeItemView)
 
-        darkModeItemBackgroundView.image = UIImage(systemName: "circle.fill")
+        darkModeItemBackgroundView.image = .circleImage
         darkModeItemBackgroundView.tintColor = .clear
         
         darkModeItemBackgroundView.setWidth(21)
@@ -89,9 +94,9 @@ class ColorSchemeSwitcherComponent: UIView {
         darkModeItemBackgroundView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func setUpDarkModeItemView() {
-        darkModeItemView.image = UIImage(systemName: "moon.fill")
-        darkModeItemView.tintColor = .ItemViewColor
+    private func setUpDarkModeItemView() {
+        darkModeItemView.image = .moonImage
+        darkModeItemView.tintColor = .switcherItemViewColor
         
         darkModeItemView.setWidth(11)
         darkModeItemView.setHeight(11)
@@ -101,7 +106,8 @@ class ColorSchemeSwitcherComponent: UIView {
         darkModeItemView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func setUpSwitchingItemStackView() {
+    //MARK: - Stack View
+    private func setUpSwitchingItemStackView() {
         addSubview(switchingItemStackView)
         switchingItemStackView.addArrangedSubview(lightModeItemBackgroundView)
         switchingItemStackView.addArrangedSubview(darkModeItemBackgroundView)
@@ -117,7 +123,8 @@ class ColorSchemeSwitcherComponent: UIView {
         switchingItemStackView.layoutMargins = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
     }
     
-    var viewController: UIViewController? {
+    //MARK: - Switcher Function
+    private var viewController: UIViewController? {
         var nextResponder: UIResponder? = self
         while let responder = nextResponder, !(responder is UIViewController) {
             nextResponder = responder.next
@@ -125,24 +132,30 @@ class ColorSchemeSwitcherComponent: UIView {
         return nextResponder as? UIViewController
     }
 
-    
+    // should remake model
     @objc func viewTapped() {
         darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
         if darkModeItemBackgroundView.isHighlighted {
             viewController?.view.backgroundColor = .darkModeBackgroundColor
-            backgroundColor = .SwitcherDarkModeBackgroundColor
+            backgroundColor = .switcherDarkModeBackgroundColor
             lightModeItemBackgroundView.tintColor = .clear
-            lightModeItemView.tintColor = .ItemViewColor
-            darkModeItemBackgroundView.tintColor = .BackgroundItemViewColor
-            darkModeItemView.tintColor = .SwitcherDarkModeBackgroundColor
+            lightModeItemView.tintColor = .switcherItemViewColor //rrename
+            darkModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
+            darkModeItemView.tintColor = .switcherDarkModeBackgroundColor
         } else {
             viewController?.view.backgroundColor = .white
             backgroundColor = .switcherLightModeBackgroundColor
-            lightModeItemBackgroundView.tintColor = .BackgroundItemViewColor
+            lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
             lightModeItemView.tintColor = .white
             darkModeItemBackgroundView.tintColor = .clear
-            darkModeItemView.tintColor = .ItemViewColor
+            darkModeItemView.tintColor = .switcherItemViewColor
         }
     }
+}
 
+
+enum Constants {
+    static let cornerRadius: Int = 12
+    static let lightModeItemViewHeight: Int = 11
+    static let lightModeItemViewWidth: Int = 11
 }

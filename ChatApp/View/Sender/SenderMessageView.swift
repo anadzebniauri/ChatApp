@@ -9,6 +9,7 @@ import UIKit
 
 class SenderMessageView: UIView {
     
+    //MARK: - Properties
     private let capsuleView = SenderCapsuleBubble().forAutoLayout()
     private let mediumBubble = SenderBubble().forAutoLayout()
     private let smallBubble = SenderBubble().forAutoLayout()
@@ -31,11 +32,12 @@ class SenderMessageView: UIView {
         fatalError("!")
     }
     
-    func setUpView() {
+    //MARK: - Functions
+    private func setUpView() {
         clipsToBounds = true
     }
     
-    func setUpMessageLabel() {
+    private func setUpMessageLabel() {
         let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
         messageStackView.isLayoutMarginsRelativeArrangement = true
         messageStackView.layoutMargins = .make(horizontal: 18, vertical: 15)
@@ -63,7 +65,7 @@ class SenderMessageView: UIView {
         messageLabel.text = "მზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jk"
     }
     
-    func setUpDateLabel() {
+    private func setUpDateLabel() {
         addSubview(dateLabel)
         
         dateLabel.font = UIFont.systemFont(ofSize: 10)
@@ -84,7 +86,7 @@ class SenderMessageView: UIView {
         dateLabel.text = dateTimeString
     }
     
-    func setUpCapsuleView() {
+    private func setUpCapsuleView() {
         addSubview(capsuleView)
 
         NSLayoutConstraint.activate([
@@ -96,7 +98,7 @@ class SenderMessageView: UIView {
         capsuleView.layer.cornerRadius = 25
     }
     
-    func setUpMediumBubble() {
+    private func setUpMediumBubble() {
         addSubview(mediumBubble)
         
         mediumBubble.setHeight(17.4)
@@ -110,7 +112,7 @@ class SenderMessageView: UIView {
         mediumBubble.layer.cornerRadius = 25
     }
     
-    func setUpSmallBubble() {
+    private func setUpSmallBubble() {
         addSubview(smallBubble)
         
         smallBubble.setHeight(9.57)

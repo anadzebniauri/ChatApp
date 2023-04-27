@@ -28,9 +28,9 @@ extension UIColor {
     
     //MARK: - Switcher Colors
     static let switcherLightModeBackgroundColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1) //almost white
-    static let SwitcherDarkModeBackgroundColor = UIColor(red: 46, green: 0, blue: 114, alpha: 1) //dark purple
-    static let BackgroundItemViewColor = UIColor(red: 159, green: 96, blue: 256, alpha: 1) //purple
-    static let ItemViewColor = UIColor(red: 255, green: 202, blue: 85, alpha: 1) //yellow
+    static let switcherDarkModeBackgroundColor = UIColor(red: 46, green: 0, blue: 114, alpha: 1) //dark purple
+    static let switcherBackgroundItemViewColor = UIColor(red: 159, green: 96, blue: 256, alpha: 1) //purple
+    static let switcherItemViewColor = UIColor(red: 255, green: 202, blue: 85, alpha: 1) //yellow
     static let darkModeBackgroundColor = UIColor(red: 22, green: 0, blue: 57, alpha: 1) //midnight blue
     
     

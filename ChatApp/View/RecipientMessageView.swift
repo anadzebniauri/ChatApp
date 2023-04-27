@@ -9,6 +9,7 @@ import UIKit
 
 class RecipientMessageView: UIView {
     
+    //MARK: - Properties
     private let capsuleView = RecipientCapsuleBubble().forAutoLayout()
     private let mediumBubble = RecipientBubble().forAutoLayout()
     private let smallBubble = RecipientBubble().forAutoLayout()
@@ -30,11 +31,13 @@ class RecipientMessageView: UIView {
         fatalError("!")
     }
     
-    func setUpView() {
+    //MARK: - Functions
+    
+    private func setUpView() {
         clipsToBounds = true
     }
     
-    func setUpMessageLabel() {
+    private func setUpMessageLabel() {
         let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
         messageStackView.isLayoutMarginsRelativeArrangement = true
         messageStackView.layoutMargins = .make(horizontal: 18, vertical: 16)
@@ -58,12 +61,12 @@ class RecipientMessageView: UIView {
 //            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
 //            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
 //        ])
-        messageLabel.text = "გამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანაგამარჯობა, ანა"
+        messageLabel.text = "გამარჯობა"
         
 //        messageLabel.text = "გამარჯობა, ანა"
     }
     
-    func setUpDateLabel() {
+    private func setUpDateLabel() {
         addSubview(dateLabel)
         
         dateLabel.font = UIFont.systemFont(ofSize: 10)
@@ -84,7 +87,7 @@ class RecipientMessageView: UIView {
         dateLabel.text = dateTimeString
     }
     
-    func setUpCapsuleView() {
+    private func setUpCapsuleView() {
         addSubview(capsuleView)
         
         NSLayoutConstraint.activate([
@@ -97,7 +100,7 @@ class RecipientMessageView: UIView {
         capsuleView.layer.cornerRadius = 25
     }
     
-    func setUpMediumBubble() {
+    private func setUpMediumBubble() {
         addSubview(mediumBubble)
         
         mediumBubble.setHeight(17.4)
@@ -111,7 +114,7 @@ class RecipientMessageView: UIView {
         mediumBubble.layer.cornerRadius = 25
     }
     
-    func setUpSmallBubble() {
+    private func setUpSmallBubble() {
         addSubview(smallBubble)
         
         smallBubble.setHeight(9.57)
