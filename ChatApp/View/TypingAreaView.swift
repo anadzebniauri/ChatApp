@@ -7,13 +7,14 @@
 
 import UIKit
 
-class TypingArea: UIView {
+class TypingAreaView: UIView {
     
     //MARK: - Properties
     private let messageTextView = UITextView().forAutoLayout()
     private let sendButton = UIButton().forAutoLayout()
     private let placeholderLabel = UILabel().forAutoLayout()
     
+    //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
         setUp()
@@ -28,7 +29,7 @@ class TypingArea: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Functions
+    //MARK: - Methods
     private func setUp() {
         setUpMessageTextViewCustomize()
         setUpMessageTextViewConstraints()
@@ -37,17 +38,17 @@ class TypingArea: UIView {
     }
     
     private func setUpView() {
-        layer.cornerRadius = 15
+        layer.cornerRadius = Constants.cornerRadius
     }
     
     private func setUpMessageTextViewCustomize() {
         addSubview(messageTextView)
-        messageTextView.font = UIFont.systemFont(ofSize: 14)
+        messageTextView.font = .systemFont(ofSize: 14)
         messageTextView.textAlignment = .left
         messageTextView.backgroundColor = .clear
-        messageTextView.layer.borderWidth = 1.0
-        messageTextView.layer.borderColor = UIColor.typeAreaBoaderColor.cgColor
-        messageTextView.layer.cornerRadius = 18
+        messageTextView.layer.borderWidth = Constants.messageTextViewBorderWidth
+        messageTextView.layer.borderColor = UIColor.typeAreaBorderPurpleColor.cgColor
+        messageTextView.layer.cornerRadius = Constants.messageTextViewCornerRadius
         messageTextView.isScrollEnabled = false
         messageTextView.textContainerInset = UIEdgeInsets(top: 12, left: 22, bottom: 15, right: 82)
         messageTextView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 283, bottom: 12, right: 56)
@@ -78,7 +79,7 @@ class TypingArea: UIView {
         
         placeholderLabel.text = "დაწერე შეტყობინება..."
         placeholderLabel.font = UIFont.systemFont(ofSize: 14)
-        placeholderLabel.textColor = .SystemGreyTextColor
+        placeholderLabel.textColor = .placeholderTextGreyColor
         placeholderLabel.sizeToFit()
         placeholderLabel.isHidden = !messageTextView.text.isEmpty
         
@@ -93,8 +94,8 @@ class TypingArea: UIView {
         addSubview(sendButton)
         sendButton.setImage(UIImage(named: "sendButton"), for: .normal)
         sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
-        sendButton.setWidth(32)
-        sendButton.setHeight(32)
+        sendButton.setWidth(Constants.sendButtonWidth)
+        sendButton.setHeight(Constants.sendButtonHeight)
         
         NSLayoutConstraint.activate([
             sendButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -27),
@@ -107,7 +108,7 @@ class TypingArea: UIView {
     }
 }
 
-extension TypingArea: UITextViewDelegate {
+extension TypingAreaView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         // Update placeholder label
@@ -130,5 +131,15 @@ extension TypingArea: UITextViewDelegate {
     }
 }
 
-
+private extension TypingAreaView {
+    enum Constants {
+        static let cornerRadius = 15.0
+        
+        static let messageTextViewBorderWidth = 1.0
+        static let messageTextViewCornerRadius = 18.0
+        
+        static let sendButtonWidth = 32.0
+        static let sendButtonHeight = 32.0
+    }
+}
 

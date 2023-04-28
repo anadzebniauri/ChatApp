@@ -1,29 +1,19 @@
 //
-//  BubbleView.swift
-//  chatApp.test
+//  SenderCapsuleBubble.swift
+//  ChatApp
 //
-//  Created by Ana Dzebniauri on 20.04.23.
+//  Created by Ana Dzebniauri on 25.04.23.
 //
 
 import UIKit
 
-// MARK: - Bubbles
-
-class RecipientCapsuleBubble: UIView {
+class SenderCapsuleBubbleView: UIView {
     
     private var radius: CGFloat {
-        bounds.height/2
+        Constants.radius
     }
     
-    //    private var bubbleType: BubbleType
-    //
-    //    init(for type: BubbleType) {
-    //        bubbleType = type
-    //        super.init(frame: .zero)
-    //        backgroundColor = .clear
-    //    }
-    
-    
+    //MARK: - Init
     required init?(coder aDecoder: NSCoder) {
         fatalError("storyboard and .xib is not supported")
     }
@@ -31,11 +21,9 @@ class RecipientCapsuleBubble: UIView {
     override required init(frame: CGRect) {
         super.init(frame: .zero)
         backgroundColor = .clear
-        
     }
     
     override func draw(_ rect: CGRect) {
-        
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: radius, y: 0))
@@ -71,14 +59,23 @@ class RecipientCapsuleBubble: UIView {
             clockwise: true
         )
         
-        UIColor.recipientColor.setFill()
+        UIColor.senderBubbleColor.setFill()
         path.fill()
     }
 }
 
+//MARK: - Constants
+private extension SenderCapsuleBubbleView {
+    enum Constants {
+        static let radius = 25.0
+    }
+}
+
+
 // MARK: - Bubble
-class RecipientBubble: UIView {
-    // subclass definition goes here
+
+class SenderMediumBubbleView: UIView {
+    
     private var radius: CGFloat {
         bounds.height/2
     }
@@ -91,7 +88,7 @@ class RecipientBubble: UIView {
     //        backgroundColor = .clear
     //    }
     
-    
+    //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
         backgroundColor = .clear
@@ -102,7 +99,6 @@ class RecipientBubble: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: radius, y: 0))
@@ -115,24 +111,56 @@ class RecipientBubble: UIView {
         path.addLine(to: CGPoint(x: 0, y: radius))
         path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
         
-        UIColor.recipientColor.setFill()
+        UIColor.senderBubbleColor.setFill()
         path.fill()
     }
 }
 
+//MARK: - Constants
+private extension SenderMediumBubbleView {
+    enum Constants {
+        static let radius = 10.0
+    }
+}
 
-//enum BubbleType {
-//    case sender
-//    case recipient
-//
-//    var color: UIColor {
-//        switch self {
-//        case .recipient:
-//
-//            return .recipientColor
-//        case .sender:
-//            return .senderColor
-//        }
-//    }
-//}
+//MARK: - Small Bubble
+class SenderSmallBubbleView: UIView {
+    
+    private var radius: CGFloat {
+        Constants.radius
+    }
+    
+    //MARK: - Init
+    override required init(frame: CGRect) {
+        super.init(frame: .zero)
+        backgroundColor = .clear
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("storyboard and .xib is not supported")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x: radius, y: 0))
+        path.addLine(to: CGPoint(x: self.bounds.width - radius, y: 0))
+        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius, y: radius), radius: radius, startAngle: 3 * .pi / 2, endAngle: 0, clockwise: true)
+        path.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height - radius))
+        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius, y: self.bounds.height - radius), radius: radius, startAngle: 0, endAngle: .pi / 2, clockwise: true)
+        path.addLine(to: CGPoint(x: radius, y: self.bounds.height))
+        path.addArc(withCenter: CGPoint(x: radius, y: self.bounds.height - radius), radius: radius, startAngle: .pi / 2, endAngle: .pi, clockwise: true)
+        path.addLine(to: CGPoint(x: 0, y: radius))
+        path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
+        
+        UIColor.recipientBubbleColor.setFill()
+        path.fill()
+    }
+}
 
+//MARK: - Constants
+private extension SenderSmallBubbleView {
+    enum Constants {
+        static let radius = 5.0
+    }
+}

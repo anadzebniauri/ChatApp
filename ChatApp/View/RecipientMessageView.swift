@@ -10,13 +10,14 @@ import UIKit
 class RecipientMessageView: UIView {
     
     //MARK: - Properties
-    private let capsuleView = RecipientCapsuleBubble().forAutoLayout()
-    private let mediumBubble = RecipientBubble().forAutoLayout()
-    private let smallBubble = RecipientBubble().forAutoLayout()
+    private let capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
+    private let mediumBubbleView = RecipientMediumBubbleView().forAutoLayout()
+    private let smallBubbleView = RecipientSmallBubbleView().forAutoLayout()
         
     private let messageLabel = UILabel()
     private let dateLabel = UILabel().forAutoLayout()
     
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -31,12 +32,12 @@ class RecipientMessageView: UIView {
         fatalError("!")
     }
     
-    //MARK: - Functions
-    
+    //MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
     }
     
+    //try without StackView
     private func setUpMessageLabel() {
         let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
         messageStackView.isLayoutMarginsRelativeArrangement = true
@@ -46,15 +47,15 @@ class RecipientMessageView: UIView {
         
         capsuleView.addSubview(capsuleStackView)
         capsuleStackView.stretchOnParent()
-//        capsuleView.addSubview(messageLabel)
         
-        messageLabel.font = UIFont.systemFont(ofSize: 14)
-        messageLabel.textColor = .messageTextColor
+        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.textColor = .messageTextBlackColor
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.numberOfLines = 0
         
         // Add constraints to position and size the label within the bubble
+//        capsuleView.addSubview(messageLabel)
 //        NSLayoutConstraint.activate([
 //            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
 //            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),
@@ -62,15 +63,14 @@ class RecipientMessageView: UIView {
 //            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
 //        ])
         messageLabel.text = "გამარჯობა"
-        
-//        messageLabel.text = "გამარჯობა, ანა"
     }
     
     private func setUpDateLabel() {
         addSubview(dateLabel)
         
-        dateLabel.font = UIFont.systemFont(ofSize: 10)
-        dateLabel.textColor = .SystemGreyTextColor
+        dateLabel.font = .systemFont(ofSize: 10)
+        
+        dateLabel.textColor = .dateLabelTextGreyColor
         dateLabel.numberOfLines = 0
         
 //        dateLabel.setHeight(10)
@@ -101,33 +101,41 @@ class RecipientMessageView: UIView {
     }
     
     private func setUpMediumBubble() {
-        addSubview(mediumBubble)
+        addSubview(mediumBubbleView)
         
-        mediumBubble.setHeight(17.4)
-        mediumBubble.setWidth(18.18)
+        mediumBubbleView.setHeight(Constants.mediumBubbleViewHeight)
+        mediumBubbleView.setWidth(Constants.mediumBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            mediumBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -13.6),
-            mediumBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: 11.82)
+            mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -13.6),
+            mediumBubbleView.leftAnchor.constraint(equalTo: leftAnchor, constant: 11.82)
         ])
         
-        mediumBubble.layer.cornerRadius = 25
+        mediumBubbleView.layer.cornerRadius = 25
     }
     
     private func setUpSmallBubble() {
-        addSubview(smallBubble)
+        addSubview(smallBubbleView)
         
-        smallBubble.setHeight(9.57)
-        smallBubble.setWidth(10)
+        smallBubbleView.setHeight(Constants.smallBubbleViewHeight)
+        smallBubbleView.setWidth(Constants.smallBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            smallBubble.leftAnchor.constraint(equalTo: leftAnchor),
-            smallBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
+            smallBubbleView.leftAnchor.constraint(equalTo: leftAnchor),
+            smallBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
         ])
-        smallBubble.layer.cornerRadius = 25
+        smallBubbleView.layer.cornerRadius = 25
     }
     
 }
 
-
-
+//MARK: - Constants
+private extension RecipientMessageView {
+    enum Constants {
+        static let mediumBubbleViewHeight = 17.4
+        static let mediumBubbleViewWidth = 18.18
+        
+        static let smallBubbleViewHeight = 9.57
+        static let smallBubbleViewWidth = 10.0
+    }
+}

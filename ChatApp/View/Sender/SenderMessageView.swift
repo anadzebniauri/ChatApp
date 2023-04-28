@@ -10,14 +10,14 @@ import UIKit
 class SenderMessageView: UIView {
     
     //MARK: - Properties
-    private let capsuleView = SenderCapsuleBubble().forAutoLayout()
-    private let mediumBubble = SenderBubble().forAutoLayout()
-    private let smallBubble = SenderBubble().forAutoLayout()
+    private let capsuleView = SenderCapsuleBubbleView().forAutoLayout()
+    private let mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
+    private let smallBubbleView = SenderSmallBubbleView().forAutoLayout()
         
     private let messageLabel = UILabel()
     private let dateLabel = UILabel().forAutoLayout()
     
-        
+    //MARK: -  Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -32,7 +32,12 @@ class SenderMessageView: UIView {
         fatalError("!")
     }
     
-    //MARK: - Functions
+    //MARK: - Internal Method
+    func setTextToBubble(_ text: String) {
+        messageLabel.text = text
+    }
+    
+    //MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
     }
@@ -47,8 +52,8 @@ class SenderMessageView: UIView {
         capsuleView.addSubview(capsuleStackView)
         capsuleStackView.stretchOnParent()
         
-        messageLabel.font = UIFont.systemFont(ofSize: 14)
-        messageLabel.textColor = .messageTextColor
+        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.textColor = .messageTextBlackColor
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.numberOfLines = 0
@@ -68,8 +73,8 @@ class SenderMessageView: UIView {
     private func setUpDateLabel() {
         addSubview(dateLabel)
         
-        dateLabel.font = UIFont.systemFont(ofSize: 10)
-        dateLabel.textColor = .SystemGreyTextColor
+        dateLabel.font = .systemFont(ofSize: 10)
+        dateLabel.textColor = .dateLabelTextGreyColor
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
@@ -99,30 +104,30 @@ class SenderMessageView: UIView {
     }
     
     private func setUpMediumBubble() {
-        addSubview(mediumBubble)
+        addSubview(mediumBubbleView)
         
-        mediumBubble.setHeight(17.4)
-        mediumBubble.setWidth(18.18)
+        mediumBubbleView.setHeight(Constants.mediumBubbleViewHeight)
+        mediumBubbleView.setWidth(Constants.mediumBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            mediumBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -13),
-            mediumBubble.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
+            mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -13),
+            mediumBubbleView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
         ])
         
-        mediumBubble.layer.cornerRadius = 25
+        mediumBubbleView.layer.cornerRadius = 25
     }
     
     private func setUpSmallBubble() {
-        addSubview(smallBubble)
+        addSubview(smallBubbleView)
         
-        smallBubble.setHeight(9.57)
-        smallBubble.setWidth(10)
+        smallBubbleView.setHeight(Constants.smallBubbleViewHeight)
+        smallBubbleView.setWidth(Constants.smallBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            smallBubble.rightAnchor.constraint(equalTo: rightAnchor),
-            smallBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
+            smallBubbleView.rightAnchor.constraint(equalTo: rightAnchor),
+            smallBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9)
         ])
-        smallBubble.layer.cornerRadius = 25
+        smallBubbleView.layer.cornerRadius = 25
     }
     
 }
@@ -130,5 +135,17 @@ class SenderMessageView: UIView {
 extension UIEdgeInsets {
     static func make(horizontal: CGFloat, vertical: CGFloat) -> UIEdgeInsets {
         UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
+    }
+}
+
+//MARK: - Constants
+private extension SenderMessageView {
+    enum Constants {
+        static let mediumBubbleViewHeight = 17.4
+        static let mediumBubbleViewWidth = 18.18
+        
+        static let smallBubbleViewHeight = 9.57
+        static let smallBubbleViewWidth = 10.0
+        
     }
 }
