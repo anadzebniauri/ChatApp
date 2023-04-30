@@ -10,12 +10,11 @@ import UIKit
 final class SenderTableViewCell: UITableViewCell {
     
     //MARK: - Properties
-    private let senderBubble = SenderMessageView()
+    var senderBubble = SenderMessageView().forAutoLayout()
     
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .red
         addSubview(senderBubble)
         setUpSenderBubbleCellConstraints()
     }
@@ -25,17 +24,14 @@ final class SenderTableViewCell: UITableViewCell {
     }
     
     //MARK: - Methods
-    private func setUpSenderBubbleCellConstraints() {
-        senderBubble.translatesAutoresizingMaskIntoConstraints = false
+    func setUpSenderBubbleCellConstraints() {
         
         NSLayoutConstraint.activate([
             senderBubble.topAnchor.constraint(equalTo: self.topAnchor),
             senderBubble.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             senderBubble.rightAnchor.constraint(equalTo: self.rightAnchor),
-            senderBubble.leftAnchor.constraint(equalTo: self.leftAnchor)
+            senderBubble.leftAnchor.constraint(greaterThanOrEqualTo: self.leftAnchor)
         ])
-
-        senderBubble.setHeight(50)
     }
     
     func addText(_ text: String) {

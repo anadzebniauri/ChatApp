@@ -12,6 +12,7 @@
 		C1CD1A2629FA86360052BEEE /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2529FA86360052BEEE /* UIStackView+Extension.swift */; };
 		C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */; };
 		C1CD1A2A29FBF7370052BEEE /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2929FBF7370052BEEE /* DividerView.swift */; };
+		C1CD1A2C29FC3F3F0052BEEE /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* ReceiverTableViewCell.swift */; };
 		C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B629F17330009B3072 /* AppDelegate.swift */; };
 		C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B829F17330009B3072 /* SceneDelegate.swift */; };
 		C1D998BB29F17330009B3072 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998BA29F17330009B3072 /* ChatViewController.swift */; };
@@ -34,6 +35,7 @@
 		C1CD1A2529FA86360052BEEE /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2929FBF7370052BEEE /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		C1CD1A2B29FC3F3F0052BEEE /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		C1D998B329F17330009B3072 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D998B629F17330009B3072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1D998B829F17330009B3072 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				C1D998D729F174FB009B3072 /* RecipientCapsuleBubbleView.swift */,
+				C1CD1A2B29FC3F3F0052BEEE /* ReceiverTableViewCell.swift */,
 				C1F205BE29F2A9B5005C2171 /* RecipientMessageView.swift */,
 			);
 			name = Recipient;
@@ -76,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */,
+				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
 				C1F205E529F7F103005C2171 /* SenderMessageView.swift */,
 			);
 			path = Sender;
@@ -137,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				C1D998BC29F17330009B3072 /* Main.storyboard */,
-				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
 				C1D998D529F174EE009B3072 /* SwitcheView.swift */,
 				C1F205C029F40D2E005C2171 /* TypingAreaView.swift */,
 				C1CD1A2929FBF7370052BEEE /* DividerView.swift */,
@@ -235,6 +238,7 @@
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
 				C1F205BF29F2A9B5005C2171 /* RecipientMessageView.swift in Sources */,
 				C1D998D129F17486009B3072 /* UIVIew+Extension.swift in Sources */,
+				C1CD1A2C29FC3F3F0052BEEE /* ReceiverTableViewCell.swift in Sources */,
 				C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */,
 				C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */,
 				C1D998CF29F17470009B3072 /* UIColor+Extension.swift in Sources */,

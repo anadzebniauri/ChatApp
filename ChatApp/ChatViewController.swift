@@ -15,7 +15,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private let receiverTypingArea = TypingAreaView().forAutoLayout()
     private let senderTypingArea = TypingAreaView().forAutoLayout()
     
-    private let recipientMessageView = RecipientMessageView().forAutoLayout()
+    private let receiverMessageView = RecipientMessageView().forAutoLayout()
     private let senderMessageView = SenderMessageView().forAutoLayout()
     
     private let dividerView = DividerView().forAutoLayout()
@@ -33,23 +33,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         setUpSwitcherView()
         setUpDividerView()
-        
+
         setUpReceiverTypingArea()
         setUpReceiverTableView()
-        
+
         setUpSenderTypingArea()
         setUpSenderTableView()
-
+        
 //        setUpRecipientMessageView()
 //        setUpSenderMessageView()
         
-//        setUpRecipientTableView()
-//        setUpSenderTableView()
-//        setUpTableViewsStackView()
-        
-        receiverTableView.register(UITableViewCell.self, forCellReuseIdentifier: "receiverCell")
+        receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
         senderTableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
-       
     }
     
 //MARK: - Typing Areas
@@ -67,20 +62,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         view.addSubview(senderTypingArea)
         
         NSLayoutConstraint.activate([
-            senderTypingArea.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            senderTypingArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             senderTypingArea.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             senderTypingArea.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
         ])
     }
     
-//MARK: - Message View
+//MARK: - Message Views
     private func setUpRecipientMessageView() {
-        view.addSubview(recipientMessageView)
+        view.addSubview(receiverMessageView)
 
         NSLayoutConstraint.activate([
-            recipientMessageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 95),
-            recipientMessageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            recipientMessageView.rightAnchor.constraint(lessThanOrEqualTo: view.rightAnchor, constant: 30)
+            receiverMessageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 95),
+            receiverMessageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            receiverMessageView.rightAnchor.constraint(lessThanOrEqualTo: view.rightAnchor)
+
+            
         ])
     }
 
@@ -90,7 +87,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSLayoutConstraint.activate([
             senderMessageView.bottomAnchor.constraint(equalTo: receiverTypingArea.topAnchor, constant: -16),
             senderMessageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            senderMessageView.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor, constant: 30)
+            senderMessageView.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor)
         ])
     }
 
@@ -98,11 +95,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private func setUpSwitcherView() {
         view.addSubview(switcherView)
 
-        switcherView.setHeight(27)
-        switcherView.setWidth(54)
+        NSLayoutConstraint.activate([
+            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: 52),
+            switcherView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
+        ])
 
-        switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: 52).isActive = true
-        switcherView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
     }
     
 //MARK: - Divider View
@@ -138,7 +135,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         senderTableView.dataSource = self
         
         view.addSubview(senderTableView)
-        senderTableView.backgroundColor = .red
         
         NSLayoutConstraint.activate([
             senderTableView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
@@ -154,39 +150,36 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == receiverTableView {
             // return the number of rows for tableView1
-            return 10
+            return 5
         } else {
             // return the number of rows for tableView2
-            return 10
+            return 5
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == receiverTableView {
             // dequeue and configure a cell for tableView1
-            let cell = tableView.dequeueReusableCell(withIdentifier: "receiverCell", for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? ReceiverTableViewCell else {
+                fatalError("Cell can't cast to ReceiverTableViewCell") }
+            
+            cell.selectionStyle = .none
+            cell.textLabel?.numberOfLines = 0
+            receiverTableView.separatorStyle = .none
+            let receiverBubble = receiverMessageView
+            cell.receiverBubble = receiverBubble
             return cell
         } else {
             // dequeue and configure a cell for tableView2
-            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell else { fatalError("Cell can't cast to SenderTableViewCell") }
-            cell.addText("ana")
+            
+            cell.selectionStyle = .none
+            cell.textLabel?.numberOfLines = 0
+            senderTableView.separatorStyle = .none
+
+            let senderBubble = senderMessageView
+            cell.senderBubble = senderBubble
             return cell
-                    
         }
     }
-    
-
-    //footer
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let typingAreaView = TypingArea()
-//        tableView.tableFooterView = typingAreaView
-//
-//        return typingAreaView
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 100
-//    }
 }
-

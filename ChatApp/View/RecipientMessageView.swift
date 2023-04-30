@@ -9,15 +9,15 @@ import UIKit
 
 class RecipientMessageView: UIView {
     
-    //MARK: - Properties
+//MARK: - Properties
     private let capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
     private let mediumBubbleView = RecipientMediumBubbleView().forAutoLayout()
     private let smallBubbleView = RecipientSmallBubbleView().forAutoLayout()
         
-    private let messageLabel = UILabel()
+    private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
-    //MARK: - Init
+//MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -32,37 +32,42 @@ class RecipientMessageView: UIView {
         fatalError("!")
     }
     
-    //MARK: - Methods
+//MARK: - Internal Method
+    func setTextToBubble(_ text: String) {
+        messageLabel.text = text
+    }
+    
+//MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
     }
     
     //try without StackView
     private func setUpMessageLabel() {
-        let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
-        messageStackView.isLayoutMarginsRelativeArrangement = true
-        messageStackView.layoutMargins = .make(horizontal: 18, vertical: 16)
+        capsuleView.addSubview(messageLabel)
 
-        let capsuleStackView = UIStackView(arrangedSubviews: [messageStackView]).forAutoLayout()
-        
-        capsuleView.addSubview(capsuleStackView)
-        capsuleStackView.stretchOnParent()
-        
-        messageLabel.font = .systemFont(ofSize: 14)
-        messageLabel.textColor = .messageTextBlackColor
-        messageLabel.textAlignment = .left
-        messageLabel.lineBreakMode = .byWordWrapping
-        messageLabel.numberOfLines = 0
-        
-        // Add constraints to position and size the label within the bubble
-//        capsuleView.addSubview(messageLabel)
-//        NSLayoutConstraint.activate([
-//            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
-//            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),
-//            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
-//            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
-//        ])
-        messageLabel.text = "გამარჯობა"
+//        let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
+//         messageStackView.isLayoutMarginsRelativeArrangement = true
+//        messageStackView.layoutMargins = .make(horizontal: 18, vertical: 16)
+//        let capsuleStackView = UIStackView(arrangedSubviews: [messageStackView]).forAutoLayout()
+//
+//         capsuleView.addSubview(capsuleStackView)
+//         capsuleStackView.stretchOnParent()
+
+         messageLabel.font = .systemFont(ofSize: 14)
+         messageLabel.textColor = .messageTextBlackColor
+         messageLabel.textAlignment = .left
+         messageLabel.lineBreakMode = .byWordWrapping
+         messageLabel.numberOfLines = 0
+
+         // Add constraints to position and size the label within the bubble
+         NSLayoutConstraint.activate([
+             messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
+             messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),
+             messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
+             messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
+         ])
+         messageLabel.text = "გამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობა"
     }
     
     private func setUpDateLabel() {
@@ -73,11 +78,12 @@ class RecipientMessageView: UIView {
         dateLabel.textColor = .dateLabelTextGreyColor
         dateLabel.numberOfLines = 0
         
-//        dateLabel.setHeight(10)
+        dateLabel.setHeight(10)
 
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 30),
+            dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
         
         let dateFormatter = DateFormatter()

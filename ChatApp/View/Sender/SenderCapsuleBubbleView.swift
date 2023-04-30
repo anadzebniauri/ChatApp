@@ -13,7 +13,7 @@ class SenderCapsuleBubbleView: UIView {
         Constants.radius
     }
     
-    //MARK: - Init
+//MARK: - Init
     required init?(coder aDecoder: NSCoder) {
         fatalError("storyboard and .xib is not supported")
     }
@@ -77,16 +77,8 @@ private extension SenderCapsuleBubbleView {
 class SenderMediumBubbleView: UIView {
     
     private var radius: CGFloat {
-        bounds.height/2
+        Constants.radius
     }
-    
-    //    private let type: BubbleType
-    
-    //    init(for type: BubbleType) {
-    //        self.type = type
-    //        super.init(frame: .zero)
-    //        backgroundColor = .clear
-    //    }
     
     //MARK: - Init
     override required init(frame: CGRect) {
@@ -153,7 +145,7 @@ class SenderSmallBubbleView: UIView {
         path.addLine(to: CGPoint(x: 0, y: radius))
         path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
         
-        UIColor.recipientBubbleColor.setFill()
+        UIColor.senderBubbleColor.setFill()
         path.fill()
     }
 }

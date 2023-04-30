@@ -9,14 +9,14 @@ import UIKit
 
 class SwitcherView: UIView {
     
-    //MARK: - properties
+//MARK: - properties
     @objc private let lightModeItemBackgroundView = UIImageView()
     private let lightModeItemView = UIImageView()
     @objc private let darkModeItemBackgroundView = UIImageView()
     private let darkModeItemView = UIImageView()
-    private let switchingItemStackView = UIStackView()
+    private let switchingItemStackView = UIStackView().forAutoLayout()
     
-    //MARK: - Init
+//MARK: - Init
     required init?(coder: NSCoder) {
         fatalError("!")
     }
@@ -24,8 +24,6 @@ class SwitcherView: UIView {
     override required init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
-        
-
     }
     
     convenience init() {
@@ -33,11 +31,8 @@ class SwitcherView: UIView {
         setUp()
     }
     
-    //MARK: - Methods
-    
-
-    
-    private func setUp() {
+//MARK: - Methods
+   private func setUp() {
         setUpView()
         setUpSwitchingItemStackView()
         setUpLightModeItemBackgroundView()
@@ -52,7 +47,7 @@ class SwitcherView: UIView {
         layer.cornerRadius = Constants.cornerRadius
     }
     
-    //MARK: - Light Mode
+//MARK: - Light Mode
     private func setUpLightModeItemBackgroundView() {
         lightModeItemBackgroundView.addSubview(lightModeItemView)
 
@@ -80,7 +75,7 @@ class SwitcherView: UIView {
         lightModeItemView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    //MARK: - Dark Mode
+//MARK: - Dark Mode
     private func setUpDarkModeItemBackgroundView() {
         darkModeItemBackgroundView.addSubview(darkModeItemView)
 
@@ -108,24 +103,24 @@ class SwitcherView: UIView {
         darkModeItemView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    //MARK: - Stack View
+//MARK: - Stack View
     private func setUpSwitchingItemStackView() {
         addSubview(switchingItemStackView)
+        switchingItemStackView.stretchOnParent()
         switchingItemStackView.addArrangedSubview(lightModeItemBackgroundView)
         switchingItemStackView.addArrangedSubview(darkModeItemBackgroundView)
         
+        switchingItemStackView.setHeight(Constants.switchingItemStackViewHeight)
+        switchingItemStackView.setWidth(Constants.switchingItemStackViewWidth)
+                
         switchingItemStackView.spacing = 4
-        switchingItemStackView.stretchOnParent()
-        
-        switchingItemStackView.translatesAutoresizingMaskIntoConstraints = false
-        
         switchingItemStackView.distribution = .fillEqually
         
         switchingItemStackView.isLayoutMarginsRelativeArrangement = true
         switchingItemStackView.layoutMargins = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
     }
     
-    //MARK: - Switcher Function
+//MARK: - Switcher Function
     private var viewController: UIViewController? {
         var nextResponder: UIResponder? = self
         while let responder = nextResponder, !(responder is UIViewController) {
@@ -138,7 +133,23 @@ class SwitcherView: UIView {
     @objc func viewTapped() {
         darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
         if darkModeItemBackgroundView.isHighlighted {
-            viewController?.view.backgroundColor = .darkModeBackgroundColor
+            //table view and cell background color
+            guard let viewController = viewController else { return }
+            let firstTableView = viewController.view.subviews.first(where: { $0 is UITableView }) as? UITableView
+            firstTableView?.backgroundColor = .darkModeBackgroundColor
+
+            //second table view and cell
+            var secondTableView: UITableView?
+            for subview in viewController.view.subviews {
+                if let tableView = subview as? UITableView, tableView != firstTableView {
+                    secondTableView = tableView
+                    break
+                }
+            }
+            secondTableView?.backgroundColor = .darkModeBackgroundColor
+
+            
+            viewController.view.backgroundColor = .darkModeBackgroundColor
             backgroundColor = .switcherDarkModeBackgroundColor
             lightModeItemBackgroundView.tintColor = .clear
             lightModeItemView.tintColor = .switcherItemViewColor
@@ -160,7 +171,6 @@ class SwitcherView: UIView {
     }
 }
 
-
 // MARK: - Constans
 private extension SwitcherView {
     enum Constants {
@@ -175,6 +185,9 @@ private extension SwitcherView {
         static let darkModeItemBackgroundViewWidth = 21.0
         static let darkModeItemViewHeight = 11.0
         static let darkModeItemViewWidth = 11.0
+        
+        static let switchingItemStackViewHeight = 27.0
+        static let switchingItemStackViewWidth = 54.0
         
     }
 }

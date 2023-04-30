@@ -9,15 +9,15 @@ import UIKit
 
 class SenderMessageView: UIView {
     
-    //MARK: - Properties
+//MARK: - Properties
     private let capsuleView = SenderCapsuleBubbleView().forAutoLayout()
     private let mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
     private let smallBubbleView = SenderSmallBubbleView().forAutoLayout()
         
-    private let messageLabel = UILabel()
+    private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
-    //MARK: -  Methods
+//MARK: -  Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -32,47 +32,44 @@ class SenderMessageView: UIView {
         fatalError("!")
     }
     
-    //MARK: - Internal Method
+//MARK: - Internal Method
     func setTextToBubble(_ text: String) {
         messageLabel.text = text
     }
     
-    //MARK: - Methods
+//MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
     }
     
     private func setUpMessageLabel() {
-        let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
-        messageStackView.isLayoutMarginsRelativeArrangement = true
-        messageStackView.layoutMargins = .make(horizontal: 18, vertical: 15)
+        capsuleView.addSubview(messageLabel)
+//        let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
+//        messageStackView.isLayoutMarginsRelativeArrangement = true
+//        messageStackView.layoutMargins = .make(horizontal: 18, vertical: 15)
+//        let capsuleStackView = UIStackView(arrangedSubviews: [messageStackView]).forAutoLayout()
+//
+//         capsuleView.addSubview(capsuleStackView)
+//         capsuleStackView.stretchOnParent()
 
-        let capsuleStackView = UIStackView(arrangedSubviews: [messageStackView]).forAutoLayout()
-        
-        capsuleView.addSubview(capsuleStackView)
-        capsuleStackView.stretchOnParent()
-        
-        messageLabel.font = .systemFont(ofSize: 14)
-        messageLabel.textColor = .messageTextBlackColor
-        messageLabel.textAlignment = .left
-        messageLabel.lineBreakMode = .byWordWrapping
-        messageLabel.numberOfLines = 0
-//        messageLabel.layer.cornerRadius = 25
-        
+         messageLabel.font = .systemFont(ofSize: 14)
+         messageLabel.textColor = .messageTextBlackColor
+         messageLabel.textAlignment = .left
+         messageLabel.lineBreakMode = .byWordWrapping
+         messageLabel.numberOfLines = 0
         
 //         Add constraints to position and size the label within the bubble
-//        NSLayoutConstraint.activate([
-//            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 15),
-//            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -15),
-//            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
-//            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
-//        ])
-        messageLabel.text = "მზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jkმზია jk"
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 15),
+            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -15),
+            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
+            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
+        ])
+        messageLabel.text = "გამა"
     }
     
     private func setUpDateLabel() {
         addSubview(dateLabel)
-        
         dateLabel.font = .systemFont(ofSize: 10)
         dateLabel.textColor = .dateLabelTextGreyColor
         dateLabel.numberOfLines = 0
@@ -82,13 +79,17 @@ class SenderMessageView: UIView {
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
+            dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, h:mm "
         let currentDateTime = Date()
         let dateTimeString = dateFormatter.string(from: currentDateTime)
         dateLabel.text = dateTimeString
+        
+//        dateLabel.text = "არ გაიგზავნა"
+//        dateLabel.textColor = .datelabelErrorTextRedColor
     }
     
     private func setUpCapsuleView() {
