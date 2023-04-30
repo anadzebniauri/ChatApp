@@ -17,6 +17,7 @@ class ReceiverTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(receiverBubble)
         setUpReceiverBubbleCellConstraints()
+        layoutSubviews()
     }
     
     required init?(coder: NSCoder) {

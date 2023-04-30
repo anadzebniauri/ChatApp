@@ -8,8 +8,11 @@
 import UIKit
 
 class DividerView: UIView {
+
+//MARK: - Properties
     private let dividerView = UIView().forAutoLayout()
     
+//MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
         setUpDividerView()
@@ -20,6 +23,7 @@ class DividerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+//MARK: - Methods
     private func setUpDividerView() {
         addSubview(dividerView)
         dividerView.stretchOnParent()

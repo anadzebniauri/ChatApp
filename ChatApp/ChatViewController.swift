@@ -40,9 +40,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         setUpSenderTypingArea()
         setUpSenderTableView()
         
-//        setUpRecipientMessageView()
-//        setUpSenderMessageView()
-        
         receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
         senderTableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
     }

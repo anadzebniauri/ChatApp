@@ -95,13 +95,36 @@ class RecipientMediumBubbleView: UIView {
         
         path.move(to: CGPoint(x: radius, y: 0))
         path.addLine(to: CGPoint(x: self.bounds.width - radius, y: 0))
-        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius, y: radius), radius: radius, startAngle: 3 * .pi / 2, endAngle: 0, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius,
+                                        y: radius),
+                    radius: radius,
+                    startAngle: 3 * .pi / 2,
+                    endAngle: 0,
+                    clockwise: true
+        )
         path.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height - radius))
-        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius, y: self.bounds.height - radius), radius: radius, startAngle: 0, endAngle: .pi / 2, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius,
+                                        y: self.bounds.height - radius),
+                    radius: radius,
+                    startAngle: 0, endAngle: .pi / 2,
+                    clockwise: true
+        )
         path.addLine(to: CGPoint(x: radius, y: self.bounds.height))
-        path.addArc(withCenter: CGPoint(x: radius, y: self.bounds.height - radius), radius: radius, startAngle: .pi / 2, endAngle: .pi, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: radius,
+                                        y: self.bounds.height - radius),
+                    radius: radius,
+                    startAngle: .pi / 2,
+                    endAngle: .pi,
+                    clockwise: true
+        )
         path.addLine(to: CGPoint(x: 0, y: radius))
-        path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: radius,
+                                        y: radius),
+                    radius: radius,
+                    startAngle: .pi,
+                    endAngle: 3 * .pi / 2,
+                    clockwise: true
+        )
         
         UIColor.recipientBubbleColor.setFill()
         path.fill()
@@ -136,13 +159,36 @@ class RecipientSmallBubbleView: UIView {
         
         path.move(to: CGPoint(x: radius, y: 0))
         path.addLine(to: CGPoint(x: self.bounds.width - radius, y: 0))
-        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius, y: radius), radius: radius, startAngle: 3 * .pi / 2, endAngle: 0, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius,
+                                        y: radius),
+                    radius: radius,
+                    startAngle: 3 * .pi / 2,
+                    endAngle: 0,
+                    clockwise: true
+        )
         path.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height - radius))
-        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius, y: self.bounds.height - radius), radius: radius, startAngle: 0, endAngle: .pi / 2, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: self.bounds.width - radius,
+                                        y: self.bounds.height - radius),
+                    radius: radius,
+                    startAngle: 0,
+                    endAngle: .pi / 2,
+                    clockwise: true
+        )
         path.addLine(to: CGPoint(x: radius, y: self.bounds.height))
-        path.addArc(withCenter: CGPoint(x: radius, y: self.bounds.height - radius), radius: radius, startAngle: .pi / 2, endAngle: .pi, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: radius,
+                                        y: self.bounds.height - radius),
+                    radius: radius,
+                    startAngle: .pi / 2,
+                    endAngle: .pi,
+                    clockwise: true
+        )
         path.addLine(to: CGPoint(x: 0, y: radius))
-        path.addArc(withCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: radius, y: radius),
+                    radius: radius,
+                    startAngle: .pi,
+                    endAngle: 3 * .pi / 2,
+                    clockwise: true
+        )
         
         UIColor.recipientBubbleColor.setFill()
         path.fill()

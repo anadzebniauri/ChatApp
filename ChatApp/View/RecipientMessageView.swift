@@ -42,17 +42,8 @@ class RecipientMessageView: UIView {
         clipsToBounds = true
     }
     
-    //try without StackView
     private func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
-
-//        let messageStackView = UIStackView(arrangedSubviews: [messageLabel])
-//         messageStackView.isLayoutMarginsRelativeArrangement = true
-//        messageStackView.layoutMargins = .make(horizontal: 18, vertical: 16)
-//        let capsuleStackView = UIStackView(arrangedSubviews: [messageStackView]).forAutoLayout()
-//
-//         capsuleView.addSubview(capsuleStackView)
-//         capsuleStackView.stretchOnParent()
 
          messageLabel.font = .systemFont(ofSize: 14)
          messageLabel.textColor = .messageTextBlackColor
@@ -60,7 +51,6 @@ class RecipientMessageView: UIView {
          messageLabel.lineBreakMode = .byWordWrapping
          messageLabel.numberOfLines = 0
 
-         // Add constraints to position and size the label within the bubble
          NSLayoutConstraint.activate([
              messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
              messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),

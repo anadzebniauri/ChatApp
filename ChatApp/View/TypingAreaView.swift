@@ -131,6 +131,7 @@ extension TypingAreaView: UITextViewDelegate {
     }
 }
 
+// MARK: - Constants
 private extension TypingAreaView {
     enum Constants {
         static let cornerRadius = 15.0
