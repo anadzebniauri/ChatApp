@@ -31,7 +31,7 @@ class TypingAreaView: UIView {
     
     //MARK: - Methods
     private func setUp() {
-        setUpMessageTextViewCustomize()
+        setUpMessageTextView()
         setUpMessageTextViewConstraints()
         setUpSendButton()
         setUpMessageTextViewPlaceholder()
@@ -41,7 +41,7 @@ class TypingAreaView: UIView {
         layer.cornerRadius = Constants.cornerRadius
     }
     
-    private func setUpMessageTextViewCustomize() {
+    private func setUpMessageTextView() {
         addSubview(messageTextView)
         messageTextView.font = .systemFont(ofSize: 14)
         messageTextView.textAlignment = .left

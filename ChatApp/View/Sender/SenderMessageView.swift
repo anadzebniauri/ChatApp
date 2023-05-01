@@ -9,15 +9,15 @@ import UIKit
 
 class SenderMessageView: UIView {
     
-//MARK: - Properties
+    //MARK: - Properties
     private let capsuleView = SenderCapsuleBubbleView().forAutoLayout()
     private let mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
     private let smallBubbleView = SenderSmallBubbleView().forAutoLayout()
-        
+    
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
-//MARK: -  Init
+    //MARK: -  Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -32,24 +32,24 @@ class SenderMessageView: UIView {
         fatalError("!")
     }
     
-//MARK: - Internal Method
+    //MARK: - Internal Method
     func setTextToBubble(_ text: String) {
         messageLabel.text = text
     }
     
-//MARK: - Methods
+    //MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
     }
     
     private func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
-
-         messageLabel.font = .systemFont(ofSize: 14)
-         messageLabel.textColor = .messageTextBlackColor
-         messageLabel.textAlignment = .left
-         messageLabel.lineBreakMode = .byWordWrapping
-         messageLabel.numberOfLines = 0
+        
+        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.textColor = .messageTextBlackColor
+        messageLabel.textAlignment = .left
+        messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.numberOfLines = 0
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 15),
@@ -67,26 +67,26 @@ class SenderMessageView: UIView {
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
-
+        
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
             dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
-
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, h:mm "
         let currentDateTime = Date()
         let dateTimeString = dateFormatter.string(from: currentDateTime)
         dateLabel.text = dateTimeString
         
-//        dateLabel.text = "არ გაიგზავნა"
-//        dateLabel.textColor = .datelabelErrorTextRedColor
+        //        dateLabel.text = "არ გაიგზავნა"
+        //        dateLabel.textColor = .datelabelErrorTextRedColor
     }
     
     private func setUpCapsuleView() {
         addSubview(capsuleView)
-
+        
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
             capsuleView.leftAnchor.constraint(equalTo: leftAnchor),

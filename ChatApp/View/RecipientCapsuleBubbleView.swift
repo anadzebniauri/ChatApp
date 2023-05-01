@@ -14,8 +14,8 @@ class RecipientCapsuleBubbleView: UIView {
     private var radius: CGFloat {
         Constants.radius
     }
-        
-//MARK: - Init
+    
+    //MARK: - Init
     required init?(coder aDecoder: NSCoder) {
         fatalError("storyboard and .xib is not supported")
     }
@@ -79,7 +79,7 @@ class RecipientMediumBubbleView: UIView {
     private var radius: CGFloat {
         Constants.radius
     }
-
+    
     //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -144,7 +144,7 @@ class RecipientSmallBubbleView: UIView {
         Constants.radius
     }
     
-//MARK: - Init
+    //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
         backgroundColor = .clear

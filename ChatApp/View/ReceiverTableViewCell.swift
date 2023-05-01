@@ -35,7 +35,7 @@ class ReceiverTableViewCell: UITableViewCell {
         ])
     }
     
-    func addText(_ text: String) {
+    func fill(_ text: String) {
         receiverBubble.setTextToBubble(text)
     }
 }

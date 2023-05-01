@@ -12,6 +12,13 @@ final class SenderTableViewCell: UITableViewCell {
     //MARK: - Properties
     var senderBubble = SenderMessageView().forAutoLayout()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        senderBubble.frame = senderBubble.frame.inset(by: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        senderBubble.backgroundColor = .red
+    }
+    
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +41,7 @@ final class SenderTableViewCell: UITableViewCell {
         ])
     }
     
-    func addText(_ text: String) {
+    func fill(_ text: String) {
         senderBubble.setTextToBubble(text)
     }
 }

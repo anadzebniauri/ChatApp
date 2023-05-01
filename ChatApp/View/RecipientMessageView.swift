@@ -9,15 +9,15 @@ import UIKit
 
 class RecipientMessageView: UIView {
     
-//MARK: - Properties
+    //MARK: - Properties
     private let capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
     private let mediumBubbleView = RecipientMediumBubbleView().forAutoLayout()
     private let smallBubbleView = RecipientSmallBubbleView().forAutoLayout()
-        
+    
     private let messageLabel = UILabel().forAutoLayout()
     private let dateLabel = UILabel().forAutoLayout()
     
-//MARK: - Init
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -32,32 +32,32 @@ class RecipientMessageView: UIView {
         fatalError("!")
     }
     
-//MARK: - Internal Method
+    //MARK: - Internal Method
     func setTextToBubble(_ text: String) {
         messageLabel.text = text
     }
     
-//MARK: - Methods
+    //MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
     }
     
     private func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
-
-         messageLabel.font = .systemFont(ofSize: 14)
-         messageLabel.textColor = .messageTextBlackColor
-         messageLabel.textAlignment = .left
-         messageLabel.lineBreakMode = .byWordWrapping
-         messageLabel.numberOfLines = 0
-
-         NSLayoutConstraint.activate([
-             messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
-             messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),
-             messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
-             messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
-         ])
-         messageLabel.text = "გამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობა"
+        
+        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.textColor = .messageTextBlackColor
+        messageLabel.textAlignment = .left
+        messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.numberOfLines = 0
+        
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: 16),
+            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -16),
+            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -18),
+            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: 18)
+        ])
+        messageLabel.text = "გამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობა"
     }
     
     private func setUpDateLabel() {
@@ -69,7 +69,7 @@ class RecipientMessageView: UIView {
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
-
+        
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 30),
@@ -91,7 +91,7 @@ class RecipientMessageView: UIView {
             capsuleView.rightAnchor.constraint(equalTo: rightAnchor),
             capsuleView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
-
+            
         ])
         capsuleView.layer.cornerRadius = 25
     }

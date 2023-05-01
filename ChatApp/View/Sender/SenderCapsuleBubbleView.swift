@@ -13,7 +13,7 @@ class SenderCapsuleBubbleView: UIView {
         Constants.radius
     }
     
-//MARK: - Init
+    //MARK: - Init
     required init?(coder aDecoder: NSCoder) {
         fatalError("storyboard and .xib is not supported")
     }
