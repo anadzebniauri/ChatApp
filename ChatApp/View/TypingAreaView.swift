@@ -117,7 +117,7 @@ extension TypingAreaView: UITextViewDelegate {
         }
         //update message text view height + scroll
         guard let lineHeight = textView.font?.lineHeight else { return }
-        let maxHeight: CGFloat = lineHeight * 5 + textView.textContainerInset.top + textView.textContainerInset.bottom
+        let maxHeight: CGFloat = lineHeight * 4 + textView.textContainerInset.top + textView.textContainerInset.bottom
         let fixedWidth = textView.frame.size.width
         
         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))

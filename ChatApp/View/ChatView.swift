@@ -42,6 +42,7 @@ class ChatView: UIView, SwitcherDelegate {
         
         setUpReceiverTypingArea()
         setUpSenderTypingArea()
+        
     }
     
     //MARK: - Typing Areas

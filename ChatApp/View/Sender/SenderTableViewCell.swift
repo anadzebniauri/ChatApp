@@ -12,17 +12,9 @@ final class SenderTableViewCell: UITableViewCell {
     //MARK: - Properties
     var senderBubble = SenderMessageView().forAutoLayout()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        senderBubble.frame = senderBubble.frame.inset(by: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
-        senderBubble.backgroundColor = .red
-    }
-    
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(senderBubble)
         setUpSenderBubbleCellConstraints()
     }
     
@@ -32,12 +24,13 @@ final class SenderTableViewCell: UITableViewCell {
     
     //MARK: - Methods
     func setUpSenderBubbleCellConstraints() {
+        addSubview(senderBubble)
         
         NSLayoutConstraint.activate([
-            senderBubble.topAnchor.constraint(equalTo: self.topAnchor),
-            senderBubble.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            senderBubble.rightAnchor.constraint(equalTo: self.rightAnchor),
-            senderBubble.leftAnchor.constraint(greaterThanOrEqualTo: self.leftAnchor)
+            senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            senderBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            senderBubble.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            senderBubble.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
     }
     

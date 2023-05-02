@@ -12,7 +12,7 @@
 		C1CD1A2629FA86360052BEEE /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2529FA86360052BEEE /* UIStackView+Extension.swift */; };
 		C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */; };
 		C1CD1A2A29FBF7370052BEEE /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2929FBF7370052BEEE /* DividerView.swift */; };
-		C1CD1A2C29FC3F3F0052BEEE /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* ReceiverTableViewCell.swift */; };
+		C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */; };
 		C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */; };
 		C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B629F17330009B3072 /* AppDelegate.swift */; };
 		C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B829F17330009B3072 /* SceneDelegate.swift */; };
@@ -36,7 +36,7 @@
 		C1CD1A2529FA86360052BEEE /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2929FBF7370052BEEE /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
-		C1CD1A2B29FC3F3F0052BEEE /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
+		C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		C1D998B329F17330009B3072 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D998B629F17330009B3072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				C1D998D729F174FB009B3072 /* RecipientCapsuleBubbleView.swift */,
-				C1CD1A2B29FC3F3F0052BEEE /* ReceiverTableViewCell.swift */,
+				C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */,
 				C1F205BE29F2A9B5005C2171 /* RecipientMessageView.swift */,
 			);
 			name = Recipient;
@@ -242,7 +242,7 @@
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
 				C1F205BF29F2A9B5005C2171 /* RecipientMessageView.swift in Sources */,
 				C1D998D129F17486009B3072 /* UIVIew+Extension.swift in Sources */,
-				C1CD1A2C29FC3F3F0052BEEE /* ReceiverTableViewCell.swift in Sources */,
+				C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */,
 				C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */,
 				C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */,
 				C1D998CF29F17470009B3072 /* UIColor+Extension.swift in Sources */,

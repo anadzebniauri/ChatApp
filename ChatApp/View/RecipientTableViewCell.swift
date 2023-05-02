@@ -7,15 +7,15 @@
 
 import UIKit
 
-class ReceiverTableViewCell: UITableViewCell {
+class RecipientTableViewCell: UITableViewCell {
     
     //MARK: - Properties
-    var receiverBubble = RecipientMessageView().forAutoLayout()
+    var recipientBubble = RecipientMessageView().forAutoLayout()
     
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(receiverBubble)
+        addSubview(recipientBubble)
         setUpReceiverBubbleCellConstraints()
         layoutSubviews()
     }
@@ -28,14 +28,14 @@ class ReceiverTableViewCell: UITableViewCell {
     func setUpReceiverBubbleCellConstraints() {
         
         NSLayoutConstraint.activate([
-            receiverBubble.topAnchor.constraint(equalTo: topAnchor),
-            receiverBubble.bottomAnchor.constraint(equalTo: bottomAnchor),
-            receiverBubble.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor),
-            receiverBubble.leftAnchor.constraint(equalTo: leftAnchor)
+            recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            recipientBubble.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor),
+            recipientBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
         ])
     }
     
     func fill(_ text: String) {
-        receiverBubble.setTextToBubble(text)
+        recipientBubble.setTextToBubble(text)
     }
 }

@@ -125,50 +125,50 @@ class SwitcherView: UIView {
     }
     
     //MARK: - Switcher Function
-    private var viewController: UIViewController? {
-        var nextResponder: UIResponder? = self
-        while let responder = nextResponder, !(responder is UIViewController) {
-            nextResponder = responder.next
-        }
-        return nextResponder as? UIViewController
-    }
+    //    private var viewController: UIViewController? {
+    //        var nextResponder: UIResponder? = self
+    //        while let responder = nextResponder, !(responder is UIViewController) {
+    //            nextResponder = responder.next
+    //        }
+    //        return nextResponder as? UIViewController
+    //    }
     
     // should remake model
     @objc func viewTapped() {
         
         delegate?.switcherDidTap()
         
-        darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
-        if darkModeItemBackgroundView.isHighlighted {
-            //table view and cell background color
-            guard let viewController = viewController else { return }
-            let firstTableView = viewController.view.subviews.first(where: { $0 is UITableView }) as? UITableView
-            firstTableView?.backgroundColor = .darkModeBackgroundColor
-            
-            //second table view and cell
-            var secondTableView: UITableView?
-            for subview in viewController.view.subviews {
-                if let tableView = subview as? UITableView, tableView != firstTableView {
-                    secondTableView = tableView
-                    break
-                }
-            }
-            secondTableView?.backgroundColor = .darkModeBackgroundColor
-            
-            viewController.view.backgroundColor = .darkModeBackgroundColor
-            backgroundColor = .switcherDarkModeBackgroundColor
-            lightModeItemBackgroundView.tintColor = .clear
-            lightModeItemView.tintColor = .switcherItemViewColor
-            darkModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
-            darkModeItemView.tintColor = .switcherDarkModeBackgroundColor
-        } else {
-            viewController?.view.backgroundColor = .white
-            backgroundColor = .switcherLightModeBackgroundColor
-            lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
-            lightModeItemView.tintColor = .white
-            darkModeItemBackgroundView.tintColor = .clear
-            darkModeItemView.tintColor = .switcherItemViewColor
-        }
+        //        darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
+        //        if darkModeItemBackgroundView.isHighlighted {
+        //            //table view and cell background color
+        //            guard let viewController = viewController else { return }
+        //            let firstTableView = viewController.view.subviews.first(where: { $0 is UITableView }) as? UITableView
+        //            firstTableView?.backgroundColor = .darkModeBackgroundColor
+        //
+        //            //second table view and cell
+        //            var secondTableView: UITableView?
+        //            for subview in viewController.view.subviews {
+        //                if let tableView = subview as? UITableView, tableView != firstTableView {
+        //                    secondTableView = tableView
+        //                    break
+        //                }
+        //            }
+        //            secondTableView?.backgroundColor = .darkModeBackgroundColor
+        //
+        //            viewController.view.backgroundColor = .darkModeBackgroundColor
+        //            backgroundColor = .switcherDarkModeBackgroundColor
+        //            lightModeItemBackgroundView.tintColor = .clear
+        //            lightModeItemView.tintColor = .switcherItemViewColor
+        //            darkModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
+        //            darkModeItemView.tintColor = .switcherDarkModeBackgroundColor
+        //        } else {
+        //            viewController?.view.backgroundColor = .white
+        //            backgroundColor = .switcherLightModeBackgroundColor
+        //            lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
+        //            lightModeItemView.tintColor = .white
+        //            darkModeItemBackgroundView.tintColor = .clear
+        //            darkModeItemView.tintColor = .switcherItemViewColor
+        //        }
     }
     
     private func setUpGesture() {

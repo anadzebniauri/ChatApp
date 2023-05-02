@@ -133,7 +133,7 @@ class RecipientMediumBubbleView: UIView {
 
 private extension RecipientMediumBubbleView {
     enum Constants {
-        static let radius = 10.0
+        static let radius = 9.0
     }
 }
 

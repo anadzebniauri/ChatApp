@@ -24,7 +24,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         setUpReceiverTableView()
         setUpSenderTableView()
 
-        receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
+        receiverTableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
         senderTableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
     }
     
@@ -78,14 +78,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == receiverTableView {
             // dequeue and configure a cell for tableView1
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? ReceiverTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
                 fatalError("Cell can't cast to ReceiverTableViewCell") }
             
             cell.selectionStyle = .none
             cell.textLabel?.numberOfLines = 0
             receiverTableView.separatorStyle = .none
             let receiverBubble = chatView.receiverMessageView
-            cell.receiverBubble = receiverBubble
+            cell.recipientBubble = receiverBubble
             return cell
         } else {
             // dequeue and configure a cell for tableView2

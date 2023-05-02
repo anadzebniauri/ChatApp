@@ -134,7 +134,7 @@ class SenderMediumBubbleView: UIView {
 //MARK: - Constants
 private extension SenderMediumBubbleView {
     enum Constants {
-        static let radius = 10.0
+        static let radius = 9.0
     }
 }
 
