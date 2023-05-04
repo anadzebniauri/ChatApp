@@ -20,11 +20,6 @@ class TypingAreaView: UIView {
         setUp()
     }
     
-    convenience init() {
-        self.init(frame: .zero)
-        setUp()
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -143,4 +138,3 @@ private extension TypingAreaView {
         static let sendButtonHeight = 32.0
     }
 }
-

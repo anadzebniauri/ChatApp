@@ -16,24 +16,19 @@ class SwitcherView: UIView {
     weak var delegate: SwitcherDelegate?
     
     //MARK: - properties
-    @objc private let lightModeItemBackgroundView = UIImageView()
-    private let lightModeItemView = UIImageView()
-    @objc private let darkModeItemBackgroundView = UIImageView()
-    private let darkModeItemView = UIImageView()
-    private let switchingItemStackView = UIStackView().forAutoLayout()
+    private lazy var lightModeItemBackgroundView = UIImageView()
+    private lazy var lightModeItemView = UIImageView()
+    private lazy var darkModeItemBackgroundView = UIImageView()
+    private lazy var darkModeItemView = UIImageView()
+    private lazy var switchingItemStackView = UIStackView().forAutoLayout()
     
     //MARK: - Init
     required init?(coder: NSCoder) {
-        fatalError("!")
+        fatalError("init(coder:) has not been implemented")
     }
     
     override required init(frame: CGRect) {
         super.init(frame: frame)
-        setUp()
-    }
-    
-    convenience init() {
-        self.init(frame: .zero)
         setUp()
     }
     
@@ -125,55 +120,50 @@ class SwitcherView: UIView {
     }
     
     //MARK: - Switcher Function
-    //    private var viewController: UIViewController? {
-    //        var nextResponder: UIResponder? = self
-    //        while let responder = nextResponder, !(responder is UIViewController) {
-    //            nextResponder = responder.next
-    //        }
-    //        return nextResponder as? UIViewController
-    //    }
+        private var viewController: UIViewController? {
+            var nextResponder: UIResponder? = self
+            while let responder = nextResponder, !(responder is UIViewController) {
+                nextResponder = responder.next
+            }
+            return nextResponder as? UIViewController
+        }
     
     // should remake model
     @objc func viewTapped() {
         
         delegate?.switcherDidTap()
         
-        //        darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
-        //        if darkModeItemBackgroundView.isHighlighted {
-        //            //table view and cell background color
-        //            guard let viewController = viewController else { return }
-        //            let firstTableView = viewController.view.subviews.first(where: { $0 is UITableView }) as? UITableView
-        //            firstTableView?.backgroundColor = .darkModeBackgroundColor
-        //
-        //            //second table view and cell
-        //            var secondTableView: UITableView?
-        //            for subview in viewController.view.subviews {
-        //                if let tableView = subview as? UITableView, tableView != firstTableView {
-        //                    secondTableView = tableView
-        //                    break
-        //                }
-        //            }
-        //            secondTableView?.backgroundColor = .darkModeBackgroundColor
-        //
-        //            viewController.view.backgroundColor = .darkModeBackgroundColor
-        //            backgroundColor = .switcherDarkModeBackgroundColor
-        //            lightModeItemBackgroundView.tintColor = .clear
-        //            lightModeItemView.tintColor = .switcherItemViewColor
-        //            darkModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
-        //            darkModeItemView.tintColor = .switcherDarkModeBackgroundColor
-        //        } else {
-        //            viewController?.view.backgroundColor = .white
-        //            backgroundColor = .switcherLightModeBackgroundColor
-        //            lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
-        //            lightModeItemView.tintColor = .white
-        //            darkModeItemBackgroundView.tintColor = .clear
-        //            darkModeItemView.tintColor = .switcherItemViewColor
-        //        }
-    }
-    
-    private func setUpGesture() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        addGestureRecognizer(tapGestureRecognizer)
+                darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
+                if darkModeItemBackgroundView.isHighlighted {
+                    //table view and cell background color
+                    guard let viewController = viewController else { return }
+                    let firstTableView = viewController.view.subviews.first(where: { $0 is UITableView }) as? UITableView
+                    firstTableView?.backgroundColor = .darkModeBackgroundColor
+        
+                    //second table view and cell
+                    var secondTableView: UITableView?
+                    for subview in viewController.view.subviews {
+                        if let tableView = subview as? UITableView, tableView != firstTableView {
+                            secondTableView = tableView
+                            break
+                        }
+                    }
+                    secondTableView?.backgroundColor = .darkModeBackgroundColor
+        
+                    viewController.view.backgroundColor = .darkModeBackgroundColor
+                    backgroundColor = .switcherDarkModeBackgroundColor
+                    lightModeItemBackgroundView.tintColor = .clear
+                    lightModeItemView.tintColor = .switcherItemViewColor
+                    darkModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
+                    darkModeItemView.tintColor = .switcherDarkModeBackgroundColor
+                } else {
+                    viewController?.view.backgroundColor = .white
+                    backgroundColor = .switcherLightModeBackgroundColor
+                    lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
+                    lightModeItemView.tintColor = .white
+                    darkModeItemBackgroundView.tintColor = .clear
+                    darkModeItemView.tintColor = .switcherItemViewColor
+                }
     }
 }
 
@@ -194,6 +184,5 @@ private extension SwitcherView {
         
         static let switchingItemStackViewHeight = 27.0
         static let switchingItemStackViewWidth = 54.0
-        
     }
 }

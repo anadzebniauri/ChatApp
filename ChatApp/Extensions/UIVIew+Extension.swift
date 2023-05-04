@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIView {
-    func stretch(on parentView: UIView) {
+    private func stretch(on parentView: UIView) {
         NSLayoutConstraint.activate([
             topAnchor.constraint(equalTo: parentView.topAnchor),
             bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
@@ -31,7 +31,7 @@ extension UIView {
     }
     
     /// View should be square at first
-    func becameCircle() {
+    private func becameCircle() {
         layer.cornerRadius = layer.bounds.width / 2
     }
     
@@ -41,25 +41,25 @@ extension UIView {
         centreHorizontally(in: parentView)
     }
     
-    func centreInParent() {
+    private func centreInParent() {
         guard let superview = superview else { return }
         centre(in: superview)
     }
     
-    func centreVertically(in parentView: UIView) {
+    private func centreVertically(in parentView: UIView) {
         centerXAnchor.constraint(equalTo: parentView.centerXAnchor).isActive = true
     }
     
-    func centreVerticallyInParent() {
+    private func centreVerticallyInParent() {
         guard let superview = superview else { return }
         centreVertically(in: superview)
     }
     
-    func centreHorizontally(in parentView: UIView) {
+    private func centreHorizontally(in parentView: UIView) {
         centerYAnchor.constraint(equalTo: parentView.centerYAnchor).isActive = true
     }
     
-    func centreHorizontallyInParent() {
+    private func centreHorizontallyInParent() {
         guard let superview = superview else { return }
         centreHorizontally(in: superview)
     }
@@ -69,4 +69,7 @@ extension UIView {
         return self
     }
     
+    func make(horizontal: CGFloat, vertical: CGFloat) -> UIEdgeInsets {
+        UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
+    }    
 }

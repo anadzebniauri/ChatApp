@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SenderMessageView: UIView {
+final class SenderMessageView: UIView {
     
     //MARK: - Properties
     private let capsuleView = SenderCapsuleBubbleView().forAutoLayout()
@@ -73,12 +73,11 @@ class SenderMessageView: UIView {
             dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
             dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, h:mm "
-        let currentDateTime = Date()
-        let dateTimeString = dateFormatter.string(from: currentDateTime)
-        dateLabel.text = dateTimeString
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMM dd, h:mm "
+//        let currentDateTime = Date()
+//        let dateTimeString = dateFormatter.string(from: currentDateTime)
+//        dateLabel.text = dateTimeString
         
         //        dateLabel.text = "არ გაიგზავნა"
         //        dateLabel.textColor = .datelabelErrorTextRedColor
@@ -125,12 +124,6 @@ class SenderMessageView: UIView {
     
 }
 
-extension UIEdgeInsets {
-    static func make(horizontal: CGFloat, vertical: CGFloat) -> UIEdgeInsets {
-        UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
-    }
-}
-
 //MARK: - Constants
 private extension SenderMessageView {
     enum Constants {
@@ -139,6 +132,5 @@ private extension SenderMessageView {
         
         static let smallBubbleViewHeight = 9.57
         static let smallBubbleViewWidth = 10.0
-        
     }
 }

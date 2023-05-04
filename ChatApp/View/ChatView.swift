@@ -7,27 +7,28 @@
 
 import UIKit
 
+//aq unda ikos marto tableview da typing area orive erti cali
+
+//switcher delegate ikos switcheris fileshi
+
 class ChatView: UIView, SwitcherDelegate {
     
     //MARK: - Properties
-    let switcherView = SwitcherView().forAutoLayout()
+    let switcherView = SwitcherView().forAutoLayout() //controllershi gaitane
     
-    let receiverTypingArea = TypingAreaView().forAutoLayout()
+    let receiverTypingArea = TypingAreaView().forAutoLayout() // erti unda ikos
     let senderTypingArea = TypingAreaView().forAutoLayout()
     
     let receiverMessageView = RecipientMessageView().forAutoLayout()
     let senderMessageView = SenderMessageView().forAutoLayout()
     
-    let dividerView = DividerView().forAutoLayout()
+    let dividerView = DividerView().forAutoLayout() // controllershi
+    
+    //table view aq unda ikos
     
     //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
-        setUp()
-    }
-    
-    convenience init() {
-        self.init(frame: .zero)
         setUp()
     }
     
@@ -36,17 +37,16 @@ class ChatView: UIView, SwitcherDelegate {
     }
     
     //MARK: - Methods
-    func setUp() {
+    private func setUp() {
         setUpSwitcherView()
         setUpDividerView()
         
         setUpReceiverTypingArea()
         setUpSenderTypingArea()
-        
     }
     
     //MARK: - Typing Areas
-    func setUpReceiverTypingArea() {
+    private func setUpReceiverTypingArea() {
         addSubview(receiverTypingArea)
         
         NSLayoutConstraint.activate([
@@ -56,7 +56,7 @@ class ChatView: UIView, SwitcherDelegate {
         ])
     }
     
-    func setUpSenderTypingArea() {
+    private func setUpSenderTypingArea() {
         addSubview(senderTypingArea)
         
         NSLayoutConstraint.activate([
@@ -67,7 +67,7 @@ class ChatView: UIView, SwitcherDelegate {
     }
     
     //MARK: - Message Views
-    func setUpRecipientMessageView() {
+    private func setUpRecipientMessageView() {
         addSubview(receiverMessageView)
         
         NSLayoutConstraint.activate([
@@ -77,7 +77,7 @@ class ChatView: UIView, SwitcherDelegate {
         ])
     }
     
-    func setUpSenderMessageView() {
+    private func setUpSenderMessageView() {
         addSubview(senderMessageView)
         
         NSLayoutConstraint.activate([
@@ -88,7 +88,7 @@ class ChatView: UIView, SwitcherDelegate {
     }
     
     //MARK: - Switcher
-    func setUpSwitcherView() {
+    private func setUpSwitcherView() {
         addSubview(switcherView)
         
         switcherView.delegate = self
@@ -104,7 +104,7 @@ class ChatView: UIView, SwitcherDelegate {
     }
     
     //MARK: - Divider View
-    func setUpDividerView() {
+    private func setUpDividerView() {
         addSubview(dividerView)
         
         NSLayoutConstraint.activate([

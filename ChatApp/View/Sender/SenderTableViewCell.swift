@@ -34,8 +34,11 @@ final class SenderTableViewCell: UITableViewCell {
         ])
     }
     
+    func setUpSenderCell() {
+        self.selectionStyle = .none
+    }
+    
     func fill(_ text: String) {
         senderBubble.setTextToBubble(text)
     }
 }
-

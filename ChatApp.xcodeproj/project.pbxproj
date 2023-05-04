@@ -14,6 +14,10 @@
 		C1CD1A2A29FBF7370052BEEE /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2929FBF7370052BEEE /* DividerView.swift */; };
 		C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */; };
 		C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */; };
+		C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */; };
+		C1CD1A332A03CF120052BEEE /* RecipientSmallBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A322A03CF120052BEEE /* RecipientSmallBubbleView.swift */; };
+		C1CD1A352A03CFA90052BEEE /* SenderMediumBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A342A03CFA90052BEEE /* SenderMediumBubbleView.swift */; };
+		C1CD1A372A03CFB40052BEEE /* SenderSmallBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A362A03CFB40052BEEE /* SenderSmallBubbleView.swift */; };
 		C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B629F17330009B3072 /* AppDelegate.swift */; };
 		C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B829F17330009B3072 /* SceneDelegate.swift */; };
 		C1D998BB29F17330009B3072 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998BA29F17330009B3072 /* ChatViewController.swift */; };
@@ -38,6 +42,10 @@
 		C1CD1A2929FBF7370052BEEE /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientMediumBubbleView.swift; sourceTree = "<group>"; };
+		C1CD1A322A03CF120052BEEE /* RecipientSmallBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientSmallBubbleView.swift; sourceTree = "<group>"; };
+		C1CD1A342A03CFA90052BEEE /* SenderMediumBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderMediumBubbleView.swift; sourceTree = "<group>"; };
+		C1CD1A362A03CFB40052BEEE /* SenderSmallBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderSmallBubbleView.swift; sourceTree = "<group>"; };
 		C1D998B329F17330009B3072 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D998B629F17330009B3072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1D998B829F17330009B3072 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,8 +79,10 @@
 			isa = PBXGroup;
 			children = (
 				C1D998D729F174FB009B3072 /* RecipientCapsuleBubbleView.swift */,
-				C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */,
+				C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */,
+				C1CD1A322A03CF120052BEEE /* RecipientSmallBubbleView.swift */,
 				C1F205BE29F2A9B5005C2171 /* RecipientMessageView.swift */,
+				C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */,
 			);
 			name = Recipient;
 			sourceTree = "<group>";
@@ -81,8 +91,10 @@
 			isa = PBXGroup;
 			children = (
 				C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */,
-				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
+				C1CD1A342A03CFA90052BEEE /* SenderMediumBubbleView.swift */,
+				C1CD1A362A03CFB40052BEEE /* SenderSmallBubbleView.swift */,
 				C1F205E529F7F103005C2171 /* SenderMessageView.swift */,
+				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
 			);
 			path = Sender;
 			sourceTree = "<group>";
@@ -233,18 +245,22 @@
 			files = (
 				C1CD1A2229F99ECC0052BEEE /* UIImage+Extension.swift in Sources */,
 				C1CD1A2629FA86360052BEEE /* UIStackView+Extension.swift in Sources */,
+				C1CD1A352A03CFA90052BEEE /* SenderMediumBubbleView.swift in Sources */,
 				C1D998BB29F17330009B3072 /* ChatViewController.swift in Sources */,
 				C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */,
+				C1CD1A332A03CF120052BEEE /* RecipientSmallBubbleView.swift in Sources */,
 				C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */,
 				C1F205C129F40D2F005C2171 /* TypingAreaView.swift in Sources */,
 				C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */,
 				C1D998C129F17330009B3072 /* ChatApp.xcdatamodeld in Sources */,
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
+				C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */,
 				C1F205BF29F2A9B5005C2171 /* RecipientMessageView.swift in Sources */,
 				C1D998D129F17486009B3072 /* UIVIew+Extension.swift in Sources */,
 				C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */,
 				C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */,
 				C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */,
+				C1CD1A372A03CFB40052BEEE /* SenderSmallBubbleView.swift in Sources */,
 				C1D998CF29F17470009B3072 /* UIColor+Extension.swift in Sources */,
 				C1F205E629F7F104005C2171 /* SenderMessageView.swift in Sources */,
 				C1CD1A2A29FBF7370052BEEE /* DividerView.swift in Sources */,

@@ -24,7 +24,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         setUpReceiverTableView()
         setUpSenderTableView()
 
-        receiverTableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
+        receiverTableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell") //eseni setupebshi unda ikos
         senderTableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
     }
     
@@ -40,6 +40,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         receiverTableView.dataSource = self
         
         view.addSubview(receiverTableView)
+        receiverTableView.separatorStyle = .none
+        
         NSLayoutConstraint.activate([
             receiverTableView.topAnchor.constraint(equalTo: chatView.switcherView.bottomAnchor),
             receiverTableView.bottomAnchor.constraint(equalTo: chatView.receiverTypingArea.topAnchor),
@@ -54,6 +56,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         senderTableView.dataSource = self
         
         view.addSubview(senderTableView)
+        senderTableView.separatorStyle = .none
+
         
         NSLayoutConstraint.activate([
             senderTableView.topAnchor.constraint(equalTo: chatView.dividerView.bottomAnchor),
@@ -64,7 +68,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK: - Table Views
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == receiverTableView {
             // return the number of rows for tableView1
@@ -81,19 +84,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
                 fatalError("Cell can't cast to ReceiverTableViewCell") }
             
-            cell.selectionStyle = .none
-            cell.textLabel?.numberOfLines = 0
-            receiverTableView.separatorStyle = .none
             let receiverBubble = chatView.receiverMessageView
             cell.recipientBubble = receiverBubble
             return cell
         } else {
             // dequeue and configure a cell for tableView2
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell else { fatalError("Cell can't cast to SenderTableViewCell") }
-            
-            cell.selectionStyle = .none
-            cell.textLabel?.numberOfLines = 0
-            senderTableView.separatorStyle = .none
             
             let senderBubble = chatView.senderMessageView
             cell.senderBubble = senderBubble

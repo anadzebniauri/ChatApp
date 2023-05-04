@@ -17,6 +17,9 @@ extension UIColor {
         )
     }
     
+    
+    
+    //esebi tavisive filebshi isev constantebivit
     //MARK: - Typing Area Colors
     static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1) // change name
     static let placeholderTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipientMessageView: UIView {
+final class RecipientMessageView: UIView {
     
     //MARK: - Properties
     private let capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
@@ -76,11 +76,8 @@ class RecipientMessageView: UIView {
             dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, h:mm "
-        let currentDateTime = Date()
-        let dateTimeString = dateFormatter.string(from: currentDateTime)
-        dateLabel.text = dateTimeString
+        setUpDateFormatter()
+
     }
     
     private func setUpCapsuleView() {
@@ -122,7 +119,6 @@ class RecipientMessageView: UIView {
         ])
         smallBubbleView.layer.cornerRadius = 25
     }
-    
 }
 
 //MARK: - Constants
@@ -133,5 +129,23 @@ private extension RecipientMessageView {
         
         static let smallBubbleViewHeight = 9.57
         static let smallBubbleViewWidth = 10.0
+    }
+}
+
+//MARK: - Date Label Text Extension
+
+extension RecipientMessageView {
+    
+    func setUpDateFormatter() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, h:mm "
+        let currentDateTime = Date()
+        let dateTimeString = dateFormatter.string(from: currentDateTime)
+        dateLabel.text = dateTimeString
+    }
+    func setUpErrorText() {
+        dateLabel.text = "არ გაიგზავნა"
+        dateLabel.textColor = .datelabelErrorTextRedColor
+        
     }
 }
