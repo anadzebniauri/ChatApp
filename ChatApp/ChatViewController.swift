@@ -7,93 +7,70 @@
 
 import UIKit
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ChatViewController: UIViewController {
+    
     //MARK: - Properties
-    private let receiverTableView = UITableView().forAutoLayout() //tag = 1
-    private let senderTableView = UITableView().forAutoLayout() //tag = 2
-
-    private let chatView = ChatView().forAutoLayout()
+    private let topChatView = ChatView().forAutoLayout()
+    private let bottomChatView = ChatView().forAutoLayout()
+    
+    private let dividerView = DividerView().forAutoLayout()
+    private let switcherView = SwitcherView().forAutoLayout()
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         //Do any additional setup after loading the view.
         
-        setUpChatView()
-        setUpReceiverTableView()
-        setUpSenderTableView()
-
-        receiverTableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell") //eseni setupebshi unda ikos
-        senderTableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
+        setUpSwitcherView()
+        setUpDividerView()
+        
+        setUpTopChatView()
+        setUpBottomChatView()
     }
     
-    //MARK: - Chat View Method
-    private func setUpChatView() {
-        view.addSubview(chatView)
-        chatView.stretchOnParent()
-    }
-
-//    MARK: - Receiver Table View Set Up
-    private func setUpReceiverTableView() {
-        receiverTableView.delegate = self
-        receiverTableView.dataSource = self
-        
-        view.addSubview(receiverTableView)
-        receiverTableView.separatorStyle = .none
+    //MARK: - Chat View Methods
+    private func setUpTopChatView() {
+        view.addSubview(topChatView)
         
         NSLayoutConstraint.activate([
-            receiverTableView.topAnchor.constraint(equalTo: chatView.switcherView.bottomAnchor),
-            receiverTableView.bottomAnchor.constraint(equalTo: chatView.receiverTypingArea.topAnchor),
-            receiverTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            receiverTableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            topChatView.topAnchor.constraint(equalTo: switcherView.bottomAnchor),
+            topChatView.bottomAnchor.constraint(equalTo: dividerView.topAnchor ),
+            topChatView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            topChatView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
     }
     
-    //MARK: - Sender Table View Set Up
-    private func setUpSenderTableView() {
-        senderTableView.delegate = self
-        senderTableView.dataSource = self
-        
-        view.addSubview(senderTableView)
-        senderTableView.separatorStyle = .none
-
+    private func setUpBottomChatView() {
+        view.addSubview(bottomChatView)
         
         NSLayoutConstraint.activate([
-            senderTableView.topAnchor.constraint(equalTo: chatView.dividerView.bottomAnchor),
-            senderTableView.bottomAnchor.constraint(equalTo: chatView.senderTypingArea.topAnchor),
-            senderTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            senderTableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
+            bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            bottomChatView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            bottomChatView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
     }
     
-    //MARK: - Table Views
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == receiverTableView {
-            // return the number of rows for tableView1
-            return 5
-        } else {
-            // return the number of rows for tableView2
-            return 5
-        }
+    //MARK: - Divider View
+    private func setUpDividerView() {
+        view.addSubview(dividerView)
+        dividerView.setHeight(6)
+        
+        NSLayoutConstraint.activate([
+            dividerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor ),
+            dividerView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            dividerView.leftAnchor.constraint(equalTo: view.leftAnchor)
+        ])
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == receiverTableView {
-            // dequeue and configure a cell for tableView1
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
-                fatalError("Cell can't cast to ReceiverTableViewCell") }
-            
-            let receiverBubble = chatView.receiverMessageView
-            cell.recipientBubble = receiverBubble
-            return cell
-        } else {
-            // dequeue and configure a cell for tableView2
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell else { fatalError("Cell can't cast to SenderTableViewCell") }
-            
-            let senderBubble = chatView.senderMessageView
-            cell.senderBubble = senderBubble
-            return cell
-        }
+    //MARK: - Switcher View
+    private func setUpSwitcherView() {
+        view.addSubview(switcherView)
+        
+        NSLayoutConstraint.activate([
+            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: 52),
+            switcherView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
+        ])
     }
 }

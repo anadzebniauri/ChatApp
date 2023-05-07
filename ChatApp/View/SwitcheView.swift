@@ -11,7 +11,7 @@ protocol SwitcherDelegate: AnyObject {
     func switcherDidTap()
 }
 
-class SwitcherView: UIView {
+class SwitcherView: UIView, SwitcherDelegate {
     
     weak var delegate: SwitcherDelegate?
     
@@ -50,8 +50,8 @@ class SwitcherView: UIView {
     private func setUpLightModeItemBackgroundView() {
         lightModeItemBackgroundView.addSubview(lightModeItemView)
         
-        lightModeItemBackgroundView.image = .circleImage
-        lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
+        lightModeItemBackgroundView.image = Images.circleImage
+        lightModeItemBackgroundView.tintColor = Colors.switcherBackgroundItemViewColor
         
         lightModeItemBackgroundView.setHeight(Constants.lightModeItemBackgroundViewHeight)
         lightModeItemBackgroundView.setWidth(Constants.lightModeItemBackgroundViewWidth)
@@ -63,7 +63,7 @@ class SwitcherView: UIView {
     }
     
     private func setUpLightModeItemView() {
-        lightModeItemView.image = .sunImage
+        lightModeItemView.image = Images.sunImage
         lightModeItemView.tintColor = .white
         
         lightModeItemView.setWidth(Constants.lightModeItemViewWidth)
@@ -78,7 +78,7 @@ class SwitcherView: UIView {
     private func setUpDarkModeItemBackgroundView() {
         darkModeItemBackgroundView.addSubview(darkModeItemView)
         
-        darkModeItemBackgroundView.image = .circleImage
+        darkModeItemBackgroundView.image = Images.circleImage
         darkModeItemBackgroundView.tintColor = .clear
         
         darkModeItemBackgroundView.setWidth(Constants.darkModeItemBackgroundViewWidth)
@@ -91,8 +91,8 @@ class SwitcherView: UIView {
     }
     
     private func setUpDarkModeItemView() {
-        darkModeItemView.image = .moonImage
-        darkModeItemView.tintColor = .switcherItemViewColor
+        darkModeItemView.image = Images.moonImage
+        darkModeItemView.tintColor = Colors.switcherItemViewColor
         
         darkModeItemView.setWidth(Constants.darkModeItemViewWidth)
         darkModeItemView.setHeight(Constants.darkModeItemViewHeight)
@@ -119,51 +119,12 @@ class SwitcherView: UIView {
         switchingItemStackView.layoutMargins = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
     }
     
-    //MARK: - Switcher Function
-        private var viewController: UIViewController? {
-            var nextResponder: UIResponder? = self
-            while let responder = nextResponder, !(responder is UIViewController) {
-                nextResponder = responder.next
-            }
-            return nextResponder as? UIViewController
-        }
-    
-    // should remake model
     @objc func viewTapped() {
-        
         delegate?.switcherDidTap()
-        
-                darkModeItemBackgroundView.isHighlighted = !darkModeItemBackgroundView.isHighlighted
-                if darkModeItemBackgroundView.isHighlighted {
-                    //table view and cell background color
-                    guard let viewController = viewController else { return }
-                    let firstTableView = viewController.view.subviews.first(where: { $0 is UITableView }) as? UITableView
-                    firstTableView?.backgroundColor = .darkModeBackgroundColor
-        
-                    //second table view and cell
-                    var secondTableView: UITableView?
-                    for subview in viewController.view.subviews {
-                        if let tableView = subview as? UITableView, tableView != firstTableView {
-                            secondTableView = tableView
-                            break
-                        }
-                    }
-                    secondTableView?.backgroundColor = .darkModeBackgroundColor
-        
-                    viewController.view.backgroundColor = .darkModeBackgroundColor
-                    backgroundColor = .switcherDarkModeBackgroundColor
-                    lightModeItemBackgroundView.tintColor = .clear
-                    lightModeItemView.tintColor = .switcherItemViewColor
-                    darkModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
-                    darkModeItemView.tintColor = .switcherDarkModeBackgroundColor
-                } else {
-                    viewController?.view.backgroundColor = .white
-                    backgroundColor = .switcherLightModeBackgroundColor
-                    lightModeItemBackgroundView.tintColor = .switcherBackgroundItemViewColor
-                    lightModeItemView.tintColor = .white
-                    darkModeItemBackgroundView.tintColor = .clear
-                    darkModeItemView.tintColor = .switcherItemViewColor
-                }
+    }
+    
+    func switcherDidTap() {
+        print("tapped")
     }
 }
 
@@ -184,5 +145,19 @@ private extension SwitcherView {
         
         static let switchingItemStackViewHeight = 27.0
         static let switchingItemStackViewWidth = 54.0
+    }
+    
+    enum Images {
+        static let circleImage = UIImage(systemName: "circle.fill")
+        static let sunImage = UIImage(systemName: "sun.min.fill")
+        static let moonImage = UIImage(systemName: "moon.fill")
+    }
+    
+    enum Colors {
+        static let switcherLightModeBackgroundColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
+        static let switcherDarkModeBackgroundColor = UIColor(red: 46, green: 0, blue: 114, alpha: 1)
+        static let switcherBackgroundItemViewColor = UIColor(red: 159, green: 96, blue: 256, alpha: 1)
+        static let switcherItemViewColor = UIColor(red: 255, green: 202, blue: 85, alpha: 1)
+        static let darkModeBackgroundColor = UIColor(red: 22, green: 0, blue: 57, alpha: 1)
     }
 }

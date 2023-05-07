@@ -59,7 +59,7 @@ final class RecipientCapsuleBubbleView: UIView {
             clockwise: true
         )
         
-        UIColor.recipientBubbleColor.setFill()
+        Colors.recipientBubbleColor.setFill()
         path.fill()
     }
 }
@@ -68,5 +68,8 @@ final class RecipientCapsuleBubbleView: UIView {
 private extension RecipientCapsuleBubbleView {
     enum Constants {
         static let radius = 25.0
+    }
+    enum Colors {
+        static let recipientBubbleColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
     }
 }

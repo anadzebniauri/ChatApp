@@ -10,9 +10,9 @@ import UIKit
 class TypingAreaView: UIView {
     
     //MARK: - Properties
-    private let messageTextView = UITextView().forAutoLayout()
-    private let sendButton = UIButton().forAutoLayout()
-    private let placeholderLabel = UILabel().forAutoLayout()
+    private lazy var messageTextView = UITextView().forAutoLayout()
+    private lazy var sendButton = UIButton().forAutoLayout()
+    private lazy var placeholderLabel = UILabel().forAutoLayout()
     
     //MARK: - Init
     override required init(frame: CGRect) {
@@ -42,7 +42,7 @@ class TypingAreaView: UIView {
         messageTextView.textAlignment = .left
         messageTextView.backgroundColor = .clear
         messageTextView.layer.borderWidth = Constants.messageTextViewBorderWidth
-        messageTextView.layer.borderColor = UIColor.typeAreaBorderPurpleColor.cgColor
+        messageTextView.layer.borderColor = Colors.typeAreaBorderPurpleColor.cgColor
         messageTextView.layer.cornerRadius = Constants.messageTextViewCornerRadius
         messageTextView.isScrollEnabled = false
         messageTextView.textContainerInset = UIEdgeInsets(top: 12, left: 22, bottom: 15, right: 82)
@@ -74,7 +74,7 @@ class TypingAreaView: UIView {
         
         placeholderLabel.text = "დაწერე შეტყობინება..."
         placeholderLabel.font = UIFont.systemFont(ofSize: 14)
-        placeholderLabel.textColor = .placeholderTextGreyColor
+        placeholderLabel.textColor = Colors.placeholderTextGreyColor
         placeholderLabel.sizeToFit()
         placeholderLabel.isHidden = !messageTextView.text.isEmpty
         
@@ -105,12 +105,12 @@ class TypingAreaView: UIView {
 
 extension TypingAreaView: UITextViewDelegate {
     
-    func textViewDidChange(_ textView: UITextView) {
-        // Update placeholder label
+    internal func textViewDidChange(_ textView: UITextView) {
         if let placeholderLabel = textView.subviews.first(where: { $0 is UILabel }) as? UILabel {
             placeholderLabel.isHidden = !textView.text.isEmpty
         }
-        //update message text view height + scroll
+    }
+    internal func textViewDidChangeSelection(_ textView: UITextView) {
         guard let lineHeight = textView.font?.lineHeight else { return }
         let maxHeight: CGFloat = lineHeight * 4 + textView.textContainerInset.top + textView.textContainerInset.bottom
         let fixedWidth = textView.frame.size.width
@@ -136,5 +136,10 @@ private extension TypingAreaView {
         
         static let sendButtonWidth = 32.0
         static let sendButtonHeight = 32.0
+    }
+    enum Colors {
+        static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
+        static let placeholderTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
+        static let typeAreaBorderPurpleColor = UIColor(red: 159, green: 96, blue: 255, alpha: 1)
     }
 }

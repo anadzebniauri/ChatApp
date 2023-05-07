@@ -10,12 +10,12 @@ import UIKit
 final class SenderMessageView: UIView {
     
     //MARK: - Properties
-    private let capsuleView = SenderCapsuleBubbleView().forAutoLayout()
-    private let mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
-    private let smallBubbleView = SenderSmallBubbleView().forAutoLayout()
+    private lazy var capsuleView = SenderCapsuleBubbleView().forAutoLayout()
+    private lazy var mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
+    private lazy var smallBubbleView = SenderSmallBubbleView().forAutoLayout()
     
-    private let messageLabel = UILabel().forAutoLayout()
-    private let dateLabel = UILabel().forAutoLayout()
+    private lazy var messageLabel = UILabel().forAutoLayout()
+    private lazy var dateLabel = UILabel().forAutoLayout()
     
     //MARK: -  Init
     override init(frame: CGRect) {
@@ -46,7 +46,7 @@ final class SenderMessageView: UIView {
         capsuleView.addSubview(messageLabel)
         
         messageLabel.font = .systemFont(ofSize: 14)
-        messageLabel.textColor = .messageTextBlackColor
+        messageLabel.textColor = Colors.messageTextBlackColor
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.numberOfLines = 0
@@ -62,8 +62,7 @@ final class SenderMessageView: UIView {
     
     private func setUpDateLabel() {
         addSubview(dateLabel)
-        dateLabel.font = .systemFont(ofSize: 10)
-        dateLabel.textColor = .dateLabelTextGreyColor
+        dateLabel.font = .systemFont(ofSize: 9)
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
@@ -73,14 +72,8 @@ final class SenderMessageView: UIView {
             dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
             dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "MMM dd, h:mm "
-//        let currentDateTime = Date()
-//        let dateTimeString = dateFormatter.string(from: currentDateTime)
-//        dateLabel.text = dateTimeString
         
-        //        dateLabel.text = "არ გაიგზავნა"
-        //        dateLabel.textColor = .datelabelErrorTextRedColor
+        dateLabel.setUpDateFormatter()
     }
     
     private func setUpCapsuleView() {
@@ -132,5 +125,8 @@ private extension SenderMessageView {
         
         static let smallBubbleViewHeight = 9.57
         static let smallBubbleViewWidth = 10.0
+    }
+    enum Colors {
+        static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
     }
 }

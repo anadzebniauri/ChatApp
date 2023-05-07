@@ -7,24 +7,11 @@
 
 import UIKit
 
-//aq unda ikos marto tableview da typing area orive erti cali
-
-//switcher delegate ikos switcheris fileshi
-
-class ChatView: UIView, SwitcherDelegate {
+class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Properties
-    let switcherView = SwitcherView().forAutoLayout() //controllershi gaitane
-    
-    let receiverTypingArea = TypingAreaView().forAutoLayout() // erti unda ikos
-    let senderTypingArea = TypingAreaView().forAutoLayout()
-    
-    let receiverMessageView = RecipientMessageView().forAutoLayout()
-    let senderMessageView = SenderMessageView().forAutoLayout()
-    
-    let dividerView = DividerView().forAutoLayout() // controllershi
-    
-    //table view aq unda ikos
+    private lazy var tableView = UITableView().forAutoLayout()
+    private lazy var typingAreaView = TypingAreaView().forAutoLayout()
     
     //MARK: - Init
     override required init(frame: CGRect) {
@@ -38,81 +25,48 @@ class ChatView: UIView, SwitcherDelegate {
     
     //MARK: - Methods
     private func setUp() {
-        setUpSwitcherView()
-        setUpDividerView()
-        
-        setUpReceiverTypingArea()
-        setUpSenderTypingArea()
+        setUpTableView()
+        setUpTypingAreaView()
     }
     
-    //MARK: - Typing Areas
-    private func setUpReceiverTypingArea() {
-        addSubview(receiverTypingArea)
+    //MARK: - Typing Area
+    private func setUpTypingAreaView() {
+        addSubview(typingAreaView)
         
         NSLayoutConstraint.activate([
-            receiverTypingArea.bottomAnchor.constraint(equalTo: dividerView.topAnchor, constant: -30),
-            receiverTypingArea.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            receiverTypingArea.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
+            typingAreaView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            typingAreaView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            typingAreaView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            typingAreaView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
-    private func setUpSenderTypingArea() {
-        addSubview(senderTypingArea)
-        
-        NSLayoutConstraint.activate([
-            senderTypingArea.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
-            senderTypingArea.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            senderTypingArea.rightAnchor.constraint(equalTo: rightAnchor, constant: -16)
-        ])
+    //MARK: - Table View
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
     
-    //MARK: - Message Views
-    private func setUpRecipientMessageView() {
-        addSubview(receiverMessageView)
-        
-        NSLayoutConstraint.activate([
-            receiverMessageView.topAnchor.constraint(equalTo: topAnchor, constant: 95),
-            receiverMessageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            receiverMessageView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor)
-        ])
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // dequeue and configure a cell for tableView1
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
+            fatalError("Cell can't cast to ReceiverTableViewCell") }
+        tableView.separatorStyle = .none
+        return cell
     }
     
-    private func setUpSenderMessageView() {
-        addSubview(senderMessageView)
+    
+    private func setUpTableView() {
+        addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            senderMessageView.bottomAnchor.constraint(equalTo: receiverTypingArea.topAnchor, constant: -16),
-            senderMessageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            senderMessageView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.leftAnchor.constraint(equalTo: leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: rightAnchor)
         ])
-    }
-    
-    //MARK: - Switcher
-    private func setUpSwitcherView() {
-        addSubview(switcherView)
         
-        switcherView.delegate = self
-        
-        NSLayoutConstraint.activate([
-            switcherView.topAnchor.constraint(equalTo: topAnchor, constant: 52),
-            switcherView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12)
-        ])
-    }
-    
-    func switcherDidTap() {
-        print("tapped")
-    }
-    
-    //MARK: - Divider View
-    private func setUpDividerView() {
-        addSubview(dividerView)
-        
-        NSLayoutConstraint.activate([
-            dividerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dividerView.centerYAnchor.constraint(equalTo: centerYAnchor ),
-            dividerView.rightAnchor.constraint(equalTo: rightAnchor),
-            dividerView.leftAnchor.constraint(equalTo: leftAnchor)
-        ])
+        tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
     }
 }
-

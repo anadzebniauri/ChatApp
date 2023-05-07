@@ -9,9 +9,6 @@ import UIKit
 
 final class DividerView: UIView {
     
-    //MARK: - Properties
-    private let dividerView = UIView().forAutoLayout() // ar unda ikos
-    
     //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -24,9 +21,14 @@ final class DividerView: UIView {
     
     //MARK: - Methods
     private func setUpDividerView() {
-        addSubview(dividerView) //controllershi
-        dividerView.stretchOnParent() //controllershi
-        dividerView.setHeight(6) // controllershi
-        self.backgroundColor = .dividerViewYellowBackgroundColor
+        self.backgroundColor = Colors.dividerViewYellowBackgroundColor
     }
 }
+
+//MARK: - Color Extension
+private extension DividerView {
+    enum Colors {
+        static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
+    }
+}
+

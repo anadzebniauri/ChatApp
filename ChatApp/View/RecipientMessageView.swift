@@ -10,12 +10,12 @@ import UIKit
 final class RecipientMessageView: UIView {
     
     //MARK: - Properties
-    private let capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
-    private let mediumBubbleView = RecipientMediumBubbleView().forAutoLayout()
-    private let smallBubbleView = RecipientSmallBubbleView().forAutoLayout()
+    private lazy var capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
+    private lazy var mediumBubbleView = RecipientMediumBubbleView().forAutoLayout()
+    private lazy var smallBubbleView = RecipientSmallBubbleView().forAutoLayout()
     
-    private let messageLabel = UILabel().forAutoLayout()
-    private let dateLabel = UILabel().forAutoLayout()
+    private lazy var messageLabel = UILabel().forAutoLayout()
+    private lazy var dateLabel = UILabel().forAutoLayout()
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -46,7 +46,7 @@ final class RecipientMessageView: UIView {
         capsuleView.addSubview(messageLabel)
         
         messageLabel.font = .systemFont(ofSize: 14)
-        messageLabel.textColor = .messageTextBlackColor
+        messageLabel.textColor = Colors.messageTextBlackColor
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.numberOfLines = 0
@@ -63,9 +63,7 @@ final class RecipientMessageView: UIView {
     private func setUpDateLabel() {
         addSubview(dateLabel)
         
-        dateLabel.font = .systemFont(ofSize: 10)
-        
-        dateLabel.textColor = .dateLabelTextGreyColor
+        dateLabel.font = .systemFont(ofSize: 9)
         dateLabel.numberOfLines = 0
         
         dateLabel.setHeight(10)
@@ -75,9 +73,7 @@ final class RecipientMessageView: UIView {
             dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 30),
             dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
-        
-        setUpDateFormatter()
-
+        dateLabel.setUpErrorText()
     }
     
     private func setUpCapsuleView() {
@@ -100,8 +96,8 @@ final class RecipientMessageView: UIView {
         mediumBubbleView.setWidth(Constants.mediumBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -13.6),
-            mediumBubbleView.leftAnchor.constraint(equalTo: leftAnchor, constant: 11.82)
+            mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
+            mediumBubbleView.leftAnchor.constraint(equalTo: leftAnchor, constant: 12)
         ])
         
         mediumBubbleView.layer.cornerRadius = 25
@@ -130,22 +126,7 @@ private extension RecipientMessageView {
         static let smallBubbleViewHeight = 9.57
         static let smallBubbleViewWidth = 10.0
     }
-}
-
-//MARK: - Date Label Text Extension
-
-extension RecipientMessageView {
-    
-    func setUpDateFormatter() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, h:mm "
-        let currentDateTime = Date()
-        let dateTimeString = dateFormatter.string(from: currentDateTime)
-        dateLabel.text = dateTimeString
-    }
-    func setUpErrorText() {
-        dateLabel.text = "არ გაიგზავნა"
-        dateLabel.textColor = .datelabelErrorTextRedColor
-        
+    enum Colors {
+        static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
     }
 }

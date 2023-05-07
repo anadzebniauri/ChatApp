@@ -15,9 +15,8 @@ class RecipientTableViewCell: UITableViewCell {
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(recipientBubble)
         setUpRecipientBubbleCellConstraints()
-        layoutSubviews()
+        setUpRecipientCell()
     }
     
     required init?(coder: NSCoder) {
@@ -26,6 +25,8 @@ class RecipientTableViewCell: UITableViewCell {
     
     //MARK: - Methods
     func setUpRecipientBubbleCellConstraints() {
+        addSubview(recipientBubble)
+        
         NSLayoutConstraint.activate([
             recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
