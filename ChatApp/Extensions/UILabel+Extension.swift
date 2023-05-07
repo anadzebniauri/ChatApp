@@ -15,6 +15,7 @@ extension UILabel {
         let currentDateTime = Date()
         let dateTimeString = dateFormatter.string(from: currentDateTime)
         self.text = dateTimeString
+        self.textColor = Colors.dateLabelTextGreyColor
     }
     func setUpErrorText() {
         self.text = "არ გაიგზავნა"

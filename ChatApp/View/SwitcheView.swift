@@ -147,12 +147,14 @@ private extension SwitcherView {
         static let switchingItemStackViewWidth = 54.0
     }
     
+    //MARK: - Images
     enum Images {
         static let circleImage = UIImage(systemName: "circle.fill")
         static let sunImage = UIImage(systemName: "sun.min.fill")
         static let moonImage = UIImage(systemName: "moon.fill")
     }
     
+    //MARK: - Colors
     enum Colors {
         static let switcherLightModeBackgroundColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
         static let switcherDarkModeBackgroundColor = UIColor(red: 46, green: 0, blue: 114, alpha: 1)

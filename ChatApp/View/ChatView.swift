@@ -42,20 +42,27 @@ class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: - Table View
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // dequeue and configure a cell for tableView1
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
-            fatalError("Cell can't cast to ReceiverTableViewCell") }
-        tableView.separatorStyle = .none
-        return cell
+        if indexPath.row % 2 == 0 { // even rows are "receiverTableViewCell"
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
+                fatalError("Cell can't cast to ReceiverTableViewCell")
+            }
+            tableView.separatorStyle = .none
+            return cell
+        } else { // odd rows are "senderTableViewCell"
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell else {
+                fatalError("Cell can't cast to SenderTableViewCell")
+            }
+            tableView.separatorStyle = .none
+            return cell
+        }
     }
     
-    
+    //MARK: - Table View Set Up
     private func setUpTableView() {
         addSubview(tableView)
         tableView.delegate = self
@@ -68,5 +75,7 @@ class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
         ])
         
         tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
+        tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
+        
     }
 }

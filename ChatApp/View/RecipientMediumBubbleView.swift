@@ -8,7 +8,7 @@
 import UIKit
 
 final class RecipientMediumBubbleView: UIView {
-
+    
     private var radius: CGFloat {
         Constants.radius
     }
@@ -69,6 +69,8 @@ private extension RecipientMediumBubbleView {
     enum Constants {
         static let radius = 9.0
     }
+    
+    //MARK: - Colors
     enum Colors {
         static let recipientBubbleColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
     }

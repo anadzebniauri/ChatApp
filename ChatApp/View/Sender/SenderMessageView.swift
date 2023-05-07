@@ -126,6 +126,8 @@ private extension SenderMessageView {
         static let smallBubbleViewHeight = 9.57
         static let smallBubbleViewWidth = 10.0
     }
+    
+    //MARK: - Colors
     enum Colors {
         static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
     }

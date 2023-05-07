@@ -105,11 +105,14 @@ class TypingAreaView: UIView {
 
 extension TypingAreaView: UITextViewDelegate {
     
+    //MARK: - Placeholder
     internal func textViewDidChange(_ textView: UITextView) {
         if let placeholderLabel = textView.subviews.first(where: { $0 is UILabel }) as? UILabel {
             placeholderLabel.isHidden = !textView.text.isEmpty
         }
     }
+    
+    //MARK: - Typing Area Height
     internal func textViewDidChangeSelection(_ textView: UITextView) {
         guard let lineHeight = textView.font?.lineHeight else { return }
         let maxHeight: CGFloat = lineHeight * 4 + textView.textContainerInset.top + textView.textContainerInset.bottom
@@ -137,6 +140,8 @@ private extension TypingAreaView {
         static let sendButtonWidth = 32.0
         static let sendButtonHeight = 32.0
     }
+    
+    //MARK: - Colors
     enum Colors {
         static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
         static let placeholderTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
