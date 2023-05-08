@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
+class ChatView: UIView {
     
     //MARK: - Properties
     private lazy var tableView = UITableView().forAutoLayout()
@@ -32,34 +32,13 @@ class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
     //MARK: - Typing Area
     private func setUpTypingAreaView() {
         addSubview(typingAreaView)
-        
+
         NSLayoutConstraint.activate([
             typingAreaView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            typingAreaView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            typingAreaView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            typingAreaView.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.typingAreaViewPadding),
+            typingAreaView.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.typingAreaViewPadding),
             typingAreaView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
-    
-    //MARK: - Table View
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % 2 == 0 { // even rows are "receiverTableViewCell"
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell else {
-                fatalError("Cell can't cast to ReceiverTableViewCell")
-            }
-            tableView.separatorStyle = .none
-            return cell
-        } else { // odd rows are "senderTableViewCell"
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell else {
-                fatalError("Cell can't cast to SenderTableViewCell")
-            }
-            tableView.separatorStyle = .none
-            return cell
-        }
     }
     
     //MARK: - Table View Set Up
@@ -67,6 +46,7 @@ class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -76,6 +56,35 @@ class ChatView: UIView, UITableViewDelegate, UITableViewDataSource {
         
         tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
         tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
-        
+    }
+}
+
+//MARK: - Table View Delegate, DataSource
+extension ChatView: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row % 2 == 0 { // even rows are "receiverTableViewCell"
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell
+            {
+                return cell
+            }
+            fatalError("Cell can't cast to ReceiverTableViewCell")
+        } else { // odd rows are "senderTableViewCell"
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell {
+                return cell
+            }
+            fatalError("Cell can't cast to SenderTableViewCell")
+        }
+    }
+}
+
+//MARK: - Constants
+extension ChatView {
+    enum Constants{
+        static let typingAreaViewPadding = 16.0
     }
 }

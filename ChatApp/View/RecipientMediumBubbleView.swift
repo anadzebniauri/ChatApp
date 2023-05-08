@@ -59,7 +59,7 @@ final class RecipientMediumBubbleView: UIView {
                     clockwise: true
         )
         
-        Colors.recipientBubbleColor.setFill()
+        Constants.recipientBubbleColor.setFill()
         path.fill()
     }
 }
@@ -68,10 +68,6 @@ final class RecipientMediumBubbleView: UIView {
 private extension RecipientMediumBubbleView {
     enum Constants {
         static let radius = 9.0
-    }
-    
-    //MARK: - Colors
-    enum Colors {
         static let recipientBubbleColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
     }
 }

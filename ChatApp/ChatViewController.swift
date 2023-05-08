@@ -10,11 +10,11 @@ import UIKit
 class ChatViewController: UIViewController {
     
     //MARK: - Properties
-    private let topChatView = ChatView().forAutoLayout()
-    private let bottomChatView = ChatView().forAutoLayout()
+    private lazy var topChatView = ChatView().forAutoLayout()
+    private lazy var bottomChatView = ChatView().forAutoLayout()
     
-    private let dividerView = DividerView().forAutoLayout()
-    private let switcherView = SwitcherView().forAutoLayout()
+    private lazy var dividerView = UIView().forAutoLayout()
+    private lazy var switcherView = SwitcherView().forAutoLayout()
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class ChatViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
-            bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.bottomChatViewPadding),
             bottomChatView.rightAnchor.constraint(equalTo: view.rightAnchor),
             bottomChatView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
@@ -57,11 +57,11 @@ class ChatViewController: UIViewController {
         dividerView.setHeight(6)
         
         NSLayoutConstraint.activate([
-            dividerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor ),
             dividerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             dividerView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
+        dividerView.backgroundColor = Constants.dividerViewYellowBackgroundColor
     }
     
     //MARK: - Switcher View
@@ -69,8 +69,19 @@ class ChatViewController: UIViewController {
         view.addSubview(switcherView)
         
         NSLayoutConstraint.activate([
-            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: 52),
-            switcherView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12)
+            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.switcherTopAnchor),
+            switcherView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: Constants.switcherRightAnchor)
         ])
+    }
+}
+
+//MARK: - Constants
+extension ChatViewController {
+    enum Constants {
+        static let bottomChatViewPadding = -30.0
+        static let switcherTopAnchor = 52.0
+        static let switcherRightAnchor = -12.0
+        
+        static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
     }
 }

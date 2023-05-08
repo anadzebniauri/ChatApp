@@ -15,8 +15,7 @@ final class SenderTableViewCell: UITableViewCell {
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpSenderBubbleCellConstraints()
-        setUpSenderCell()
+        setUpSenderBubbleCell()
     }
     
     required init?(coder: NSCoder) {
@@ -24,22 +23,27 @@ final class SenderTableViewCell: UITableViewCell {
     }
     
     //MARK: - Methods
-    func setUpSenderBubbleCellConstraints() {
+    private func setUpSenderBubbleCell() {
         addSubview(senderBubble)
+        self.selectionStyle = .none
         
         NSLayoutConstraint.activate([
-            senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            senderBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            senderBubble.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.senderBubbleHeightPadding),
+            senderBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.senderBubbleHeightPadding),
+            senderBubble.rightAnchor.constraint(equalTo: rightAnchor, constant: Constants.senderBubbleRightPadding),
             senderBubble.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
         ])
     }
     
-    func setUpSenderCell() {
-        self.selectionStyle = .none
-    }
-    
     func fill(_ text: String) {
         senderBubble.setTextToBubble(text)
+    }
+}
+
+//MARK: - Constants
+extension SenderTableViewCell {
+    enum Constants {
+        static let senderBubbleHeightPadding = 8.0
+        static let senderBubbleRightPadding = -16.0
     }
 }

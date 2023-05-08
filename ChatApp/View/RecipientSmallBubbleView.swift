@@ -59,7 +59,7 @@ final class RecipientSmallBubbleView: UIView {
                     clockwise: true
         )
         
-        Colors.recipientBubbleColor.setFill()
+        Constants.recipientBubbleColor.setFill()
         path.fill()
     }
 }
@@ -68,10 +68,6 @@ final class RecipientSmallBubbleView: UIView {
 private extension RecipientSmallBubbleView {
     enum Constants {
         static let radius = 5.0
-    }
-    
-    //MARK: - Colors
-    enum Colors {
         static let recipientBubbleColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
     }
 }

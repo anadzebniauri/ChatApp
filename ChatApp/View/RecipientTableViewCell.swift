@@ -15,8 +15,7 @@ class RecipientTableViewCell: UITableViewCell {
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpRecipientBubbleCellConstraints()
-        setUpRecipientCell()
+        setUpRecipientBubbleCell()
     }
     
     required init?(coder: NSCoder) {
@@ -24,22 +23,27 @@ class RecipientTableViewCell: UITableViewCell {
     }
     
     //MARK: - Methods
-    func setUpRecipientBubbleCellConstraints() {
+    private func setUpRecipientBubbleCell() {
         addSubview(recipientBubble)
-        
-        NSLayoutConstraint.activate([
-            recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            recipientBubble.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor),
-            recipientBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
-        ])
-    }
-    
-    func setUpRecipientCell() {
         self.selectionStyle = .none
+
+        NSLayoutConstraint.activate([
+            recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.recipientBubbleHeightPadding),
+            recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.recipientBubbleHeightPadding),
+            recipientBubble.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor),
+            recipientBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.recipientBubbleLeftPadding)
+        ])
     }
     
     func fill(_ text: String) {
         recipientBubble.setTextToBubble(text)
+    }
+}
+
+//MARK: - Constants
+extension RecipientTableViewCell {
+    enum Constants {
+        static let recipientBubbleHeightPadding = 8.0
+        static let recipientBubbleLeftPadding = 16.0
     }
 }

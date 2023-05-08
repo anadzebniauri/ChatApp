@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */; };
 		C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */; };
-		C1CD1A2A29FBF7370052BEEE /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2929FBF7370052BEEE /* DividerView.swift */; };
 		C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */; };
 		C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */; };
 		C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCapsuleBubbleView.swift; sourceTree = "<group>"; };
 		C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
-		C1CD1A2929FBF7370052BEEE /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientMediumBubbleView.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
 				C1D998D529F174EE009B3072 /* SwitcheView.swift */,
 				C1F205C029F40D2E005C2171 /* TypingAreaView.swift */,
-				C1CD1A2929FBF7370052BEEE /* DividerView.swift */,
 				C1CD1A1F29F95FB40052BEEE /* Recipient */,
 				C1CD1A2029F95FD70052BEEE /* Sender */,
 			);
@@ -259,7 +256,6 @@
 				C1CD1A372A03CFB40052BEEE /* SenderSmallBubbleView.swift in Sources */,
 				C1D998CF29F17470009B3072 /* UIColor+Extension.swift in Sources */,
 				C1F205E629F7F104005C2171 /* SenderMessageView.swift in Sources */,
-				C1CD1A2A29FBF7370052BEEE /* DividerView.swift in Sources */,
 				C1D998D629F174EE009B3072 /* SwitcheView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
