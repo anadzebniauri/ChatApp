@@ -10,32 +10,35 @@ import UIKit
 class TypingAreaView: UIView {
     
     //MARK: - Properties
-    private lazy var messageTextView: UITextView = { () -> UITextView in
+    private lazy var messageTextView: UITextView = {
         let messageTextView = UITextView()
-        messageTextView.font = .systemFont(ofSize: 14)
+        messageTextView.font = Constants.textFont
         messageTextView.textAlignment = .left
         messageTextView.backgroundColor = .clear
-        messageTextView.layer.borderColor = Constants.Color.typeAreaBorderPurpleColor.cgColor
+        messageTextView.layer.borderColor = Constants.Color.typeAreaBorderPurpleColor
         messageTextView.isScrollEnabled = false
         messageTextView.delegate = self
         messageTextView.becomeFirstResponder()
+        messageTextView.translatesAutoresizingMaskIntoConstraints = false
         return messageTextView
-    }().forAutoLayout()
+    }()
     
-    private lazy var placeholderLabel: UILabel = { () -> UILabel in
+    private let placeholderLabel: UILabel = {
         let placeholderLabel = UILabel()
-        placeholderLabel.text = "დაწერე შეტყობინება..."
-        placeholderLabel.font = UIFont.systemFont(ofSize: 14)
+        placeholderLabel.text = Constants.PlaceholderLabel.placeholderText
+        placeholderLabel.font = Constants.textFont
         placeholderLabel.textColor = Constants.Color.placeholderTextGreyColor
         placeholderLabel.sizeToFit()
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         return placeholderLabel
-    }().forAutoLayout()
+    }()
     
-    private lazy var sendButton: UIButton = { () -> UIButton in
+    private let sendButton: UIButton = {
         let sendButton = UIButton()
-        sendButton.setImage(UIImage(named: "sendButton"), for: .normal)
+        sendButton.setImage(Constants.Image.sendButton, for: .normal)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
         return sendButton
-    }().forAutoLayout()
+    }()
     
     
     //MARK: - Init
@@ -64,14 +67,14 @@ class TypingAreaView: UIView {
         
         messageTextView.layer.borderWidth = Constants.MessageTextView.messageTextViewBorderWidth
         messageTextView.layer.cornerRadius = Constants.MessageTextView.messageTextViewCornerRadius
-        messageTextView.textContainerInset = UIEdgeInsets(top: 12, left: 22, bottom: 15, right: 82)
-        messageTextView.scrollIndicatorInsets = UIEdgeInsets(top: 17, left: 283, bottom: 12, right: 56)
+        messageTextView.textContainerInset = Constants.MessageTextView.messageTextViewContainerInsets
+        messageTextView.scrollIndicatorInsets = Constants.MessageTextView.messageTextViewScrollIndicatorInsets
         
-        let maxHeightConstraint = messageTextView.heightAnchor.constraint(lessThanOrEqualToConstant: 90)
+        let maxHeightConstraint = messageTextView.heightAnchor.constraint(lessThanOrEqualToConstant: Constants.MessageTextView.minHeightConstraint)
         maxHeightConstraint.isActive = true
         maxHeightConstraint.priority = .defaultHigh
         
-        let heightConstraint = messageTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40)
+        let heightConstraint = messageTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: Constants.MessageTextView.maxHeightConstraint)
         heightConstraint.isActive = true
         heightConstraint.priority = .defaultHigh
         
@@ -137,30 +140,40 @@ extension TypingAreaView: UITextViewDelegate {
 private extension TypingAreaView {
     enum Constants {
         static let cornerRadius = 15.0
+        static let textFont = UIFont.systemFont(ofSize: 14)
         
-        enum MessageTextView{
+        enum MessageTextView {
             static let messageTextViewBorderWidth = 1.0
             static let messageTextViewCornerRadius = 18.0
             static let messageTextViewHeightPadding = 19.0
             static let messageTextViewWidthPadding = 22.0
+            static let minHeightConstraint = 40.0
+            static let maxHeightConstraint = 90.0
+            static let messageTextViewContainerInsets = UIEdgeInsets(top: 12, left: 22, bottom: 15, right: 82)
+            static let messageTextViewScrollIndicatorInsets = UIEdgeInsets(top: 17, left: 283, bottom: 12, right: 56)
         }
         
-        enum PlaceholderLabel{
+        enum PlaceholderLabel {
             static let placeholderLabelHeightPadding = 12.0
             static let placeholderLabelLeftPadding = 34.0
+            static let placeholderText = "დაწერე შეტყობინება..."
         }
         
-        enum SendButton{
+        enum SendButton {
             static let sendButtonWidth = 32.0
             static let sendButtonHeight = 32.0
             static let sendButtonRightPadding = -27.0
             static let sendButtonBottomPadding = -24.0
         }
         
+        enum Image {
+            static let sendButton = UIImage(named: "sendButton")
+        }
+        
         enum Color {
             static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
             static let placeholderTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
-            static let typeAreaBorderPurpleColor = UIColor(red: 159, green: 96, blue: 255, alpha: 1)
+            static let typeAreaBorderPurpleColor = UIColor(red: 159, green: 96, blue: 255, alpha: 1).cgColor
         }
     }
 }

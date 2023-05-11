@@ -12,20 +12,10 @@ final class SenderTableViewCell: UITableViewCell {
     //MARK: - Properties
     private var senderBubble = SenderMessageView().forAutoLayout()
     
-    //MARK: - Init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpSenderBubbleCell()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: - Methods
     private func setUpSenderBubbleCell() {
         addSubview(senderBubble)
-        self.selectionStyle = .none
+        selectionStyle = .none
         
         NSLayoutConstraint.activate([
             senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.SenderBubbleView.senderBubbleHeightPadding),
@@ -35,8 +25,9 @@ final class SenderTableViewCell: UITableViewCell {
         ])
     }
     
-    func fill(_ text: String) {
+    func setup(with text: String) {
         senderBubble.setTextToBubble(text)
+        setUpSenderBubbleCell()
     }
 }
 

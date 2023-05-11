@@ -10,25 +10,27 @@ import UIKit
 final class SenderMessageView: UIView {
     
     //MARK: - Properties
-    private lazy var capsuleView = SenderCapsuleBubbleView().forAutoLayout()
-    private lazy var mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
-    private lazy var smallBubbleView = SenderSmallBubbleView().forAutoLayout()
+    private lazy var capsuleView = SenderCapsuleBubbleView()
+    private lazy var mediumBubbleView = SenderMediumBubbleView()
+    private lazy var smallBubbleView = SenderSmallBubbleView()
     
-    private lazy var messageLabel: UILabel = { () -> UILabel in
+    private lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.font = Constants.Font.messageLabelText
         messageLabel.textColor = Constants.Color.messageTextBlackColor
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
-        messageLabel.numberOfLines = 0
+        messageLabel.numberOfLines = Constants.MessageLabel.messageLabelNumberOfLines
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
         return messageLabel
-    }().forAutoLayout()
+    }()
     
-    private lazy var dateLabel: UILabel = { () -> UILabel in
+    private lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
-        dateLabel.font = .systemFont(ofSize: 9)
+        dateLabel.font = Constants.Font.dateLabelText
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         return dateLabel
-    }().forAutoLayout()
+    }()
     
     //MARK: -  Init
     override init(frame: CGRect) {
@@ -42,7 +44,7 @@ final class SenderMessageView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("!")
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - Internal Method
@@ -64,7 +66,6 @@ final class SenderMessageView: UIView {
             messageLabel.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor, constant: -Constants.MessageLabel.messageLabelWidthPadding),
             messageLabel.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: Constants.MessageLabel.messageLabelWidthPadding)
         ])
-        messageLabel.text = "გამა"
     }
     
     private func setUpDateLabel() {
@@ -84,6 +85,7 @@ final class SenderMessageView: UIView {
     private func setUpCapsuleView() {
         addSubview(capsuleView)
         capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        capsuleView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
@@ -96,6 +98,7 @@ final class SenderMessageView: UIView {
     private func setUpMediumBubble() {
         addSubview(mediumBubbleView)
         mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        mediumBubbleView.translatesAutoresizingMaskIntoConstraints = false
         
         mediumBubbleView.setHeight(Constants.MediumBubbleView.mediumBubbleViewHeight)
         mediumBubbleView.setWidth(Constants.MediumBubbleView.mediumBubbleViewWidth)
@@ -110,6 +113,7 @@ final class SenderMessageView: UIView {
     private func setUpSmallBubble() {
         addSubview(smallBubbleView)
         smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        smallBubbleView.translatesAutoresizingMaskIntoConstraints = false
         
         smallBubbleView.setHeight(Constants.SmallBubbleView.smallBubbleViewHeight)
         smallBubbleView.setWidth(Constants.SmallBubbleView.smallBubbleViewWidth)
@@ -146,11 +150,17 @@ private extension SenderMessageView {
         enum MessageLabel {
             static let messageLabelHeightPadding = 15.0
             static let messageLabelWidthPadding = 18.0
+            static let messageLabelNumberOfLines = 0
         }
         
         enum DateLabel {
             static let dateLabelHeight = 10.0
             static let dateLabelRightPadding = -30.0
+        }
+        
+        enum Font {
+            static let messageLabelText = UIFont.systemFont(ofSize: 14)
+            static let dateLabelText = UIFont.systemFont(ofSize: 9)
         }
         
         enum Color {

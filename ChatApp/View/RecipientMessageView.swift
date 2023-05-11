@@ -10,25 +10,27 @@ import UIKit
 final class RecipientMessageView: UIView {
     
     //MARK: - Properties
-    private lazy var capsuleView = RecipientCapsuleBubbleView().forAutoLayout()
-    private lazy var mediumBubbleView = RecipientMediumBubbleView().forAutoLayout()
-    private lazy var smallBubbleView = RecipientSmallBubbleView().forAutoLayout()
+    private let capsuleView = RecipientCapsuleBubbleView()
+    private let mediumBubbleView = RecipientMediumBubbleView()
+    private let smallBubbleView = RecipientSmallBubbleView()
     
-    private lazy var messageLabel: UILabel = { () -> UILabel in
+    private let messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.font = Constants.Font.messageLabelText
         messageLabel.textColor = Constants.Color.messageTextBlackColor
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
-        messageLabel.numberOfLines = 0
+        messageLabel.numberOfLines = Constants.MessageLabel.messageLabelNumberOfLines
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
         return messageLabel
-    }().forAutoLayout()
+    }()
     
-    private lazy var dateLabel: UILabel = { () -> UILabel in
+    private let dateLabel: UILabel = {
         let dateLabel = UILabel()
-        dateLabel.font = .systemFont(ofSize: 9)
+        dateLabel.font = Constants.Font.dateLabelText
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         return dateLabel
-    }().forAutoLayout()
+    }()
     
     
     //MARK: - Init
@@ -43,7 +45,7 @@ final class RecipientMessageView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("!")
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - Internal Method
@@ -65,7 +67,6 @@ final class RecipientMessageView: UIView {
             messageLabel.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor, constant: -Constants.MessageLabel.messageLabelWidthPadding),
             messageLabel.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: Constants.MessageLabel.messageLabelWidthPadding)
         ])
-        messageLabel.text = "გამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობაგამარჯობა"
     }
     
     private func setUpDateLabel() {
@@ -75,6 +76,7 @@ final class RecipientMessageView: UIView {
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.DateLabel.dateLabelLeftPadding),
+            dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
         ])
         
         dateLabel.setUpErrorText()
@@ -84,6 +86,7 @@ final class RecipientMessageView: UIView {
     private func setUpCapsuleView() {
         addSubview(capsuleView)
         capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        capsuleView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
@@ -97,6 +100,7 @@ final class RecipientMessageView: UIView {
     private func setUpMediumBubble() {
         addSubview(mediumBubbleView)
         mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        mediumBubbleView.translatesAutoresizingMaskIntoConstraints = false
         
         mediumBubbleView.setHeight(Constants.MediumBubbleView.mediumBubbleViewHeight)
         mediumBubbleView.setWidth(Constants.MediumBubbleView.mediumBubbleViewWidth)
@@ -105,12 +109,12 @@ final class RecipientMessageView: UIView {
             mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.MediumBubbleView.mediumBubbleViewBottomPadding),
             mediumBubbleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.MediumBubbleView.mediumBubbleViewLeftPadding)
         ])
-        
     }
     
     private func setUpSmallBubble() {
         addSubview(smallBubbleView)
         smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        smallBubbleView.translatesAutoresizingMaskIntoConstraints = false
         
         smallBubbleView.setHeight(Constants.SmallBubbleView.smallBubbleViewHeight)
         smallBubbleView.setWidth(Constants.SmallBubbleView.smallBubbleViewWidth)
@@ -148,11 +152,17 @@ private extension RecipientMessageView {
         enum MessageLabel {
             static let messageLabelHeightPadding = 16.0
             static let messageLabelWidthPadding = 18.0
+            static let messageLabelNumberOfLines = 0
         }
         
         enum DateLabel {
             static let dateLabelHeight = 10.0
             static let dateLabelLeftPadding = 30.0
+        }
+        
+        enum Font {
+            static let messageLabelText = UIFont.systemFont(ofSize: 14)
+            static let dateLabelText = UIFont.systemFont(ofSize: 9)
         }
         
         enum Color {

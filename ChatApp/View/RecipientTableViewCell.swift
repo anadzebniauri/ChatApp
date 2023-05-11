@@ -12,31 +12,22 @@ class RecipientTableViewCell: UITableViewCell {
     //MARK: - Properties
     private var recipientBubble = RecipientMessageView().forAutoLayout()
     
-    //MARK: - Init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpRecipientBubbleCell()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: - Methods
     private func setUpRecipientBubbleCell() {
         addSubview(recipientBubble)
-        self.selectionStyle = .none
-
+        selectionStyle = .none
+        
         NSLayoutConstraint.activate([
             recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.RecipientBubbleView.recipientBubbleHeightPadding),
             recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.RecipientBubbleView.recipientBubbleHeightPadding),
-            recipientBubble.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            recipientBubble.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.RecipientBubbleView.recipientBubbleLeftPadding)
+            recipientBubble.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.RecipientBubbleView.recipientBubbleLeftPadding),
+            recipientBubble.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
         ])
     }
     
     func setup(with text: String) {
         recipientBubble.setTextToBubble(text)
+        setUpRecipientBubbleCell()
     }
 }
 

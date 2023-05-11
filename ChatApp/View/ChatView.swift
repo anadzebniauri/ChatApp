@@ -10,17 +10,20 @@ import UIKit
 class ChatView: UIView {
     
     //MARK: - Properties
-    private lazy var tableView: UITableView = { () -> UITableView in
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
         tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
         return tableView
-    }().forAutoLayout()
+    }()
     
-    private lazy var typingAreaView = TypingAreaView().forAutoLayout()
+    private let typingAreaView = TypingAreaView().forAutoLayout()
+    
+    private let dummyData: [String] = ["anahjhjhj", "1111", "222", "ana"]
     
     //MARK: - Init
     override required init(frame: CGRect) {
@@ -66,17 +69,19 @@ class ChatView: UIView {
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        dummyData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 2 == 0 { // even rows are "receiverTableViewCell"
             if let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell
             {
+                cell.setup(with: dummyData[indexPath.row])
                 return cell
             }
         } else { // odd rows are "senderTableViewCell"
             if let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell {
+                cell.setup(with: dummyData[indexPath.row])
                 return cell
             }
         }

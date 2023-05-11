@@ -19,7 +19,6 @@ class ChatViewController: UIViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Do any additional setup after loading the view.
         
         setUpSwitcherView()
         setUpDividerView()
@@ -54,14 +53,14 @@ class ChatViewController: UIViewController {
     //MARK: - Divider View
     private func setUpDividerView() {
         view.addSubview(dividerView)
-        dividerView.setHeight(6)
+        dividerView.setHeight(Constants.DividerView.dividerViewHeight)
         
         NSLayoutConstraint.activate([
             dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor ),
             dividerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             dividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        dividerView.backgroundColor = Constants.DividerView.dividerViewYellowBackgroundColor
+        dividerView.backgroundColor = Constants.Color.dividerViewYellowBackgroundColor
     }
     
     //MARK: - Switcher View
@@ -76,6 +75,13 @@ class ChatViewController: UIViewController {
     }
 }
 
+//MARK: - Switcher Delegate
+extension ChatViewController: SwitcherDelegate {
+    func switcherDidTap() {
+        print("tapped")
+    }
+}
+
 //MARK: - Constants
 extension ChatViewController {
     enum Constants {
@@ -87,14 +93,10 @@ extension ChatViewController {
             static let switcherRightAnchor = -12.0
         }
         enum DividerView {
+            static let dividerViewHeight = 6.0
+        }
+        enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
         }
-    }
-}
-
-//MARK: - Switcher Delegate
-extension ChatViewController: SwitcherDelegate {
-    func switcherDidTap() {
-        print("tapped")
     }
 }

@@ -16,11 +16,11 @@ class SwitcherView: UIView {
     weak var delegate: SwitcherDelegate?
 
     //MARK: - properties
-    private lazy var lightModeItemBackgroundView = UIImageView()
-    private lazy var lightModeItemView = UIImageView()
-    private lazy var darkModeItemBackgroundView = UIImageView()
-    private lazy var darkModeItemView = UIImageView()
-    private lazy var switchingItemStackView = UIStackView().forAutoLayout()
+    private let lightModeItemBackgroundView = UIImageView()
+    private let lightModeItemView = UIImageView()
+    private let darkModeItemBackgroundView = UIImageView()
+    private let darkModeItemView = UIImageView()
+    private let switchingItemStackView = UIStackView()
     
     //MARK: - Init
     required init?(coder: NSCoder) {
@@ -112,12 +112,13 @@ class SwitcherView: UIView {
         switchingItemStackView.setHeight(Constants.StackView.switchingItemStackViewHeight)
         switchingItemStackView.setWidth(Constants.StackView.switchingItemStackViewWidth)
         
-        switchingItemStackView.spacing = 4
+        switchingItemStackView.spacing = Constants.StackView.switchingItemStackViewSpacing
         switchingItemStackView.distribution = .fillEqually
         
+        switchingItemStackView.translatesAutoresizingMaskIntoConstraints = false
         switchingItemStackView.isLayoutMarginsRelativeArrangement = true
-        switchingItemStackView.layoutMargins = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
-}
+        switchingItemStackView.layoutMargins = Constants.StackView.switchingItemStackViewUIEdgeInsets
+    }
     
     @objc func viewTapped() {
         delegate?.switcherDidTap()
@@ -146,6 +147,8 @@ private extension SwitcherView {
         enum StackView {
             static let switchingItemStackViewHeight = 27.0
             static let switchingItemStackViewWidth = 54.0
+            static let switchingItemStackViewSpacing = 4.0
+            static let switchingItemStackViewUIEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         }
        
         enum Image {
