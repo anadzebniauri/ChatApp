@@ -16,8 +16,8 @@ class ChatView: UIView {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
-        tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
+        tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: Constants.RecipientTableView.cell)
+        tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: Constants.SenderTableView.cell)
         return tableView
     }()
     
@@ -74,13 +74,13 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 2 == 0 { // even rows are "receiverTableViewCell"
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "receiverTableViewCell", for: indexPath) as? RecipientTableViewCell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell
             {
                 cell.setup(with: dummyData[indexPath.row])
                 return cell
             }
         } else { // odd rows are "senderTableViewCell"
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SenderTableView.cell, for: indexPath) as? SenderTableViewCell {
                 cell.setup(with: dummyData[indexPath.row])
                 return cell
             }
@@ -94,6 +94,12 @@ extension ChatView {
     enum Constants{
         enum TypingArea {
             static let typingAreaViewPadding = 16.0
+        }
+        enum RecipientTableView {
+            static let cell = "recipientTableViewCell"
+        }
+        enum SenderTableView {
+            static let cell = "senderTableViewCell"
         }
     }
 }
