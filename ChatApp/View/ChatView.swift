@@ -10,7 +10,16 @@ import UIKit
 class ChatView: UIView {
     
     //MARK: - Properties
-    private lazy var tableView = UITableView().forAutoLayout()
+    private lazy var tableView: UITableView = { () -> UITableView in
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
+        tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
+        return tableView
+    }().forAutoLayout()
+    
     private lazy var typingAreaView = TypingAreaView().forAutoLayout()
     
     //MARK: - Init
@@ -35,8 +44,8 @@ class ChatView: UIView {
 
         NSLayoutConstraint.activate([
             typingAreaView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            typingAreaView.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.typingAreaViewPadding),
-            typingAreaView.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.typingAreaViewPadding),
+            typingAreaView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.TypingArea.typingAreaViewPadding),
+            typingAreaView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.TypingArea.typingAreaViewPadding),
             typingAreaView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
@@ -44,18 +53,12 @@ class ChatView: UIView {
     //MARK: - Table View Set Up
     private func setUpTableView() {
         addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leftAnchor.constraint(equalTo: leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: rightAnchor)
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        
-        tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: "receiverTableViewCell")
-        tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: "senderTableViewCell")
     }
 }
 
@@ -72,19 +75,20 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             {
                 return cell
             }
-            fatalError("Cell can't cast to ReceiverTableViewCell")
         } else { // odd rows are "senderTableViewCell"
             if let cell = tableView.dequeueReusableCell(withIdentifier: "senderTableViewCell", for: indexPath) as? SenderTableViewCell {
                 return cell
             }
-            fatalError("Cell can't cast to SenderTableViewCell")
         }
+        return UITableViewCell()
     }
 }
 
 //MARK: - Constants
 extension ChatView {
     enum Constants{
-        static let typingAreaViewPadding = 16.0
+        enum TypingArea {
+            static let typingAreaViewPadding = 16.0
+        }
     }
 }

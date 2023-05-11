@@ -10,7 +10,7 @@ import UIKit
 class RecipientTableViewCell: UITableViewCell {
     
     //MARK: - Properties
-    var recipientBubble = RecipientMessageView().forAutoLayout()
+    private var recipientBubble = RecipientMessageView().forAutoLayout()
     
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,14 +28,14 @@ class RecipientTableViewCell: UITableViewCell {
         self.selectionStyle = .none
 
         NSLayoutConstraint.activate([
-            recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.recipientBubbleHeightPadding),
-            recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.recipientBubbleHeightPadding),
-            recipientBubble.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor),
-            recipientBubble.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.recipientBubbleLeftPadding)
+            recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.RecipientBubbleView.recipientBubbleHeightPadding),
+            recipientBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.RecipientBubbleView.recipientBubbleHeightPadding),
+            recipientBubble.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            recipientBubble.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.RecipientBubbleView.recipientBubbleLeftPadding)
         ])
     }
     
-    func fill(_ text: String) {
+    func setup(with text: String) {
         recipientBubble.setTextToBubble(text)
     }
 }
@@ -43,7 +43,9 @@ class RecipientTableViewCell: UITableViewCell {
 //MARK: - Constants
 extension RecipientTableViewCell {
     enum Constants {
-        static let recipientBubbleHeightPadding = 8.0
-        static let recipientBubbleLeftPadding = 16.0
+        enum RecipientBubbleView {
+            static let recipientBubbleHeightPadding = 8.0
+            static let recipientBubbleLeftPadding = 16.0
+        }
     }
 }

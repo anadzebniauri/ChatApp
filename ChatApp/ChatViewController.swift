@@ -35,8 +35,8 @@ class ChatViewController: UIViewController {
         NSLayoutConstraint.activate([
             topChatView.topAnchor.constraint(equalTo: switcherView.bottomAnchor),
             topChatView.bottomAnchor.constraint(equalTo: dividerView.topAnchor ),
-            topChatView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            topChatView.leftAnchor.constraint(equalTo: view.leftAnchor)
+            topChatView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topChatView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
     }
     
@@ -45,9 +45,9 @@ class ChatViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
-            bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.bottomChatViewPadding),
-            bottomChatView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            bottomChatView.leftAnchor.constraint(equalTo: view.leftAnchor)
+            bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.ChatView.bottomChatViewPadding),
+            bottomChatView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomChatView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
     }
     
@@ -58,19 +58,20 @@ class ChatViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor ),
-            dividerView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            dividerView.leftAnchor.constraint(equalTo: view.leftAnchor)
+            dividerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        dividerView.backgroundColor = Constants.dividerViewYellowBackgroundColor
+        dividerView.backgroundColor = Constants.DividerView.dividerViewYellowBackgroundColor
     }
     
     //MARK: - Switcher View
     private func setUpSwitcherView() {
         view.addSubview(switcherView)
+        switcherView.delegate = self
         
         NSLayoutConstraint.activate([
-            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.switcherTopAnchor),
-            switcherView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: Constants.switcherRightAnchor)
+            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.SwitcherView.switcherTopAnchor),
+            switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
         ])
     }
 }
@@ -78,10 +79,22 @@ class ChatViewController: UIViewController {
 //MARK: - Constants
 extension ChatViewController {
     enum Constants {
-        static let bottomChatViewPadding = -30.0
-        static let switcherTopAnchor = 52.0
-        static let switcherRightAnchor = -12.0
-        
-        static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
+        enum ChatView {
+            static let bottomChatViewPadding = -30.0
+        }
+        enum SwitcherView {
+            static let switcherTopAnchor = 52.0
+            static let switcherRightAnchor = -12.0
+        }
+        enum DividerView {
+            static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
+        }
+    }
+}
+
+//MARK: - Switcher Delegate
+extension ChatViewController: SwitcherDelegate {
+    func switcherDidTap() {
+        print("tapped")
     }
 }

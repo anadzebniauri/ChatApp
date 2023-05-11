@@ -10,7 +10,7 @@ import UIKit
 final class SenderTableViewCell: UITableViewCell {
     
     //MARK: - Properties
-    var senderBubble = SenderMessageView().forAutoLayout()
+    private var senderBubble = SenderMessageView().forAutoLayout()
     
     //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,10 +28,10 @@ final class SenderTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         
         NSLayoutConstraint.activate([
-            senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.senderBubbleHeightPadding),
-            senderBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.senderBubbleHeightPadding),
-            senderBubble.rightAnchor.constraint(equalTo: rightAnchor, constant: Constants.senderBubbleRightPadding),
-            senderBubble.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
+            senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.SenderBubbleView.senderBubbleHeightPadding),
+            senderBubble.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.SenderBubbleView.senderBubbleHeightPadding),
+            senderBubble.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.SenderBubbleView.senderBubbleRightPadding),
+            senderBubble.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor)
         ])
     }
     
@@ -43,7 +43,9 @@ final class SenderTableViewCell: UITableViewCell {
 //MARK: - Constants
 extension SenderTableViewCell {
     enum Constants {
-        static let senderBubbleHeightPadding = 8.0
-        static let senderBubbleRightPadding = -16.0
+        enum SenderBubbleView {
+            static let senderBubbleHeightPadding = 8.0
+            static let senderBubbleRightPadding = -16.0
+        }
     }
 }

@@ -14,8 +14,21 @@ final class SenderMessageView: UIView {
     private lazy var mediumBubbleView = SenderMediumBubbleView().forAutoLayout()
     private lazy var smallBubbleView = SenderSmallBubbleView().forAutoLayout()
     
-    private lazy var messageLabel = UILabel().forAutoLayout()
-    private lazy var dateLabel = UILabel().forAutoLayout()
+    private lazy var messageLabel: UILabel = { () -> UILabel in
+        let messageLabel = UILabel()
+        messageLabel.font = .systemFont(ofSize: 14)
+        messageLabel.textColor = Constants.Color.messageTextBlackColor
+        messageLabel.textAlignment = .left
+        messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.numberOfLines = 0
+        return messageLabel
+    }().forAutoLayout()
+    
+    private lazy var dateLabel: UILabel = { () -> UILabel in
+        let dateLabel = UILabel()
+        dateLabel.font = .systemFont(ofSize: 9)
+        return dateLabel
+    }().forAutoLayout()
     
     //MARK: -  Init
     override init(frame: CGRect) {
@@ -45,75 +58,67 @@ final class SenderMessageView: UIView {
     private func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
         
-        messageLabel.font = .systemFont(ofSize: 14)
-        messageLabel.textColor = Constants.messageTextBlackColor
-        messageLabel.textAlignment = .left
-        messageLabel.lineBreakMode = .byWordWrapping
-        messageLabel.numberOfLines = 0
-        
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: Constants.messageLabelHeightPadding),
-            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -Constants.messageLabelHeightPadding),
-            messageLabel.rightAnchor.constraint(equalTo: capsuleView.rightAnchor, constant: -Constants.messageLabelWidthPadding),
-            messageLabel.leftAnchor.constraint(equalTo: capsuleView.leftAnchor, constant: Constants.messageLabelWidthPadding)
+            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: Constants.MessageLabel.messageLabelHeightPadding),
+            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -Constants.MessageLabel.messageLabelHeightPadding),
+            messageLabel.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor, constant: -Constants.MessageLabel.messageLabelWidthPadding),
+            messageLabel.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: Constants.MessageLabel.messageLabelWidthPadding)
         ])
         messageLabel.text = "გამა"
     }
     
     private func setUpDateLabel() {
         addSubview(dateLabel)
-        dateLabel.font = .systemFont(ofSize: 9)
-        dateLabel.setHeight(Constants.dateLabelHeight)
+        dateLabel.setHeight(Constants.DateLabel.dateLabelHeight)
         
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: Constants.dateLabelRightPadding),
-            dateLabel.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor)
+            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.DateLabel.dateLabelRightPadding),
+            dateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor)
         ])
         
         dateLabel.setUpDateFormatter()
-        dateLabel.textColor = Constants.dateLabelTextGreyColor
+        dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
     }
     
     private func setUpCapsuleView() {
         addSubview(capsuleView)
+        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
-            capsuleView.leftAnchor.constraint(equalTo: leftAnchor),
-            capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.capsuleViewBottomPadding),
-            capsuleView.rightAnchor.constraint(equalTo: rightAnchor, constant: Constants.capsuleViewRightPadding)
+            capsuleView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            capsuleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.CapsuleView.capsuleViewBottomPadding),
+            capsuleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.CapsuleView.capsuleViewRightPadding)
         ])
-        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
     }
     
     private func setUpMediumBubble() {
         addSubview(mediumBubbleView)
+        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
-        mediumBubbleView.setHeight(Constants.mediumBubbleViewHeight)
-        mediumBubbleView.setWidth(Constants.mediumBubbleViewWidth)
+        mediumBubbleView.setHeight(Constants.MediumBubbleView.mediumBubbleViewHeight)
+        mediumBubbleView.setWidth(Constants.MediumBubbleView.mediumBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.mediumBubbleViewBottomPadding),
-            mediumBubbleView.rightAnchor.constraint(equalTo: rightAnchor, constant: Constants.mediumBubbleViewRightPadding)
+            mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.MediumBubbleView.mediumBubbleViewBottomPadding),
+            mediumBubbleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.MediumBubbleView.mediumBubbleViewRightPadding)
         ])
         
-        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
     }
     
     private func setUpSmallBubble() {
         addSubview(smallBubbleView)
+        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
-        smallBubbleView.setHeight(Constants.smallBubbleViewHeight)
-        smallBubbleView.setWidth(Constants.smallBubbleViewWidth)
+        smallBubbleView.setHeight(Constants.SmallBubbleView.smallBubbleViewHeight)
+        smallBubbleView.setWidth(Constants.SmallBubbleView.smallBubbleViewWidth)
         
         NSLayoutConstraint.activate([
-            smallBubbleView.rightAnchor.constraint(equalTo: rightAnchor),
-            smallBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.smallBubbleBottomPadding)
+            smallBubbleView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            smallBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.SmallBubbleView.smallBubbleBottomPadding)
         ])
-        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
     }
-    
 }
 
 //MARK: - Constants
@@ -121,29 +126,37 @@ private extension SenderMessageView {
     enum Constants {
         static let bubbleCornerRadius = 25.0
         
-        static let mediumBubbleViewHeight = 17.4
-        static let mediumBubbleViewWidth = 18.18
+        enum CapsuleView {
+            static let capsuleViewBottomPadding = -14.0
+            static let capsuleViewRightPadding = -16.0
+        }
+        enum MediumBubbleView {
+            static let mediumBubbleViewHeight = 17.4
+            static let mediumBubbleViewWidth = 18.18
+            static let mediumBubbleViewBottomPadding = -13.0
+            static let mediumBubbleViewRightPadding = -12.0
+        }
         
-        static let smallBubbleViewHeight = 9.57
-        static let smallBubbleViewWidth = 10.0
+        enum SmallBubbleView {
+            static let smallBubbleViewHeight = 9.57
+            static let smallBubbleViewWidth = 10.0
+            static let smallBubbleBottomPadding = -9.0
+        }
         
-        static let messageLabelHeightPadding = 15.0
-        static let messageLabelWidthPadding = 18.0
+        enum MessageLabel {
+            static let messageLabelHeightPadding = 15.0
+            static let messageLabelWidthPadding = 18.0
+        }
         
-        static let dateLabelHeight = 10.0
-        static let dateLabelRightPadding = -30.0
+        enum DateLabel {
+            static let dateLabelHeight = 10.0
+            static let dateLabelRightPadding = -30.0
+        }
         
-        static let capsuleViewBottomPadding = -14.0
-        static let capsuleViewRightPadding = -16.0
-        
-        static let mediumBubbleViewBottomPadding = -13.0
-        static let mediumBubbleViewRightPadding = -12.0
-        
-        static let smallBubbleBottomPadding = -9.0
-        
-        static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
-        static let dateLabelTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
-        static let dateLabelErrorTextRedColor = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
-        
+        enum Color {
+            static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
+            static let dateLabelTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
+            static let dateLabelErrorTextRedColor = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
+        }
     }
 }
