@@ -40,7 +40,6 @@ class SwitcherView: UIView {
         setUpLightModeItemView()
         setUpDarkModeItemBackgroundView()
         setUpDarkModeItemView()
-        viewTapped()
     }
     
     private func setUpView() {
