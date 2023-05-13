@@ -73,12 +73,26 @@ class ChatViewController: UIViewController {
             switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
         ])
     }
+    
+    private func setUpLightModeView() {
+        view.backgroundColor = .systemBackground
+    }
+    
+    private func setUpDarkModeView() {
+        view.backgroundColor = Constants.Color.darkModeBackgroundColor
+        topChatView.typingAreaView.messageTextView.textColor = .white
+        bottomChatView.typingAreaView.messageTextView.textColor = .white
+    }
 }
 
 //MARK: - Switcher Delegate
 extension ChatViewController: SwitcherDelegate {
-    func switcherDidTap() {
-        print("tapped")
+    func switcherDidTap(_ state: SwitcherState) {
+        if state == .light {
+            self.setUpLightModeView()
+        } else if state == .dark {
+            self.setUpDarkModeView()
+        }
     }
 }
 
@@ -97,6 +111,7 @@ extension ChatViewController {
         }
         enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
+            static let darkModeBackgroundColor = UIColor(red: 22, green: 0, blue: 57, alpha: 1)
         }
     }
 }

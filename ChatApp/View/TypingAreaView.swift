@@ -10,7 +10,7 @@ import UIKit
 class TypingAreaView: UIView {
     
     //MARK: - Properties
-    private lazy var messageTextView: UITextView = {
+    lazy var messageTextView: UITextView = {
         let messageTextView = UITextView()
         messageTextView.font = Constants.textFont
         messageTextView.textAlignment = .left

@@ -16,6 +16,7 @@ class RecipientTableViewCell: UITableViewCell {
     private func setUpRecipientBubbleCell() {
         addSubview(recipientBubble)
         selectionStyle = .none
+        backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             recipientBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.RecipientBubbleView.recipientBubbleHeightPadding),

@@ -8,19 +8,20 @@
 import UIKit
 
 protocol SwitcherDelegate: AnyObject {
-    func switcherDidTap()
+    func switcherDidTap(_ state: SwitcherState)
 }
 
 class SwitcherView: UIView {
     
     weak var delegate: SwitcherDelegate?
-
+    private var switcherState: SwitcherState = .dark
+    
     //MARK: - properties
-    private let lightModeItemBackgroundView = UIImageView()
-    private let lightModeItemView = UIImageView()
-    private let darkModeItemBackgroundView = UIImageView()
-    private let darkModeItemView = UIImageView()
-    private let switchingItemStackView = UIStackView()
+    var lightModeItemBackgroundView = UIImageView()
+    var lightModeItemView = UIImageView()
+    var darkModeItemBackgroundView = UIImageView()
+    var darkModeItemView = UIImageView()
+    var switchingItemStackView = UIStackView()
     
     //MARK: - Init
     required init?(coder: NSCoder) {
@@ -119,8 +120,32 @@ class SwitcherView: UIView {
         switchingItemStackView.layoutMargins = Constants.StackView.switchingItemStackViewUIEdgeInsets
     }
     
+    private func setUpSwitcherLightModeColors() {
+        backgroundColor = Constants.Color.switcherLightModeBackgroundColor
+        lightModeItemBackgroundView.tintColor = Constants.Color.switcherBackgroundItemViewColor
+        lightModeItemView.tintColor = .white
+        darkModeItemBackgroundView.tintColor = .clear
+        darkModeItemView.tintColor = Constants.Color.switcherItemViewColor
+    }
+    
+    private func setUpSwitcherDarkModeColors() {
+        backgroundColor = Constants.Color.darkModeBackgroundColor
+        lightModeItemBackgroundView.tintColor = .clear
+        lightModeItemView.tintColor = Constants.Color.switcherItemViewColor
+        darkModeItemBackgroundView.tintColor = Constants.Color.switcherBackgroundItemViewColor
+        darkModeItemView.tintColor = Constants.Color.darkModeBackgroundColor
+    }
+    
     @objc func viewTapped() {
-        delegate?.switcherDidTap()
+        delegate?.switcherDidTap(switcherState)
+        switch self.switcherState {
+        case .light:
+            self.switcherState = .dark
+            setUpSwitcherLightModeColors()
+        case .dark:
+            self.switcherState = .light
+            setUpSwitcherDarkModeColors()
+        }
     }
 }
 
@@ -135,21 +160,21 @@ private extension SwitcherView {
             static let lightModeItemViewHeight = 11.0
             static let lightModeItemViewWidth = 11.0
         }
-
+        
         enum DarkMode {
             static let darkModeItemBackgroundViewHeight = 21.0
             static let darkModeItemBackgroundViewWidth = 21.0
             static let darkModeItemViewHeight = 11.0
             static let darkModeItemViewWidth = 11.0
         }
-
+        
         enum StackView {
             static let switchingItemStackViewHeight = 27.0
             static let switchingItemStackViewWidth = 54.0
             static let switchingItemStackViewSpacing = 4.0
             static let switchingItemStackViewUIEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         }
-       
+        
         enum Image {
             static let circleImage = UIImage(systemName: "circle.fill")
             static let sunImage = UIImage(systemName: "sun.min.fill")
@@ -159,9 +184,14 @@ private extension SwitcherView {
         enum Color {
             static let switcherLightModeBackgroundColor = UIColor(red: 241, green: 241, blue: 241, alpha: 1)
             static let switcherDarkModeBackgroundColor = UIColor(red: 46, green: 0, blue: 114, alpha: 1)
-            static let switcherBackgroundItemViewColor = UIColor(red: 159, green: 96, blue: 256, alpha: 1)
+            static let switcherBackgroundItemViewColor = UIColor(red: 159, green: 96, blue: 255, alpha: 1)
             static let switcherItemViewColor = UIColor(red: 255, green: 202, blue: 85, alpha: 1)
-            static let darkModeBackgroundColor = UIColor(red: 22, green: 0, blue: 57, alpha: 1)
+            static let darkModeBackgroundColor = UIColor(red: 46, green: 0, blue: 114, alpha: 1)
         }
     }
+}
+
+enum SwitcherState {
+    case light
+    case dark
 }

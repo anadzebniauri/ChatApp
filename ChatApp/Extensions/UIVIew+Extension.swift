@@ -71,5 +71,5 @@ extension UIView {
     
     func make(horizontal: CGFloat, vertical: CGFloat) -> UIEdgeInsets {
         UIEdgeInsets(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
-    }    
+    }
 }

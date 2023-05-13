@@ -15,13 +15,14 @@ class ChatView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: Constants.RecipientTableView.cell)
         tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: Constants.SenderTableView.cell)
         return tableView
     }()
     
-    private let typingAreaView = TypingAreaView().forAutoLayout()
+    let typingAreaView = TypingAreaView().forAutoLayout()
     
     private let dummyData: [String] = ["anahjhjhj", "1111", "222", "ana"]
     
@@ -56,7 +57,7 @@ class ChatView: UIView {
     //MARK: - Table View Set Up
     private func setUpTableView() {
         addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),

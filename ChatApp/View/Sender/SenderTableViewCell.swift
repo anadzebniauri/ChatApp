@@ -16,6 +16,7 @@ final class SenderTableViewCell: UITableViewCell {
     private func setUpSenderBubbleCell() {
         addSubview(senderBubble)
         selectionStyle = .none
+        backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             senderBubble.topAnchor.constraint(equalTo: topAnchor, constant: Constants.SenderBubbleView.senderBubbleHeightPadding),
