@@ -19,12 +19,19 @@ class ChatViewController: UIViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        keyboardDismiss()
         
         setUpSwitcherView()
         setUpDividerView()
         
         setUpTopChatView()
         setUpBottomChatView()
+    }
+    
+    //MARK: - KeyBoard
+    private func keyboardDismiss() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+         view.addGestureRecognizer(tapGesture)
     }
     
     //MARK: - Chat View Methods
@@ -76,6 +83,8 @@ class ChatViewController: UIViewController {
     
     private func setUpLightModeView() {
         view.backgroundColor = .systemBackground
+        topChatView.typingAreaView.messageTextView.textColor = .black
+        bottomChatView.typingAreaView.messageTextView.textColor = .black
     }
     
     private func setUpDarkModeView() {
