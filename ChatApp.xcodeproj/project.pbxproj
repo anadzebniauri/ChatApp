@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */; };
+		C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */; };
+		C1BDD1CA2A12827300AB9AE3 /* MessageCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C92A12827300AB9AE3 /* MessageCoreData.swift */; };
 		C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */; };
 		C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */; };
 		C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */; };
@@ -20,7 +22,6 @@
 		C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998B829F17330009B3072 /* SceneDelegate.swift */; };
 		C1D998BB29F17330009B3072 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998BA29F17330009B3072 /* ChatViewController.swift */; };
 		C1D998BE29F17330009B3072 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D998BC29F17330009B3072 /* Main.storyboard */; };
-		C1D998C129F17330009B3072 /* ChatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1D998BF29F17330009B3072 /* ChatApp.xcdatamodeld */; };
 		C1D998C329F17333009B3072 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D998C229F17333009B3072 /* Assets.xcassets */; };
 		C1D998C629F17333009B3072 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D998C429F17333009B3072 /* LaunchScreen.storyboard */; };
 		C1D998CF29F17470009B3072 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D998CE29F17470009B3072 /* UIColor+Extension.swift */; };
@@ -34,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCapsuleBubbleView.swift; sourceTree = "<group>"; };
+		C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatApp.xcdatamodel; sourceTree = "<group>"; };
+		C1BDD1C92A12827300AB9AE3 /* MessageCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreData.swift; sourceTree = "<group>"; };
 		C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -47,7 +50,6 @@
 		C1D998B829F17330009B3072 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C1D998BA29F17330009B3072 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C1D998BD29F17330009B3072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C1D998C029F17330009B3072 /* ChatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatApp.xcdatamodel; sourceTree = "<group>"; };
 		C1D998C229F17333009B3072 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1D998C529F17333009B3072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1D998C729F17333009B3072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C1BDD1C52A12822F00AB9AE3 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */,
+				C1BDD1C92A12827300AB9AE3 /* MessageCoreData.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		C1CD1A1F29F95FB40052BEEE /* Recipient */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +125,7 @@
 		C1D998B529F17330009B3072 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				C1BDD1C52A12822F00AB9AE3 /* Core Data */,
 				C1D998CD29F1745C009B3072 /* Extensions */,
 				C1D998D429F174C5009B3072 /* Model */,
 				C1D998D329F174BD009B3072 /* View */,
@@ -124,7 +136,6 @@
 				C1D998C229F17333009B3072 /* Assets.xcassets */,
 				C1D998C429F17333009B3072 /* LaunchScreen.storyboard */,
 				C1D998C729F17333009B3072 /* Info.plist */,
-				C1D998BF29F17330009B3072 /* ChatApp.xcdatamodeld */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -245,8 +256,9 @@
 				C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */,
 				C1F205C129F40D2F005C2171 /* TypingAreaView.swift in Sources */,
 				C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */,
-				C1D998C129F17330009B3072 /* ChatApp.xcdatamodeld in Sources */,
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
+				C1BDD1CA2A12827300AB9AE3 /* MessageCoreData.swift in Sources */,
+				C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */,
 				C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */,
 				C1F205BF29F2A9B5005C2171 /* RecipientMessageView.swift in Sources */,
 				C1D998D129F17486009B3072 /* UIVIew+Extension.swift in Sources */,
@@ -480,12 +492,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C1D998BF29F17330009B3072 /* ChatApp.xcdatamodeld */ = {
+		C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C1D998C029F17330009B3072 /* ChatApp.xcdatamodel */,
+				C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */,
 			);
-			currentVersion = C1D998C029F17330009B3072 /* ChatApp.xcdatamodel */;
+			currentVersion = C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */;
 			path = ChatApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

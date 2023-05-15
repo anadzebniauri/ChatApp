@@ -110,6 +110,13 @@ class TypingAreaView: UIView {
     
     @objc func sendButtonPressed() {
         // Add your send button action here
+        MessageCoreData.saveMessage(text: messageTextView.text , id: 1, date: Date())
+        MessageCoreData.fetchMessages(completion: { messages in
+            print(messages)
+            for message in messages {
+                print(message.text)
+            }
+        })
     }
 }
 
