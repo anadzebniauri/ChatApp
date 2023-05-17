@@ -15,7 +15,7 @@ class ChatViewController: UIViewController {
     
     private lazy var dividerView = UIView().forAutoLayout()
     private lazy var switcherView = SwitcherView().forAutoLayout()
-    
+            
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,27 +80,28 @@ class ChatViewController: UIViewController {
             switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
         ])
     }
-    
-    private func setUpLightModeView() {
-        view.backgroundColor = .systemBackground
-        topChatView.typingAreaView.messageTextView.textColor = .black
-        bottomChatView.typingAreaView.messageTextView.textColor = .black
-    }
-    
-    private func setUpDarkModeView() {
-        view.backgroundColor = Constants.Color.darkModeBackgroundColor
-        topChatView.typingAreaView.messageTextView.textColor = .white
-        bottomChatView.typingAreaView.messageTextView.textColor = .white
-    }
 }
 
 //MARK: - Switcher Delegate
 extension ChatViewController: SwitcherDelegate {
     func switcherDidTap(_ state: SwitcherState) {
-        if state == .light {
-            self.setUpLightModeView()
-        } else if state == .dark {
-            self.setUpDarkModeView()
+        switch state {
+        case .light:
+            setUpSwitcherMode()
+        case .dark:
+            setUpSwitcherMode()
+        }
+        
+        func setUpSwitcherMode() {
+            if state == .light {
+                view.backgroundColor = .systemBackground
+                topChatView.typingAreaView.messageTextView.textColor = .black
+                bottomChatView.typingAreaView.messageTextView.textColor = .black
+            } else {
+                view.backgroundColor = Constants.Color.darkModeBackgroundColor
+                topChatView.typingAreaView.messageTextView.textColor = .white
+                bottomChatView.typingAreaView.messageTextView.textColor = .white
+            }
         }
     }
 }

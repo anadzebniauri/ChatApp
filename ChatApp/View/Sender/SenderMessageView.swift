@@ -84,8 +84,8 @@ final class SenderMessageView: UIView {
     
     private func setUpCapsuleView() {
         addSubview(capsuleView)
-        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
         capsuleView.translatesAutoresizingMaskIntoConstraints = false
+//        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
@@ -97,8 +97,8 @@ final class SenderMessageView: UIView {
     
     private func setUpMediumBubble() {
         addSubview(mediumBubbleView)
-        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         mediumBubbleView.translatesAutoresizingMaskIntoConstraints = false
+//        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         mediumBubbleView.setHeight(Constants.MediumBubbleView.mediumBubbleViewHeight)
         mediumBubbleView.setWidth(Constants.MediumBubbleView.mediumBubbleViewWidth)
@@ -107,13 +107,12 @@ final class SenderMessageView: UIView {
             mediumBubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.MediumBubbleView.mediumBubbleViewBottomPadding),
             mediumBubbleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.MediumBubbleView.mediumBubbleViewRightPadding)
         ])
-        
     }
     
     private func setUpSmallBubble() {
         addSubview(smallBubbleView)
-        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         smallBubbleView.translatesAutoresizingMaskIntoConstraints = false
+//        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         smallBubbleView.setHeight(Constants.SmallBubbleView.smallBubbleViewHeight)
         smallBubbleView.setWidth(Constants.SmallBubbleView.smallBubbleViewWidth)
