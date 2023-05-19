@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol SendButtonDelegate: AnyObject {
+    func sendButtonTap()
+}
+
 class TypingAreaView: UIView {
     
+    weak var delegate: SendButtonDelegate?
+                
     //MARK: - Properties
     lazy var messageTextView: UITextView = {
         let messageTextView = UITextView()
@@ -33,14 +39,13 @@ class TypingAreaView: UIView {
         return placeholderLabel
     }()
     
-    private let sendButton: UIButton = {
+    let sendButton: UIButton = {
         let sendButton = UIButton()
         sendButton.setImage(Constants.Image.sendButton, for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         return sendButton
     }()
-    
-    
+        
     //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -96,7 +101,7 @@ class TypingAreaView: UIView {
         ])
     }
     
-    private func setUpSendButton() {
+    func setUpSendButton() {
         addSubview(sendButton)
         sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
         sendButton.setWidth(Constants.SendButton.sendButtonWidth)
@@ -107,17 +112,10 @@ class TypingAreaView: UIView {
             sendButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.SendButton.sendButtonBottomPadding)
         ])
     }
-    
-    @objc func sendButtonPressed() {
-        // Add your send button action here
-        MessageCoreData.saveMessage(text: messageTextView.text , id: 1, date: Date())
-        MessageCoreData.fetchMessages(completion: { messages in
-            print(messages)
-            for message in messages {
-                print(message.text)
-            }
-        })
-    }
+        
+    @objc private func sendButtonPressed() {
+        delegate?.sendButtonTap()
+        }
 }
 
 extension TypingAreaView: UITextViewDelegate {

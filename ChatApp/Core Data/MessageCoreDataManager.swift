@@ -9,15 +9,16 @@ import UIKit
 import CoreData
 
 class MessageCoreDataManager {
+    
     static func saveMessage(text: String, userId: Int64, date: Date) {
         let context = AppDelegate.coreDataContainer.viewContext
-        
+
         let message = Message(context: context)
-        
+
         message.userId = userId
         message.text = text
         message.date = date
-        
+
         do {
             try context.save()
             print("message \(userId) saved")
@@ -25,7 +26,7 @@ class MessageCoreDataManager {
             print("can not save")
         }
     }
-    
+        
     static func fetchMessages(completion: @escaping ([Message]) -> Void) {
         let context = AppDelegate.coreDataContainer.viewContext
         

@@ -79,8 +79,8 @@ final class RecipientMessageView: UIView {
             dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
         ])
         
-        dateLabel.setUpErrorText()
-        dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+        dateLabel.setUpDateFormatter()
+        dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
     }
     
     private func setUpCapsuleView() {

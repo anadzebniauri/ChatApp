@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C11ABAD12A14E20A00167ED0 /* SendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD02A14E20A00167ED0 /* SendButton.swift */; };
+		C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */; };
 		C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */; };
 		C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */; };
-		C1BDD1CA2A12827300AB9AE3 /* MessageCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C92A12827300AB9AE3 /* MessageCoreData.swift */; };
+		C1BDD1CA2A12827300AB9AE3 /* MessageCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */; };
+		C1BDD1D02A13840900AB9AE3 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1CF2A13840900AB9AE3 /* ChatViewModel.swift */; };
 		C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */; };
 		C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */; };
 		C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */; };
@@ -34,9 +37,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C11ABAD02A14E20A00167ED0 /* SendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButton.swift; sourceTree = "<group>"; };
+		C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCapsuleBubbleView.swift; sourceTree = "<group>"; };
 		C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatApp.xcdatamodel; sourceTree = "<group>"; };
-		C1BDD1C92A12827300AB9AE3 /* MessageCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreData.swift; sourceTree = "<group>"; };
+		C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreDataManager.swift; sourceTree = "<group>"; };
+		C1BDD1CF2A13840900AB9AE3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -77,7 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */,
-				C1BDD1C92A12827300AB9AE3 /* MessageCoreData.swift */,
+				C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */,
+				C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -153,6 +160,8 @@
 		C1D998D229F174B1009B3072 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				C1BDD1CF2A13840900AB9AE3 /* ChatViewModel.swift */,
+				C11ABAD02A14E20A00167ED0 /* SendButton.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -248,21 +257,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11ABAD12A14E20A00167ED0 /* SendButton.swift in Sources */,
 				C1CD1A352A03CFA90052BEEE /* SenderMediumBubbleView.swift in Sources */,
 				C1CD1A392A0781AD0052BEEE /* UILabel+Extension.swift in Sources */,
 				C1D998BB29F17330009B3072 /* ChatViewController.swift in Sources */,
 				C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */,
 				C1CD1A332A03CF120052BEEE /* RecipientSmallBubbleView.swift in Sources */,
+				C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */,
 				C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */,
 				C1F205C129F40D2F005C2171 /* TypingAreaView.swift in Sources */,
 				C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */,
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
-				C1BDD1CA2A12827300AB9AE3 /* MessageCoreData.swift in Sources */,
+				C1BDD1CA2A12827300AB9AE3 /* MessageCoreDataManager.swift in Sources */,
 				C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */,
 				C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */,
 				C1F205BF29F2A9B5005C2171 /* RecipientMessageView.swift in Sources */,
 				C1D998D129F17486009B3072 /* UIVIew+Extension.swift in Sources */,
 				C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */,
+				C1BDD1D02A13840900AB9AE3 /* ChatViewModel.swift in Sources */,
 				C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */,
 				C1D998B929F17330009B3072 /* SceneDelegate.swift in Sources */,
 				C1CD1A372A03CFB40052BEEE /* SenderSmallBubbleView.swift in Sources */,

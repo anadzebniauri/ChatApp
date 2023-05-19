@@ -15,7 +15,9 @@ class ChatViewController: UIViewController {
     
     private lazy var dividerView = UIView().forAutoLayout()
     private lazy var switcherView = SwitcherView().forAutoLayout()
-            
+    
+    private lazy var statusBar: UIStatusBarStyle = .darkContent
+    
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,11 @@ class ChatViewController: UIViewController {
         
         setUpTopChatView()
         setUpBottomChatView()
+    }
+    
+    //MARK: - Status Bar  Mode
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBar
     }
     
     //MARK: - KeyBoard
@@ -97,11 +104,14 @@ extension ChatViewController: SwitcherDelegate {
                 view.backgroundColor = .systemBackground
                 topChatView.typingAreaView.messageTextView.textColor = .black
                 bottomChatView.typingAreaView.messageTextView.textColor = .black
+                statusBar = .darkContent
             } else {
                 view.backgroundColor = Constants.Color.darkModeBackgroundColor
                 topChatView.typingAreaView.messageTextView.textColor = .white
                 bottomChatView.typingAreaView.messageTextView.textColor = .white
+                statusBar = .lightContent
             }
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
 }
