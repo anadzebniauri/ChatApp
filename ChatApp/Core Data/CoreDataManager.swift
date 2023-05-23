@@ -8,14 +8,12 @@
 import UIKit
 import CoreData
 
-class CoreDataManager {
-    
-
+class CoreDataManager<Entity: NSManagedObject> {
     
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "YourDataModelName")
+        let container = NSPersistentContainer(name: "ChatApp")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Failed to load persistent stores: \(error), \(error.userInfo)")
@@ -43,28 +41,27 @@ class CoreDataManager {
     
     // MARK: - CRUD operations
     
-    func createEntity<T: NSManagedObject>(entityName: String) -> T? {
+    func create(entityName: String) -> Entity? {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: viewContext) else {
             return nil
         }
-        return T(entity: entityDescription, insertInto: viewContext)
+        return Entity(entity: entityDescription, insertInto: viewContext)
     }
 
-    func fetchEntities<T: NSManagedObject>(entityName: String, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [T] {
-        let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
+    func fetch(entityName: String, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [Entity] {
+        let fetchRequest = NSFetchRequest<Entity>(entityName: entityName)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortDescriptors
-        
+
         do {
-            let entities = try viewContext.fetch(fetchRequest)
-            return entities
+            return try viewContext.fetch(fetchRequest)
         } catch {
             print("Failed to fetch entities: \(error)")
             return []
         }
     }
     
-    func deleteEntity(entity: NSManagedObject) {
+    func delete(entity: Entity) {
         viewContext.delete(entity)
         saveContext()
     }

@@ -115,7 +115,7 @@ class TypingAreaView: UIView {
         
     @objc private func sendButtonPressed() {
         delegate?.sendButtonTap()
-        }
+    }
 }
 
 extension TypingAreaView: UITextViewDelegate {

@@ -8,37 +8,23 @@
 import UIKit
 import CoreData
 
-class MessageCoreDataManager {
+class MessageCoreDataManager: CoreDataManager<MessageEntity> {
     
-    static func saveMessage(text: String, userId: Int64, date: Date) {
-        let context = AppDelegate.coreDataContainer.viewContext
+    func saveMessage(text: String, userId: Int64, date: Date) -> MessageEntity {
+        let messageEntity = MessageEntity(context: viewContext)
 
-        let message = Message(context: context)
-
-        message.userId = userId
-        message.text = text
-        message.date = date
-
-        do {
-            try context.save()
-            print("message \(userId) saved")
-        } catch {
-            print("can not save")
-        }
+        messageEntity.userId = userId
+        messageEntity.text = text
+        messageEntity.date = date
+        
+        saveContext()
+        
+        return messageEntity
     }
         
-    static func fetchMessages(completion: @escaping ([Message]) -> Void) {
-        let context = AppDelegate.coreDataContainer.viewContext
+    func fetchMessages(completion: @escaping ([MessageEntity]) -> Void) {
         
-        let request: NSFetchRequest<Message> = Message.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        
-        do {
-            let messages = try context.fetch(request)
-            completion(messages)
-        } catch {
-            print("can not fetch")
-        }
+        let result = fetch(entityName: "MessageEntity", predicate: nil, sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)])
+        completion(result)
     }
 }

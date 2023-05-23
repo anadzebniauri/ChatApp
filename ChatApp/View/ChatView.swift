@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ChatViewDelegate: AnyObject {
+    func setUp()
+    func send()
+}
+
 class ChatView: UIView {
     
     //MARK: - Properties
@@ -22,10 +27,19 @@ class ChatView: UIView {
         return tableView
     }()
     
+    weak var delegate: ChatViewDelegate?
+    
     var typingAreaView = TypingAreaView()
     
-    var messages:[Message] = []
-        
+    let messageCoreDataManager = MessageCoreDataManager()
+    
+    private var sender: User?
+    private var recipient: User?
+    private var messageCount: Int {
+        guard let sender = sender, let recipient = recipient else { return 0 }
+        return sender.messages.count + recipient.messages.count
+    }
+    
     //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -37,42 +51,20 @@ class ChatView: UIView {
     }
     
     //MARK: - Methods
+    public func setUpUsers(sender: User, recipient: User) {
+        self.sender = sender
+        self.recipient = recipient
+        sender.type = .sender
+        recipient.type = .recipient
+        tableView.reloadData()
+    }
+    
     private func setUp() {
         setUpTableView()
         setUpTypingAreaView()
-        fetchMessages()
+        delegate?.setUp()
     }
     
-    private func fetchMessages() {
-        MessageCoreDataManager.fetchMessages { [weak self] messages in
-            self?.updateMessages(messages: messages)
-        }
-    }
-
-    func updateMessages(messages: [Message]) {
-        guard !messages.isEmpty else {
-            return
-        }
-        
-        let previousCount = self.messages.count
-        self.messages.append(contentsOf: messages)
-        let newCount = self.messages.count
-        
-        DispatchQueue.main.async {
-            if previousCount == 0 {
-                self.tableView.reloadData()
-            } else {
-                let indexPaths = (previousCount..<newCount).map { IndexPath(row: $0, section: 0) }
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: indexPaths, with: .automatic)
-                self.tableView.endUpdates()
-            }
-            let lastRowIndex = newCount - 1
-            let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
-            self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-        }
-    }
-
     //MARK: - Typing Area
     private func setUpTypingAreaView() {
         addSubview(typingAreaView)
@@ -99,45 +91,69 @@ class ChatView: UIView {
     }
 }
 
+extension ChatView: ChatViewModelDelegate {
+    func updateMessages(_ messages: MessageEntity) {
+        
+        let previousCount = messageCount
+        self.sender?.messages.append(messages)
+        let newCount = messageCount
+        
+        DispatchQueue.main.async {
+            if previousCount == 0 {
+                self.tableView.reloadData()
+            } else {
+                let indexPaths = (previousCount..<newCount).map { IndexPath(row: $0, section: 0) }
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: indexPaths, with: .automatic)
+                self.tableView.endUpdates()
+            }
+            let lastRowIndex = newCount - 1
+            let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
+            self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        }
+    }
+}
+
+// MARK: - Send Button
+
+extension ChatView: SendButtonDelegate {
+
+    func sendButtonTap() {
+        guard let text = typingAreaView.messageTextView.text, !text.isEmpty else {
+            return
+        }
+        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender?.userId ?? -1 , date: Date())
+        self.updateMessages(newMessage)
+        
+        typingAreaView.messageTextView.text = ""
+        delegate?.send()
+    }
+}
+
 //MARK: - Table View Delegate, DataSource
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        messages.count
+        messageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = messages[indexPath.row]
-        if indexPath.row % 2 == 0 { // even rows are "receiverTableViewCell"
+        guard let sender = sender, let recipient = recipient else { return UITableViewCell() }
+        let messages = sender.messages + recipient.messages
+        let sortedMessages = messages.sorted(by: {$0.date?.compare($1.date ?? Date()) == .orderedDescending})
+        let message = sortedMessages[indexPath.row]
+        if message.userId == recipient.userId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell {
                 cell.setup(with: message.text ?? "")
                 return cell
             }
-        } else { // odd rows are "senderTableViewCell"
+        } else if message.userId == sender.userId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SenderTableView.cell, for: indexPath) as? SenderTableViewCell {
                 cell.setup(with: message.text ?? "")
                 return cell
             }
         }
         return UITableViewCell()
-    }
-}
-
-//MARK: - Send Button Delegate
-
-extension ChatView: SendButtonDelegate {
-    func sendButtonTap() {
-        guard let text = typingAreaView.messageTextView.text, !text.isEmpty else {
-            return
-        }
-        MessageCoreDataManager.saveMessage(text: text, userId: 1, date: Date())
-        MessageCoreDataManager.fetchMessages { [weak self] messages in
-            guard let lastMessage = messages.last else {
-                return
-            }
-            self?.updateMessages(messages: [lastMessage])
-        }
-        typingAreaView.messageTextView.text = ""
     }
 }
 

@@ -10,13 +10,15 @@ import UIKit
 class ChatViewController: UIViewController {
     
     //MARK: - Properties
-    private lazy var topChatView = ChatView().forAutoLayout()
-    private lazy var bottomChatView = ChatView().forAutoLayout()
+    private let topChatView = ChatView().forAutoLayout()
+    private let bottomChatView = ChatView().forAutoLayout()
     
-    private lazy var dividerView = UIView().forAutoLayout()
-    private lazy var switcherView = SwitcherView().forAutoLayout()
+    private let dividerView = UIView().forAutoLayout()
+    private let switcherView = SwitcherView().forAutoLayout()
     
-    private lazy var statusBar: UIStatusBarStyle = .darkContent
+    private var statusBar: UIStatusBarStyle = .darkContent
+    
+    private var viewModel: ChatViewControllerDelegate?
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -28,9 +30,19 @@ class ChatViewController: UIViewController {
         
         setUpTopChatView()
         setUpBottomChatView()
+        
+        viewModel = ChatViewControllerModel()
+        
+        viewModel?.getUsers(completion: { [weak self] users in
+            guard let self = self else { return }
+            if let firstUser = users?.0, let secondUser = users?.1 {
+                self.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
+                self.bottomChatView.setUpUsers(sender: secondUser, recipient: firstUser)
+            }
+        })
     }
     
-    //MARK: - Status Bar  Mode
+    //MARK: - Status Bar  Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBar
     }
