@@ -81,6 +81,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C12FE1E72A1E2E2A00E1A705 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
+				C1BDD1CF2A13840900AB9AE3 /* ChatViewModel.swift */,
+				C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */,
+				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
 		C1BDD1C52A12822F00AB9AE3 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +109,6 @@
 				C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */,
 				C1CD1A322A03CF120052BEEE /* RecipientSmallBubbleView.swift */,
 				C1F205BE29F2A9B5005C2171 /* RecipientMessageView.swift */,
-				C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */,
 			);
 			name = Recipient;
 			sourceTree = "<group>";
@@ -110,7 +120,6 @@
 				C1CD1A342A03CFA90052BEEE /* SenderMediumBubbleView.swift */,
 				C1CD1A362A03CFB40052BEEE /* SenderSmallBubbleView.swift */,
 				C1F205E529F7F103005C2171 /* SenderMessageView.swift */,
-				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
 			);
 			path = Sender;
 			sourceTree = "<group>";
@@ -136,12 +145,13 @@
 			children = (
 				C1BDD1C52A12822F00AB9AE3 /* Core Data */,
 				C1D998CD29F1745C009B3072 /* Extensions */,
-				C1D998D429F174C5009B3072 /* Model */,
 				C1D998D329F174BD009B3072 /* View */,
-				C1D998D229F174B1009B3072 /* View Model */,
+				C12FE1E72A1E2E2A00E1A705 /* ChatView */,
+				C1D998D229F174B1009B3072 /* ChatViewController */,
 				C1D998B629F17330009B3072 /* AppDelegate.swift */,
 				C1D998B829F17330009B3072 /* SceneDelegate.swift */,
 				C1D998C229F17333009B3072 /* Assets.xcassets */,
+				C1D998BC29F17330009B3072 /* Main.storyboard */,
 				C1D998C429F17333009B3072 /* LaunchScreen.storyboard */,
 				C1D998C729F17333009B3072 /* Info.plist */,
 			);
@@ -158,35 +168,25 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C1D998D229F174B1009B3072 /* View Model */ = {
+		C1D998D229F174B1009B3072 /* ChatViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C1BDD1CF2A13840900AB9AE3 /* ChatViewModel.swift */,
+				C1D998BA29F17330009B3072 /* ChatViewController.swift */,
 				C11ABAD82A1BA84000167ED0 /* ChatViewControllerModel.swift */,
 				C11ABADA2A1CE89E00167ED0 /* User.swift */,
 			);
-			path = "View Model";
+			path = ChatViewController;
 			sourceTree = "<group>";
 		};
 		C1D998D329F174BD009B3072 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C1D998BC29F17330009B3072 /* Main.storyboard */,
-				C1D998BA29F17330009B3072 /* ChatViewController.swift */,
-				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
 				C1D998D529F174EE009B3072 /* SwitcheView.swift */,
 				C1F205C029F40D2E005C2171 /* TypingAreaView.swift */,
 				C1CD1A1F29F95FB40052BEEE /* Recipient */,
 				C1CD1A2029F95FD70052BEEE /* Sender */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		C1D998D429F174C5009B3072 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

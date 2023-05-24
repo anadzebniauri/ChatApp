@@ -21,6 +21,7 @@ final class RecipientCapsuleBubbleView: UIView {
     override required init(frame: CGRect) {
         super.init(frame: .zero)
         backgroundColor = .clear
+        layer.cornerRadius = Constants.radius
         layer.masksToBounds = true
     }
     
@@ -28,7 +29,7 @@ final class RecipientCapsuleBubbleView: UIView {
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: radius, y: 0))
-        path.addLine(to: CGPoint(x: bounds.width - radius, y: 0)) //width radius problem?
+        path.addLine(to: CGPoint(x: bounds.width - radius, y: 0))
         path.addArc(
             withCenter: CGPoint(x: bounds.width - radius, y: radius),
             radius: radius,

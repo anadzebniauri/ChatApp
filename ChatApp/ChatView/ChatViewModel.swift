@@ -19,21 +19,11 @@ class ChatViewModel {
 }
 
 extension ChatViewModel: ChatViewDelegate {
+    func setUp() {
+        print("setUp")
+    }
+    
     func send() {
         print("sent")
     }
-    
-    func setUp() {
-//        fetchMessages()
-    }
 }
-//
-//private extension ChatViewModel {
-//    private func fetchMessages() {
-//        messageCoreDataManager.fetchMessages { [weak self] messageEntities in
-//            let messages = messageEntities.map { _ in MessageEntity() }
-//            self?.delegate?.updateMessages(messages)
-//        }
-//    }
-//}
-

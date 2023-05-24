@@ -17,10 +17,12 @@ class ChatView: UIView {
     //MARK: - Properties
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().backgroundColor = .clear
+        //view.separatorStyle = .none
+        //view.backgroundColor = .red
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(RecipientTableViewCell.self, forCellReuseIdentifier: Constants.RecipientTableView.cell)
         tableView.register(SenderTableViewCell.self, forCellReuseIdentifier: Constants.SenderTableView.cell)
@@ -93,24 +95,40 @@ class ChatView: UIView {
 
 //MARK: - Chat View Model Delegate
 extension ChatView: ChatViewModelDelegate {
+//    func updateMessages(_ messages: MessageEntity) {
+//
+//        let previousCount = messageCount
+//        self.sender?.messages.append(messages)
+//        let newCount = messageCount
+//
+//        DispatchQueue.main.async {
+//            if previousCount == 0 {
+//                self.tableView.reloadData()
+//            } else {
+//                let indexPaths = (previousCount..<newCount).map { IndexPath(row: $0, section: 0) }
+//                self.tableView.beginUpdates()
+//                self.tableView.insertRows(at: indexPaths, with: .automatic)
+//                self.tableView.endUpdates()
+//            }
+//            let lastRowIndex = newCount - 1
+//            let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
+//            self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+//        }
+//    }
     func updateMessages(_ messages: MessageEntity) {
-        
-        let previousCount = messageCount
-        self.sender?.messages.append(messages)
-        let newCount = messageCount
-        
         DispatchQueue.main.async {
-            if previousCount == 0 {
-                self.tableView.reloadData()
-            } else {
-                let indexPaths = (previousCount..<newCount).map { IndexPath(row: $0, section: 0) }
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: indexPaths, with: .automatic)
-                self.tableView.endUpdates()
+            if messages.userId == self.sender?.userId {
+                self.sender?.messages.append(messages)
+            } else if messages.userId == self.recipient?.userId {
+                self.recipient?.messages.append(messages)
             }
-            let lastRowIndex = newCount - 1
-            let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
-            self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+            self.tableView.reloadData()
+            
+            let lastRowIndex = self.messageCount - 1
+            if lastRowIndex >= 0 {
+                let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
+                self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+            }
         }
     }
 }

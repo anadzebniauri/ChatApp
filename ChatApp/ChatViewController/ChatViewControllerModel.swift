@@ -11,6 +11,7 @@ protocol ChatViewControllerDelegate: AnyObject {
     func getUsers(completion: @escaping ((User, User)?) -> Void)
 }
 class ChatViewControllerModel: ChatViewControllerDelegate {
+    
     private let messageCoreDataManager = MessageCoreDataManager()
     private let firstUser = User(userId: 0)
     private let secondUser = User(userId: 1)

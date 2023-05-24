@@ -10,8 +10,8 @@ import UIKit
 class ChatViewController: UIViewController {
     
     //MARK: - Properties
-    private let topChatView = ChatView().forAutoLayout()
-    private let bottomChatView = ChatView().forAutoLayout()
+    let topChatView = ChatView().forAutoLayout()
+    let bottomChatView = ChatView().forAutoLayout()
     
     private let dividerView = UIView().forAutoLayout()
     private let switcherView = SwitcherView().forAutoLayout()
@@ -23,16 +23,19 @@ class ChatViewController: UIViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        keyboardDismiss()
-        
         setUpSwitcherView()
         setUpDividerView()
         
         setUpTopChatView()
         setUpBottomChatView()
         
+        keyboardDismiss()
+        setUpViewModel()
+    }
+    
+    //MARK: - View Model
+    private func setUpViewModel() {
         viewModel = ChatViewControllerModel()
-        
         viewModel?.getUsers(completion: { [weak self] users in
             guard let self = self else { return }
             if let firstUser = users?.0, let secondUser = users?.1 {
@@ -67,7 +70,7 @@ class ChatViewController: UIViewController {
     
     private func setUpBottomChatView() {
         view.addSubview(bottomChatView)
-        
+
         NSLayoutConstraint.activate([
             bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
             bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.ChatView.bottomChatViewPadding),
@@ -80,13 +83,13 @@ class ChatViewController: UIViewController {
     private func setUpDividerView() {
         view.addSubview(dividerView)
         dividerView.setHeight(Constants.DividerView.dividerViewHeight)
+        dividerView.backgroundColor = Constants.Color.dividerViewYellowBackgroundColor
         
         NSLayoutConstraint.activate([
             dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor ),
             dividerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             dividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        dividerView.backgroundColor = Constants.Color.dividerViewYellowBackgroundColor
     }
     
     //MARK: - Switcher View

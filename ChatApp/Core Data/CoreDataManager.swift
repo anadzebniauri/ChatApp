@@ -5,13 +5,11 @@
 //  Created by Ana Dzebniauri on 17.05.23.
 //
 
-import UIKit
 import CoreData
 
 class CoreDataManager<Entity: NSManagedObject> {
     
     // MARK: - Core Data stack
-    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ChatApp")
         container.loadPersistentStores { _, error in
@@ -27,7 +25,6 @@ class CoreDataManager<Entity: NSManagedObject> {
     }
     
     // MARK: - Core Data operations
-    
     func saveContext() {
         if viewContext.hasChanges {
             do {
@@ -39,14 +36,12 @@ class CoreDataManager<Entity: NSManagedObject> {
         }
     }
     
-    // MARK: - CRUD operations
-    
-    func create(entityName: String) -> Entity? {
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: viewContext) else {
-            return nil
-        }
-        return Entity(entity: entityDescription, insertInto: viewContext)
-    }
+//    func create(entityName: String) -> Entity? {
+//        guard let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: viewContext) else {
+//            return nil
+//        }
+//        return Entity(entity: entityDescription, insertInto: viewContext)
+//    }
 
     func fetch(entityName: String, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [Entity] {
         let fetchRequest = NSFetchRequest<Entity>(entityName: entityName)
