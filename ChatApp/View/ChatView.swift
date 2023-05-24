@@ -30,11 +30,11 @@ class ChatView: UIView {
     weak var delegate: ChatViewDelegate?
     
     var typingAreaView = TypingAreaView()
-    
     let messageCoreDataManager = MessageCoreDataManager()
     
     private var sender: User?
     private var recipient: User?
+    
     private var messageCount: Int {
         guard let sender = sender, let recipient = recipient else { return 0 }
         return sender.messages.count + recipient.messages.count
@@ -60,9 +60,9 @@ class ChatView: UIView {
     }
     
     private func setUp() {
+        delegate?.setUp()
         setUpTableView()
         setUpTypingAreaView()
-        delegate?.setUp()
     }
     
     //MARK: - Typing Area
@@ -91,6 +91,7 @@ class ChatView: UIView {
     }
 }
 
+//MARK: - Chat View Model Delegate
 extension ChatView: ChatViewModelDelegate {
     func updateMessages(_ messages: MessageEntity) {
         
@@ -115,7 +116,6 @@ extension ChatView: ChatViewModelDelegate {
 }
 
 // MARK: - Send Button
-
 extension ChatView: SendButtonDelegate {
 
     func sendButtonTap() {
@@ -140,7 +140,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let sender = sender, let recipient = recipient else { return UITableViewCell() }
         let messages = sender.messages + recipient.messages
-        let sortedMessages = messages.sorted(by: {$0.date?.compare($1.date ?? Date()) == .orderedDescending})
+        let sortedMessages = messages.sorted(by: {$0.date?.compare($1.date ?? Date()) == .orderedAscending})
         let message = sortedMessages[indexPath.row]
         if message.userId == recipient.userId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell {

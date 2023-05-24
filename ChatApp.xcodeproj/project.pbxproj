@@ -141,7 +141,6 @@
 				C1D998D229F174B1009B3072 /* View Model */,
 				C1D998B629F17330009B3072 /* AppDelegate.swift */,
 				C1D998B829F17330009B3072 /* SceneDelegate.swift */,
-				C1D998BA29F17330009B3072 /* ChatViewController.swift */,
 				C1D998C229F17333009B3072 /* Assets.xcassets */,
 				C1D998C429F17333009B3072 /* LaunchScreen.storyboard */,
 				C1D998C729F17333009B3072 /* Info.plist */,
@@ -173,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				C1D998BC29F17330009B3072 /* Main.storyboard */,
+				C1D998BA29F17330009B3072 /* ChatViewController.swift */,
 				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
 				C1D998D529F174EE009B3072 /* SwitcheView.swift */,
 				C1F205C029F40D2E005C2171 /* TypingAreaView.swift */,
