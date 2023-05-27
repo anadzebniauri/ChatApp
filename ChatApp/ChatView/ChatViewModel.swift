@@ -17,13 +17,3 @@ class ChatViewModel {
     
     weak var delegate: ChatViewModelDelegate?
 }
-
-extension ChatViewModel: ChatViewDelegate {
-    func setUp() {
-        print("setUp")
-    }
-    
-    func send() {
-        print("sent")
-    }
-}

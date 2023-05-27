@@ -10,20 +10,21 @@ import CoreData
 class CoreDataManager<Entity: NSManagedObject> {
     
     // MARK: - Core Data stack
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "ChatApp")
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                fatalError("Failed to load persistent stores: \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
+//    lazy var persistentContainer: NSPersistentContainer = {
+//        let container = NSPersistentContainer(name: "ChatApp")
+//        container.loadPersistentStores { _, error in
+//            if let error = error as NSError? {
+//                fatalError("Failed to load persistent stores: \(error), \(error.userInfo)")
+//            }
+//        }
+//        return container
+//    }()
     
     var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
+//        return persistentContainer.viewContext
+        return AppDelegate.coreDataContainer.viewContext
     }
-    
+        
     // MARK: - Core Data operations
     func saveContext() {
         if viewContext.hasChanges {
@@ -35,13 +36,6 @@ class CoreDataManager<Entity: NSManagedObject> {
             }
         }
     }
-    
-//    func create(entityName: String) -> Entity? {
-//        guard let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: viewContext) else {
-//            return nil
-//        }
-//        return Entity(entity: entityDescription, insertInto: viewContext)
-//    }
 
     func fetch(entityName: String, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [Entity] {
         let fetchRequest = NSFetchRequest<Entity>(entityName: entityName)

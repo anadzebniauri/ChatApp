@@ -5,7 +5,6 @@
 //  Created by Ana Dzebniauri on 15.05.23.
 //
 
-import UIKit
 import CoreData
 
 class MessageCoreDataManager: CoreDataManager<MessageEntity> {

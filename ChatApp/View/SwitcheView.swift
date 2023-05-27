@@ -113,7 +113,7 @@ class SwitcherView: UIView {
         switchingItemStackView.setWidth(Constants.StackView.switchingItemStackViewWidth)
         
         switchingItemStackView.spacing = Constants.StackView.switchingItemStackViewSpacing
-        switchingItemStackView.distribution = .fillEqually
+        switchingItemStackView.distribution = .fill
         
         switchingItemStackView.translatesAutoresizingMaskIntoConstraints = false
         switchingItemStackView.isLayoutMarginsRelativeArrangement = true
@@ -171,7 +171,7 @@ private extension SwitcherView {
         enum StackView {
             static let switchingItemStackViewHeight = 27.0
             static let switchingItemStackViewWidth = 54.0
-            static let switchingItemStackViewSpacing = 4.0
+            static let switchingItemStackViewSpacing = 6.0
             static let switchingItemStackViewUIEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         }
         

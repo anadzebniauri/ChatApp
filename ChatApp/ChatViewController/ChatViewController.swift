@@ -59,6 +59,7 @@ class ChatViewController: UIViewController {
     //MARK: - Chat View Methods
     private func setUpTopChatView() {
         view.addSubview(topChatView)
+        topChatView.delegate = self
         
         NSLayoutConstraint.activate([
             topChatView.topAnchor.constraint(equalTo: switcherView.bottomAnchor),
@@ -70,6 +71,7 @@ class ChatViewController: UIViewController {
     
     private func setUpBottomChatView() {
         view.addSubview(bottomChatView)
+        bottomChatView.delegate = self
 
         NSLayoutConstraint.activate([
             bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
@@ -147,6 +149,16 @@ extension ChatViewController {
         enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
             static let darkModeBackgroundColor = UIColor(red: 22, green: 0, blue: 57, alpha: 1)
+        }
+    }
+}
+
+extension ChatViewController: ChatViewDelegate {
+    func send(message: MessageEntity, fromTop: Bool) {
+        if fromTop == true {
+            bottomChatView.receivedMessage()
+        } else {
+            topChatView.receivedMessage()
         }
     }
 }
