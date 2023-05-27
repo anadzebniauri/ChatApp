@@ -88,6 +88,7 @@ final class RecipientMessageView: UIView {
         } else {
             dateLabel.setUpErrorText()
             dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
         }
     }
     
@@ -175,6 +176,7 @@ private extension RecipientMessageView {
         
         enum Color {
             static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
+            static let messageTextNoConnectionColor = UIColor(red: 25, green: 25, blue: 25, alpha: 0.5)
             static let dateLabelTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
             static let dateLabelErrorTextRedColor = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
         }

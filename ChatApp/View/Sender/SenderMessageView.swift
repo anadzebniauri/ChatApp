@@ -10,9 +10,9 @@ import UIKit
 final class SenderMessageView: UIView {
     
     //MARK: - Properties
-    private lazy var capsuleView = SenderCapsuleBubbleView()
-    private lazy var mediumBubbleView = SenderMediumBubbleView()
-    private lazy var smallBubbleView = SenderSmallBubbleView()
+    private let capsuleView = SenderCapsuleBubbleView()
+    private let mediumBubbleView = SenderMediumBubbleView()
+    private let smallBubbleView = SenderSmallBubbleView()
     
     private lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
@@ -88,13 +88,14 @@ final class SenderMessageView: UIView {
         } else {
             dateLabel.setUpErrorText()
             dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
         }
     }
     
     private func setUpCapsuleView() {
         addSubview(capsuleView)
         capsuleView.translatesAutoresizingMaskIntoConstraints = false
-//        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
@@ -107,7 +108,7 @@ final class SenderMessageView: UIView {
     private func setUpMediumBubble() {
         addSubview(mediumBubbleView)
         mediumBubbleView.translatesAutoresizingMaskIntoConstraints = false
-//        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         mediumBubbleView.setHeight(Constants.MediumBubbleView.mediumBubbleViewHeight)
         mediumBubbleView.setWidth(Constants.MediumBubbleView.mediumBubbleViewWidth)
@@ -121,7 +122,7 @@ final class SenderMessageView: UIView {
     private func setUpSmallBubble() {
         addSubview(smallBubbleView)
         smallBubbleView.translatesAutoresizingMaskIntoConstraints = false
-//        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
+        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         smallBubbleView.setHeight(Constants.SmallBubbleView.smallBubbleViewHeight)
         smallBubbleView.setWidth(Constants.SmallBubbleView.smallBubbleViewWidth)
@@ -173,6 +174,7 @@ private extension SenderMessageView {
         
         enum Color {
             static let messageTextBlackColor = UIColor(red: 25, green: 25, blue: 25, alpha: 1)
+            static let messageTextNoConnectionColor = UIColor(red: 25, green: 25, blue: 25, alpha: 0.5)
             static let dateLabelTextGreyColor = UIColor(red: 199, green: 199, blue: 199, alpha: 1)
             static let dateLabelErrorTextRedColor = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
         }

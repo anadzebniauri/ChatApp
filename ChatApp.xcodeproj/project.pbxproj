@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C1005DC62A22948700366401 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1005DC52A22948700366401 /* Network.swift */; };
+		C1005DCC2A22B08000366401 /* RecipientTypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1005DCB2A22B08000366401 /* RecipientTypingIndicator.swift */; };
 		C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */; };
 		C11ABAD92A1BA84000167ED0 /* ChatViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD82A1BA84000167ED0 /* ChatViewControllerModel.swift */; };
 		C11ABADB2A1CE89E00167ED0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABADA2A1CE89E00167ED0 /* User.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		C1005DC52A22948700366401 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C1005DCB2A22B08000366401 /* RecipientTypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTypingIndicator.swift; sourceTree = "<group>"; };
 		C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C11ABAD82A1BA84000167ED0 /* ChatViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerModel.swift; sourceTree = "<group>"; };
 		C11ABADA2A1CE89E00167ED0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */,
 				C1CD1A322A03CF120052BEEE /* RecipientSmallBubbleView.swift */,
 				C1F205BE29F2A9B5005C2171 /* RecipientMessageView.swift */,
+				C1005DCB2A22B08000366401 /* RecipientTypingIndicator.swift */,
 			);
 			name = Recipient;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				C1BDD1C52A12822F00AB9AE3 /* Core Data */,
+				C1005DC42A22946B00366401 /* Network */,
 				C1D998CD29F1745C009B3072 /* Extensions */,
 				C1D998D329F174BD009B3072 /* View */,
 				C12FE1E72A1E2E2A00E1A705 /* ChatView */,
@@ -174,7 +178,6 @@
 				C1D998CE29F17470009B3072 /* UIColor+Extension.swift */,
 				C1D998D029F17486009B3072 /* UIVIew+Extension.swift */,
 				C1CD1A382A0781AD0052BEEE /* UILabel+Extension.swift */,
-				C1005DC42A22946B00366401 /* Network */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				C1CD1A332A03CF120052BEEE /* RecipientSmallBubbleView.swift in Sources */,
 				C11ABAD92A1BA84000167ED0 /* ChatViewControllerModel.swift in Sources */,
 				C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */,
+				C1005DCC2A22B08000366401 /* RecipientTypingIndicator.swift in Sources */,
 				C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */,
 				C1F205C129F40D2F005C2171 /* TypingAreaView.swift in Sources */,
 				C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */,

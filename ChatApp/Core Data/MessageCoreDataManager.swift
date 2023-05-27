@@ -11,7 +11,7 @@ class MessageCoreDataManager: CoreDataManager<MessageEntity> {
     
     func saveMessage(text: String, userId: Int64, date: Date) -> MessageEntity {
         let messageEntity = MessageEntity(context: viewContext)
-
+        
         messageEntity.userId = userId
         messageEntity.text = text
         messageEntity.date = date
@@ -19,7 +19,7 @@ class MessageCoreDataManager: CoreDataManager<MessageEntity> {
         saveContext()
         return messageEntity
     }
-        
+    
     func fetchMessages(completion: @escaping ([MessageEntity]) -> Void) {
         let result = fetch(entityName: "MessageEntity", predicate: nil, sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)])
         completion(result)

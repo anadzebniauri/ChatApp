@@ -87,16 +87,6 @@ class ChatView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
-    
-    func receivedMessage() {
-        DispatchQueue.main.async {
-            let indexPath = IndexPath(row: self.messageCount - 1, section: 0)
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: [indexPath], with: .automatic)
-            self.tableView.endUpdates()
-            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        }
-    }
 }
 
 //MARK: - Chat View Model Delegate
@@ -119,6 +109,16 @@ extension ChatView: ChatViewModelDelegate {
             let lastRowIndex = newCount - 1
             let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
             self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        }
+    }
+    
+    func receivedMessage() {
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: self.messageCount - 1, section: 0)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
 }

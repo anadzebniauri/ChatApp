@@ -14,7 +14,7 @@ protocol SendButtonDelegate: AnyObject {
 class TypingAreaView: UIView {
     
     weak var delegate: SendButtonDelegate?
-                
+    
     //MARK: - Properties
     lazy var messageTextView: UITextView = {
         let messageTextView = UITextView()
@@ -45,7 +45,7 @@ class TypingAreaView: UIView {
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         return sendButton
     }()
-        
+    
     //MARK: - Init
     override required init(frame: CGRect) {
         super.init(frame: .zero)
@@ -112,7 +112,7 @@ class TypingAreaView: UIView {
             sendButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.SendButton.sendButtonBottomPadding)
         ])
     }
-        
+    
     @objc private func sendButtonPressed() {
         delegate?.sendButtonTap()
     }

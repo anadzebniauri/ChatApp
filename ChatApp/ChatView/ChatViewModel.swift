@@ -10,9 +10,9 @@ import CoreData
 
 protocol ChatViewModelDelegate: AnyObject {
     func updateMessages(_ messages: MessageEntity)
+    func receivedMessage()
 }
 
 class ChatViewModel {
-    private let messageCoreDataManager = MessageCoreDataManager()
     weak var delegate: ChatViewModelDelegate?
 }

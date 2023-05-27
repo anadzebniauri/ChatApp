@@ -53,7 +53,7 @@ class ChatViewController: UIViewController {
     //MARK: - KeyBoard
     private func keyboardDismiss() {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-         view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(tapGesture)
     }
     
     //MARK: - Chat View Methods
@@ -72,7 +72,7 @@ class ChatViewController: UIViewController {
     private func setUpBottomChatView() {
         view.addSubview(bottomChatView)
         bottomChatView.delegate = self
-
+        
         NSLayoutConstraint.activate([
             bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
             bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.ChatView.bottomChatViewPadding),

@@ -11,6 +11,7 @@ class RecipientTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     private var recipientBubble = RecipientMessageView().forAutoLayout()
+    private var recipientTypingIndicator = RecipientTypingIndicator().forAutoLayout()
     
     //MARK: - Methods
     private func setUpRecipientBubbleCell() {
