@@ -14,6 +14,5 @@ protocol ChatViewModelDelegate: AnyObject {
 
 class ChatViewModel {
     private let messageCoreDataManager = MessageCoreDataManager()
-    
     weak var delegate: ChatViewModelDelegate?
 }

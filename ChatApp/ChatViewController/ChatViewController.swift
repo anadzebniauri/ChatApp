@@ -133,6 +133,17 @@ extension ChatViewController: SwitcherDelegate {
     }
 }
 
+//MARK: - Send Delegate
+extension ChatViewController: ChatViewDelegate {
+    func send(message: MessageEntity, fromTop: Bool) {
+        if fromTop == true {
+            bottomChatView.receivedMessage()
+        } else {
+            topChatView.receivedMessage()
+        }
+    }
+}
+
 //MARK: - Constants
 extension ChatViewController {
     enum Constants {
@@ -149,16 +160,6 @@ extension ChatViewController {
         enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)
             static let darkModeBackgroundColor = UIColor(red: 22, green: 0, blue: 57, alpha: 1)
-        }
-    }
-}
-
-extension ChatViewController: ChatViewDelegate {
-    func send(message: MessageEntity, fromTop: Bool) {
-        if fromTop == true {
-            bottomChatView.receivedMessage()
-        } else {
-            topChatView.receivedMessage()
         }
     }
 }

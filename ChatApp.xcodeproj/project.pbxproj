@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1005DC62A22948700366401 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1005DC52A22948700366401 /* Network.swift */; };
 		C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */; };
 		C11ABAD92A1BA84000167ED0 /* ChatViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD82A1BA84000167ED0 /* ChatViewControllerModel.swift */; };
 		C11ABADB2A1CE89E00167ED0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABADA2A1CE89E00167ED0 /* User.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C1005DC52A22948700366401 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C11ABAD82A1BA84000167ED0 /* ChatViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerModel.swift; sourceTree = "<group>"; };
 		C11ABADA2A1CE89E00167ED0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C1005DC42A22946B00366401 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C1005DC52A22948700366401 /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		C12FE1E72A1E2E2A00E1A705 /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +174,7 @@
 				C1D998CE29F17470009B3072 /* UIColor+Extension.swift */,
 				C1D998D029F17486009B3072 /* UIVIew+Extension.swift */,
 				C1CD1A382A0781AD0052BEEE /* UILabel+Extension.swift */,
+				C1005DC42A22946B00366401 /* Network */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,6 +283,7 @@
 				C1F205C129F40D2F005C2171 /* TypingAreaView.swift in Sources */,
 				C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */,
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
+				C1005DC62A22948700366401 /* Network.swift in Sources */,
 				C1BDD1CA2A12827300AB9AE3 /* MessageCoreDataManager.swift in Sources */,
 				C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */,
 				C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */,

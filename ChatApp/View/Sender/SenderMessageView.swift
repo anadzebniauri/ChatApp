@@ -38,6 +38,7 @@ final class SenderMessageView: UIView {
         setUpView()
         setUpMessageLabel()
         setUpDateLabel()
+        checkNetworkConnection()
         setUpCapsuleView()
         setUpMediumBubble()
         setUpSmallBubble()
@@ -78,8 +79,16 @@ final class SenderMessageView: UIView {
             dateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor)
         ])
         
-        dateLabel.setUpDateFormatter()
-        dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
+    }
+    
+    private func checkNetworkConnection() {
+        if Network.shared.isConnected {
+            dateLabel.setUpDateFormatter()
+            dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
+        } else {
+            dateLabel.setUpErrorText()
+            dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+        }
     }
     
     private func setUpCapsuleView() {

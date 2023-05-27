@@ -17,6 +17,7 @@ class ChatView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false

@@ -9,19 +9,7 @@ import CoreData
 
 class CoreDataManager<Entity: NSManagedObject> {
     
-    // MARK: - Core Data stack
-//    lazy var persistentContainer: NSPersistentContainer = {
-//        let container = NSPersistentContainer(name: "ChatApp")
-//        container.loadPersistentStores { _, error in
-//            if let error = error as NSError? {
-//                fatalError("Failed to load persistent stores: \(error), \(error.userInfo)")
-//            }
-//        }
-//        return container
-//    }()
-    
     var viewContext: NSManagedObjectContext {
-//        return persistentContainer.viewContext
         return AppDelegate.coreDataContainer.viewContext
     }
         
