@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension UILabel {
     func setUpDateFormatter() {

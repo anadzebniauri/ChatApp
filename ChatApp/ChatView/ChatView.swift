@@ -151,7 +151,15 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
         let message = sortedMessages[indexPath.row]
         if message.userId == recipient.userId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell {
-                cell.setup(with: message.text ?? "")
+                
+                if !typingAreaView.messageTextView.text.isEmpty {
+                    cell.setup(with: "", isTyping: true)
+                }
+                else {
+                    cell.setup(with: message.text ?? "", isTyping: false)
+                }
+                
+//                cell.setup(with: message.text ?? "")
                 return cell
             }
         } else if message.userId == sender.userId {

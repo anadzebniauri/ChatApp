@@ -18,6 +18,10 @@ class RecipientTypingIndicator: UIView {
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUpCapsuleView()
+        setUpMediumBubble()
+        setUpSmallBubble()
+        setUpTypingIndicator()
     }
     
     required init?(coder: NSCoder) {
