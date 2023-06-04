@@ -17,11 +17,11 @@ class SwitcherView: UIView {
     private var switcherState: SwitcherState = .dark
     
     //MARK: - properties
-    var lightModeItemBackgroundView = UIImageView()
-    var lightModeItemView = UIImageView()
-    var darkModeItemBackgroundView = UIImageView()
-    var darkModeItemView = UIImageView()
-    var switchingItemStackView = UIStackView()
+    private let lightModeItemBackgroundView = UIImageView()
+    private let lightModeItemView = UIImageView()
+    private let darkModeItemBackgroundView = UIImageView()
+    private let darkModeItemView = UIImageView()
+    private let switchingItemStackView = UIStackView()
     
     //MARK: - Init
     required init?(coder: NSCoder) {
@@ -50,7 +50,7 @@ class SwitcherView: UIView {
     
     //MARK: - Light Mode
     private func setUpLightModeItemBackgroundView() {
-        lightModeItemBackgroundView.addSubview(lightModeItemView)
+        lightModeItemBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         lightModeItemBackgroundView.image = Constants.Image.circleImage
         lightModeItemBackgroundView.tintColor = Constants.Color.switcherBackgroundItemViewColor
@@ -64,6 +64,7 @@ class SwitcherView: UIView {
     }
     
     private func setUpLightModeItemView() {
+        lightModeItemBackgroundView.addSubview(lightModeItemView)
         lightModeItemView.image = Constants.Image.sunImage
         lightModeItemView.tintColor = .white
         
@@ -77,7 +78,7 @@ class SwitcherView: UIView {
     
     //MARK: - Dark Mode
     private func setUpDarkModeItemBackgroundView() {
-        darkModeItemBackgroundView.addSubview(darkModeItemView)
+        darkModeItemBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         darkModeItemBackgroundView.image = Constants.Image.circleImage
         darkModeItemBackgroundView.tintColor = .clear
@@ -91,6 +92,7 @@ class SwitcherView: UIView {
     }
     
     private func setUpDarkModeItemView() {
+        darkModeItemBackgroundView.addSubview(darkModeItemView)
         darkModeItemView.image = Constants.Image.moonImage
         darkModeItemView.tintColor = Constants.Color.switcherItemViewColor
         
@@ -108,14 +110,15 @@ class SwitcherView: UIView {
         switchingItemStackView.stretchOnParent()
         switchingItemStackView.addArrangedSubview(lightModeItemBackgroundView)
         switchingItemStackView.addArrangedSubview(darkModeItemBackgroundView)
+        switchingItemStackView.translatesAutoresizingMaskIntoConstraints = false
         
         switchingItemStackView.setHeight(Constants.StackView.switchingItemStackViewHeight)
         switchingItemStackView.setWidth(Constants.StackView.switchingItemStackViewWidth)
         
         switchingItemStackView.spacing = Constants.StackView.switchingItemStackViewSpacing
-        switchingItemStackView.distribution = .fill
+        switchingItemStackView.distribution = .fillEqually
+        switchingItemStackView.axis = .horizontal
         
-        switchingItemStackView.translatesAutoresizingMaskIntoConstraints = false
         switchingItemStackView.isLayoutMarginsRelativeArrangement = true
         switchingItemStackView.layoutMargins = Constants.StackView.switchingItemStackViewUIEdgeInsets
     }
@@ -171,7 +174,7 @@ private extension SwitcherView {
         enum StackView {
             static let switchingItemStackViewHeight = 27.0
             static let switchingItemStackViewWidth = 54.0
-            static let switchingItemStackViewSpacing = 6.0
+            static let switchingItemStackViewSpacing = 3.0
             static let switchingItemStackViewUIEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         }
         

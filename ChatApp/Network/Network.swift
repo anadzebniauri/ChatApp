@@ -31,7 +31,7 @@ final class Network {
         monitor = NWPathMonitor()
     }
     
-    public func startMonitoring() {
+    func startMonitoring() {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
             self?.isConnected = path.status != .unsatisfied
@@ -39,7 +39,7 @@ final class Network {
         }
     }
     
-    public func stopMonitoring() {
+    func stopMonitoring() {
         monitor.cancel()
     }
     

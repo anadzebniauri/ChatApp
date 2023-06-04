@@ -9,7 +9,7 @@ import CoreData
 
 class MessageCoreDataManager: CoreDataManager<MessageEntity> {
     
-    func saveMessage(text: String, userId: Int64, date: Date) -> MessageEntity {
+    func saveMessage(text: String, userId: Int16, date: Date) -> MessageEntity {
         let messageEntity = MessageEntity(context: viewContext)
         
         messageEntity.userId = userId

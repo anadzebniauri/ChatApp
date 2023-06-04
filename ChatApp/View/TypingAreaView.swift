@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SendButtonDelegate: AnyObject {
-    func sendButtonTap()
+    func sendButtonTap(with text: String)
 }
 
 class TypingAreaView: UIView {
@@ -16,7 +16,7 @@ class TypingAreaView: UIView {
     weak var delegate: SendButtonDelegate?
     
     //MARK: - Properties
-    lazy var messageTextView: UITextView = {
+     private lazy var messageTextView: UITextView = {
         let messageTextView = UITextView()
         messageTextView.font = Constants.textFont
         messageTextView.textAlignment = .left
@@ -39,7 +39,7 @@ class TypingAreaView: UIView {
         return placeholderLabel
     }()
     
-    let sendButton: UIButton = {
+    private let sendButton: UIButton = {
         let sendButton = UIButton()
         sendButton.setImage(Constants.Image.sendButton, for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +114,8 @@ class TypingAreaView: UIView {
     }
     
     @objc private func sendButtonPressed() {
-        delegate?.sendButtonTap()
+        delegate?.sendButtonTap(with: messageTextView.text)
+        messageTextView.text = ""
     }
 }
 

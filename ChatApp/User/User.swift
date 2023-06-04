@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum UserType: Int64 {
+enum UserType: Int16 {
     case sender, recipient, none
 }
 
 class User {
     var type: UserType
     var messages: [MessageEntity]  = []
-    var userId: Int64
+    var userId: Int16
     
-    init (type: UserType = .none, userId: Int64) {
+    init (type: UserType = .none, userId: Int16) {
         self.type = type
         self.userId = userId
     }

@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol ChatViewControllerDelegate: AnyObject {
-    func getUsers(completion: @escaping ((User, User)?) -> Void)
-}
-class ChatViewControllerModel: ChatViewControllerDelegate {
+class UserModel {
     
     private let messageCoreDataManager = MessageCoreDataManager()
     private let firstUser = User(userId: 0)

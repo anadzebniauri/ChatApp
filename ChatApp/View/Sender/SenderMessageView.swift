@@ -25,7 +25,7 @@ final class SenderMessageView: UIView {
         return messageLabel
     }()
     
-    private lazy var dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = Constants.Font.dateLabelText
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ final class SenderMessageView: UIView {
         setUpView()
         setUpMessageLabel()
         setUpDateLabel()
-        checkNetworkConnection()
+//        checkNetworkConnection()
         setUpCapsuleView()
         setUpMediumBubble()
         setUpSmallBubble()
@@ -81,21 +81,20 @@ final class SenderMessageView: UIView {
         
     }
     
-    private func checkNetworkConnection() {
-        if Network.shared.isConnected {
-            dateLabel.setUpDateFormatter()
-            dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
-        } else {
-            dateLabel.setUpErrorText()
-            dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
-            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
-        }
-    }
+//    private func checkNetworkConnection() {
+//        if Network.shared.isConnected {
+//            dateLabel.setUpDateFormatter()
+//            dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
+//        } else {
+//            dateLabel.setUpErrorText()
+//            dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+//            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
+//        }
+//    }
     
     private func setUpCapsuleView() {
         addSubview(capsuleView)
         capsuleView.translatesAutoresizingMaskIntoConstraints = false
-        capsuleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         NSLayoutConstraint.activate([
             capsuleView.topAnchor.constraint(equalTo: topAnchor),
@@ -108,7 +107,6 @@ final class SenderMessageView: UIView {
     private func setUpMediumBubble() {
         addSubview(mediumBubbleView)
         mediumBubbleView.translatesAutoresizingMaskIntoConstraints = false
-        mediumBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         mediumBubbleView.setHeight(Constants.MediumBubbleView.mediumBubbleViewHeight)
         mediumBubbleView.setWidth(Constants.MediumBubbleView.mediumBubbleViewWidth)
@@ -122,7 +120,6 @@ final class SenderMessageView: UIView {
     private func setUpSmallBubble() {
         addSubview(smallBubbleView)
         smallBubbleView.translatesAutoresizingMaskIntoConstraints = false
-        smallBubbleView.layer.cornerRadius = Constants.bubbleCornerRadius
         
         smallBubbleView.setHeight(Constants.SmallBubbleView.smallBubbleViewHeight)
         smallBubbleView.setWidth(Constants.SmallBubbleView.smallBubbleViewWidth)

@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+protocol ChatAppViewDelegate: AnyObject {
+    func send(fromTop: Bool)
+}
+
+class ChatAppViewController: UIViewController {
     
     //MARK: - Properties
     let topChatView = ChatView().forAutoLayout()
@@ -17,9 +21,7 @@ class ChatViewController: UIViewController {
     private let switcherView = SwitcherView().forAutoLayout()
     
     private var statusBar: UIStatusBarStyle = .darkContent
-    
-    private var viewModel: ChatViewControllerDelegate?
-    
+        
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +37,8 @@ class ChatViewController: UIViewController {
     
     //MARK: - View Model
     private func setUpViewModel() {
-        viewModel = ChatViewControllerModel()
-        viewModel?.getUsers(completion: { [weak self] users in
+        let userModel = UserModel()
+        userModel.getUsers(completion: { [weak self] users in
             guard let self = self else { return }
             if let firstUser = users?.0, let secondUser = users?.1 {
                 self.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
@@ -107,7 +109,8 @@ class ChatViewController: UIViewController {
 }
 
 //MARK: - Switcher Delegate
-extension ChatViewController: SwitcherDelegate {
+extension ChatAppViewController: SwitcherDelegate {
+    
     func switcherDidTap(_ state: SwitcherState) {
         switch state {
         case .light:
@@ -119,13 +122,11 @@ extension ChatViewController: SwitcherDelegate {
         func setUpSwitcherMode() {
             if state == .light {
                 view.backgroundColor = .systemBackground
-                topChatView.typingAreaView.messageTextView.textColor = .black
-                bottomChatView.typingAreaView.messageTextView.textColor = .black
                 statusBar = .darkContent
             } else {
                 view.backgroundColor = Constants.Color.darkModeBackgroundColor
-                topChatView.typingAreaView.messageTextView.textColor = .white
-                bottomChatView.typingAreaView.messageTextView.textColor = .white
+//                topChatView.typingAreaView.messageTextView.textColor = .white
+//                bottomChatView.typingAreaView.messageTextView.textColor = .white
                 statusBar = .lightContent
             }
             self.setNeedsStatusBarAppearanceUpdate()
@@ -134,9 +135,9 @@ extension ChatViewController: SwitcherDelegate {
 }
 
 //MARK: - Send Delegate
-extension ChatViewController: ChatViewDelegate {
-    func send(message: MessageEntity, fromTop: Bool) {
-        if fromTop == true {
+extension ChatAppViewController: ChatAppViewDelegate {
+    func send(fromTop: Bool) {
+        if fromTop {
             bottomChatView.receivedMessage()
         } else {
             topChatView.receivedMessage()
@@ -145,7 +146,7 @@ extension ChatViewController: ChatViewDelegate {
 }
 
 //MARK: - Constants
-extension ChatViewController {
+extension ChatAppViewController {
     enum Constants {
         enum ChatView {
             static let bottomChatViewPadding = -30.0
