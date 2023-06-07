@@ -26,9 +26,10 @@ final class SenderTableViewCell: UITableViewCell {
         ])
     }
     
-    func setup(with text: String) {
-        senderBubble.setTextToBubble(text)
+    func setup(with text: String, isConnected: Bool) {
         setUpSenderBubbleCell()
+        senderBubble.setTextToBubble(text)
+        senderBubble.setDate(with: Date(), isConnected: isConnected)
     }
 }
 

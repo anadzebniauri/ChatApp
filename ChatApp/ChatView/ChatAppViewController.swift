@@ -21,7 +21,8 @@ class ChatAppViewController: UIViewController {
     private let switcherView = SwitcherView().forAutoLayout()
     
     private var statusBar: UIStatusBarStyle = .darkContent
-        
+
+    
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,11 +101,14 @@ class ChatAppViewController: UIViewController {
     private func setUpSwitcherView() {
         view.addSubview(switcherView)
         switcherView.delegate = self
-        
+
         NSLayoutConstraint.activate([
             switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.SwitcherView.switcherTopAnchor),
             switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
         ])
+        
+        let darkModeEnabled = UserDefaults.standard.bool(forKey: "DarkModeEnabled")
+        setUpSwitcherMode(darkModeEnabled)
     }
 }
 
@@ -114,23 +118,25 @@ extension ChatAppViewController: SwitcherDelegate {
     func switcherDidTap(_ state: SwitcherState) {
         switch state {
         case .light:
-            setUpSwitcherMode()
+            setUpSwitcherMode(false)
+            UserDefaults.standard.set(false, forKey: "DarkModeEnabled")
         case .dark:
-            setUpSwitcherMode()
+            setUpSwitcherMode(true)
+            UserDefaults.standard.set(true, forKey: "DarkModeEnabled")
         }
-        
-        func setUpSwitcherMode() {
-            if state == .light {
-                view.backgroundColor = .systemBackground
-                statusBar = .darkContent
-            } else {
-                view.backgroundColor = Constants.Color.darkModeBackgroundColor
-//                topChatView.typingAreaView.messageTextView.textColor = .white
-//                bottomChatView.typingAreaView.messageTextView.textColor = .white
-                statusBar = .lightContent
-            }
-            self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    func setUpSwitcherMode(_ isDarkMode: Bool) {
+        if isDarkMode {
+            view.backgroundColor = Constants.Color.darkModeBackgroundColor
+            statusBar = .lightContent
+            switcherView.setUpSwitcherDarkModeColors()
+        } else {
+            view.backgroundColor = .systemBackground
+            statusBar = .darkContent
+            switcherView.setUpSwitcherLightModeColors()
         }
+        setNeedsStatusBarAppearanceUpdate()
     }
 }
 

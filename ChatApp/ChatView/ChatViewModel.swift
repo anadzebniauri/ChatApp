@@ -37,13 +37,16 @@ class ChatViewModel {
     }
     
     func setUpMessages(with text: String) {
-        guard Network.shared.isConnected else {
-            // TODO: handle error
+        guard Network.shared.isConnected, let sender else {
             return
         }
-        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender?.userId ?? -1 , date: Date())
+        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId, date: Date())
         updateMessages(newMessage)
-        delegate?.send(fromTop: sender?.userId == 0)
+        delegate?.send(fromTop: sender.userId == 0)
+    }
+    
+    func isConnected() -> Bool {
+        Network.shared.isConnected
     }
     
     func updateMessages(_ messages: MessageEntity) {

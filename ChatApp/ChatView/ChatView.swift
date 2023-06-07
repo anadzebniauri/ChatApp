@@ -108,7 +108,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             }
         } else if message.userId == chatViewModel.senderId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SenderTableView.cell, for: indexPath) as? SenderTableViewCell {
-                cell.setup(with: message.text ?? "")
+                cell.setup(with: message.text ?? "", isConnected: chatViewModel.isConnected())
                 return cell
             }
         }

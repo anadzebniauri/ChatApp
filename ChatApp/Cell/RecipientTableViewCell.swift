@@ -28,6 +28,7 @@ class RecipientTableViewCell: UITableViewCell {
     
     func setup(with text: String) {
         recipientBubble.setTextToBubble(text)
+        recipientBubble.setDate(with: Date())
         setUpRecipientBubbleCell()
     }
 

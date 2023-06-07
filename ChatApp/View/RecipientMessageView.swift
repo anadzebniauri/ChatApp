@@ -39,7 +39,6 @@ final class RecipientMessageView: UIView {
         setUpView()
         setUpMessageLabel()
         setUpDateLabel()
-//        checkNetworkConnection()
         setUpCapsuleView()
         setUpMediumBubble()
         setUpSmallBubble()
@@ -52,6 +51,10 @@ final class RecipientMessageView: UIView {
     //MARK: - Internal Method
     func setTextToBubble(_ text: String) {
         messageLabel.text = text
+    }
+    
+    func setDate(with date: Date) {
+        dateLabel.setUpDateFormatter()
     }
     
     //MARK: - Methods

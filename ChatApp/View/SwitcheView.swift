@@ -14,7 +14,15 @@ protocol SwitcherDelegate: AnyObject {
 class SwitcherView: UIView {
     
     weak var delegate: SwitcherDelegate?
-    private var switcherState: SwitcherState = .dark
+    var switcherState: SwitcherState = .light {
+        didSet {
+            if switcherState == .light {
+                setUpSwitcherLightModeColors()
+            } else {
+                setUpSwitcherDarkModeColors()
+            }
+        }
+    }
     
     //MARK: - properties
     private let lightModeItemBackgroundView = UIImageView()
@@ -123,7 +131,7 @@ class SwitcherView: UIView {
         switchingItemStackView.layoutMargins = Constants.StackView.switchingItemStackViewUIEdgeInsets
     }
     
-    private func setUpSwitcherLightModeColors() {
+    func setUpSwitcherLightModeColors() {
         backgroundColor = Constants.Color.switcherLightModeBackgroundColor
         lightModeItemBackgroundView.tintColor = Constants.Color.switcherBackgroundItemViewColor
         lightModeItemView.tintColor = .white
@@ -131,7 +139,7 @@ class SwitcherView: UIView {
         darkModeItemView.tintColor = Constants.Color.switcherItemViewColor
     }
     
-    private func setUpSwitcherDarkModeColors() {
+    func setUpSwitcherDarkModeColors() {
         backgroundColor = Constants.Color.darkModeBackgroundColor
         lightModeItemBackgroundView.tintColor = .clear
         lightModeItemView.tintColor = Constants.Color.switcherItemViewColor

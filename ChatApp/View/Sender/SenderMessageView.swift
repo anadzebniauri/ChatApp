@@ -25,7 +25,7 @@ final class SenderMessageView: UIView {
         return messageLabel
     }()
     
-    lazy var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = Constants.Font.dateLabelText
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,6 @@ final class SenderMessageView: UIView {
         setUpView()
         setUpMessageLabel()
         setUpDateLabel()
-//        checkNetworkConnection()
         setUpCapsuleView()
         setUpMediumBubble()
         setUpSmallBubble()
@@ -58,14 +57,30 @@ final class SenderMessageView: UIView {
         clipsToBounds = true
     }
     
+    func setDate(with date: Date, isConnected: Bool) {
+        isConnected ? dateLabel.setUpDateFormatter() : dateLabel.setUpErrorText()
+    }
+    
     private func setUpMessageLabel() {
         capsuleView.addSubview(messageLabel)
         
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: capsuleView.topAnchor, constant: Constants.MessageLabel.messageLabelHeightPadding),
-            messageLabel.bottomAnchor.constraint(equalTo: capsuleView.bottomAnchor, constant: -Constants.MessageLabel.messageLabelHeightPadding),
-            messageLabel.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor, constant: -Constants.MessageLabel.messageLabelWidthPadding),
-            messageLabel.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: Constants.MessageLabel.messageLabelWidthPadding)
+            messageLabel.topAnchor.constraint(
+                equalTo: capsuleView.topAnchor,
+                constant: Constants.MessageLabel.messageLabelHeightPadding
+            ),
+            messageLabel.bottomAnchor.constraint(
+                equalTo: capsuleView.bottomAnchor,
+                constant: -Constants.MessageLabel.messageLabelHeightPadding
+            ),
+            messageLabel.trailingAnchor.constraint(
+                equalTo: capsuleView.trailingAnchor,
+                constant: -Constants.MessageLabel.messageLabelWidthPadding
+            ),
+            messageLabel.leadingAnchor.constraint(
+                equalTo: capsuleView.leadingAnchor,
+                constant: Constants.MessageLabel.messageLabelWidthPadding
+            )
         ])
     }
     
