@@ -49,14 +49,12 @@ final class RecipientMessageView: UIView {
     }
     
     //MARK: - Internal Method
-    func setTextToBubble(_ text: String) {
-        messageLabel.text = text
+    func setTextToBubble(with message: MessageEntity) {
+        messageLabel.text = message.text
+        dateLabel.text = message.date
+        dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
     }
-    
-    func setDate(with date: Date) {
-        dateLabel.setUpDateFormatter()
-    }
-    
+
     //MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
@@ -83,18 +81,7 @@ final class RecipientMessageView: UIView {
             dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
         ])
     }
-    //viewmodel
-//    private func checkNetworkConnection() {
-//        if Network.shared.isConnected {
-//            dateLabel.setUpDateFormatter()
-//            dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
-//        } else {
-//            dateLabel.setUpErrorText()
-//            dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
-//            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
-//        }
-//    }
-    
+
     private func setUpCapsuleView() {
         addSubview(capsuleView)
         capsuleView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,6 +154,7 @@ private extension RecipientMessageView {
         enum DateLabel {
             static let dateLabelHeight = 10.0
             static let dateLabelLeftPadding = 30.0
+            static let errorMessage = "არ გაიგზავნა"
         }
         
         enum Font {

@@ -12,9 +12,9 @@
 		C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */; };
 		C11ABAD92A1BA84000167ED0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD82A1BA84000167ED0 /* UserModel.swift */; };
 		C11ABADB2A1CE89E00167ED0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABADA2A1CE89E00167ED0 /* User.swift */; };
+		C13B85032A31E79600DFE250 /* ChatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C13B85012A31E79600DFE250 /* ChatApp.xcdatamodeld */; };
 		C1863B0B2A2CDFB9007D93DF /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1863B0A2A2CDFB9007D93DF /* ChatViewModel.swift */; };
 		C1BA431A29F8313400EC2694 /* SenderCapsuleBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */; };
-		C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */; };
 		C1BDD1CA2A12827300AB9AE3 /* MessageCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */; };
 		C1CD1A2829FB16350052BEEE /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */; };
 		C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */; };
@@ -45,9 +45,9 @@
 		C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C11ABAD82A1BA84000167ED0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C11ABADA2A1CE89E00167ED0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C13B85022A31E79600DFE250 /* ChatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatApp.xcdatamodel; sourceTree = "<group>"; };
 		C1863B0A2A2CDFB9007D93DF /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		C1BA431929F8313400EC2694 /* SenderCapsuleBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCapsuleBubbleView.swift; sourceTree = "<group>"; };
-		C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatApp.xcdatamodel; sourceTree = "<group>"; };
 		C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreDataManager.swift; sourceTree = "<group>"; };
 		C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
 		C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTableViewCell.swift; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		C1BDD1C52A12822F00AB9AE3 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */,
+				C13B85012A31E79600DFE250 /* ChatApp.xcdatamodeld */,
 				C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */,
 				C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */,
 			);
@@ -298,9 +298,9 @@
 				C1D998D829F174FB009B3072 /* RecipientCapsuleBubbleView.swift in Sources */,
 				C1005DC62A22948700366401 /* Network.swift in Sources */,
 				C1BDD1CA2A12827300AB9AE3 /* MessageCoreDataManager.swift in Sources */,
-				C1BDD1C82A12824900AB9AE3 /* ChatApp.xcdatamodeld in Sources */,
 				C1CD1A312A03CF040052BEEE /* RecipientMediumBubbleView.swift in Sources */,
 				C1F205BF29F2A9B5005C2171 /* RecipientMessageView.swift in Sources */,
+				C13B85032A31E79600DFE250 /* ChatApp.xcdatamodeld in Sources */,
 				C1D998D129F17486009B3072 /* UIVIew+Extension.swift in Sources */,
 				C1CD1A2C29FC3F3F0052BEEE /* RecipientTableViewCell.swift in Sources */,
 				C1D998B729F17330009B3072 /* AppDelegate.swift in Sources */,
@@ -534,12 +534,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C1BDD1C62A12824900AB9AE3 /* ChatApp.xcdatamodeld */ = {
+		C13B85012A31E79600DFE250 /* ChatApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */,
+				C13B85022A31E79600DFE250 /* ChatApp.xcdatamodel */,
 			);
-			currentVersion = C1BDD1C72A12824900AB9AE3 /* ChatApp.xcdatamodel */;
+			currentVersion = C13B85022A31E79600DFE250 /* ChatApp.xcdatamodel */;
 			path = ChatApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -38,11 +38,18 @@ class ChatViewModel {
     
     func setUpMessages(with text: String) {
         guard Network.shared.isConnected, let sender else {
-            return
+            return 
         }
-        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId, date: Date())
+        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId, date: getDate(), messageId: Int16(messageCount + 1))
         updateMessages(newMessage)
         delegate?.send(fromTop: sender.userId == 0)
+    }
+    
+    func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, h:mm"
+        let date = dateFormatter.string(from: Date())
+        return date
     }
     
     func isConnected() -> Bool {
@@ -80,7 +87,7 @@ class ChatViewModel {
     func sortedMessage(at indexPath: IndexPath) -> MessageEntity? {
         guard let sender = sender, let recipient = recipient else { return nil }
         let messages = sender.messages + recipient.messages
-        let sortedMessages = messages.sorted(by: {$0.date?.compare($1.date ?? Date()) == .orderedAscending})
+        let sortedMessages = messages.sorted(by: {$0.messageId < $1.messageId})
         let message = sortedMessages[indexPath.row]
         return message
     }

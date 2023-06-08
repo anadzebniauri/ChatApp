@@ -48,17 +48,18 @@ final class SenderMessageView: UIView {
     }
     
     //MARK: - Internal Method
-    func setTextToBubble(_ text: String) {
-        messageLabel.text = text
+    func setTextToBubble(with message: MessageEntity) {
+        messageLabel.text = message.text
+        dateLabel.text = message.date
+        dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
+        if dateLabel.text == Constant.errorMessage {
+            dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+        }
     }
     
     //MARK: - Methods
     private func setUpView() {
         clipsToBounds = true
-    }
-    
-    func setDate(with date: Date, isConnected: Bool) {
-        isConnected ? dateLabel.setUpDateFormatter() : dateLabel.setUpErrorText()
     }
     
     private func setUpMessageLabel() {
@@ -95,18 +96,7 @@ final class SenderMessageView: UIView {
         ])
         
     }
-    
-//    private func checkNetworkConnection() {
-//        if Network.shared.isConnected {
-//            dateLabel.setUpDateFormatter()
-//            dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
-//        } else {
-//            dateLabel.setUpErrorText()
-//            dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
-//            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
-//        }
-//    }
-    
+
     private func setUpCapsuleView() {
         addSubview(capsuleView)
         capsuleView.translatesAutoresizingMaskIntoConstraints = false
