@@ -107,7 +107,7 @@ class ChatAppViewController: UIViewController {
             switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
         ])
         
-        let darkModeEnabled = UserDefaults.standard.bool(forKey: "DarkModeEnabled")
+        let darkModeEnabled = UserDefaults.standard.bool(forKey: Constants.UserDefaults.key)
         setUpSwitcherMode(darkModeEnabled)
     }
 }
@@ -119,22 +119,26 @@ extension ChatAppViewController: SwitcherDelegate {
         switch state {
         case .light:
             setUpSwitcherMode(false)
-            UserDefaults.standard.set(false, forKey: "DarkModeEnabled")
+            UserDefaults.standard.set(false, forKey: Constants.UserDefaults.key)
         case .dark:
             setUpSwitcherMode(true)
-            UserDefaults.standard.set(true, forKey: "DarkModeEnabled")
+            UserDefaults.standard.set(true, forKey: Constants.UserDefaults.key)
         }
     }
     
     func setUpSwitcherMode(_ isDarkMode: Bool) {
         if isDarkMode {
-            view.backgroundColor = Constants.Color.darkModeBackgroundColor
             statusBar = .lightContent
             switcherView.setUpSwitcherDarkModeColors()
+            topChatView.messageTextViewColorConfigure(true)
+            bottomChatView.messageTextViewColorConfigure(true)
+            view.backgroundColor = Constants.Color.darkModeBackgroundColor
         } else {
-            view.backgroundColor = .systemBackground
             statusBar = .darkContent
+            view.backgroundColor = .systemBackground
             switcherView.setUpSwitcherLightModeColors()
+            topChatView.messageTextViewColorConfigure(false)
+            bottomChatView.messageTextViewColorConfigure(false)
         }
         setNeedsStatusBarAppearanceUpdate()
     }
@@ -163,6 +167,9 @@ extension ChatAppViewController {
         }
         enum DividerView {
             static let dividerViewHeight = 6.0
+        }
+        enum UserDefaults {
+            static let key = "DarkModeEnabled"
         }
         enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)

@@ -38,7 +38,7 @@ class ChatViewModel {
     
     func setUpMessages(with text: String) {
         guard Network.shared.isConnected, let sender else {
-            return 
+            return
         }
         let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId, date: getDate(), messageId: Int16(messageCount + 1))
         updateMessages(newMessage)

@@ -9,6 +9,7 @@ import UIKit
 
 protocol SendButtonDelegate: AnyObject {
     func sendButtonTap(with text: String)
+    func messageTextViewColorConfigure(_ isDarkMode: Bool)
 }
 
 class TypingAreaView: UIView {
@@ -65,6 +66,14 @@ class TypingAreaView: UIView {
     
     private func setUpView() {
         layer.cornerRadius = Constants.cornerRadius
+    }
+    
+    func messageTextViewColorConfigure(_ isDarkMode: Bool) {
+        if isDarkMode {
+            messageTextView.textColor = .white
+        } else {
+            messageTextView.textColor = .black
+        }
     }
     
     private func setUpMessageTextViewConstraints() {

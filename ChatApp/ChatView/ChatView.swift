@@ -87,6 +87,10 @@ class ChatView: UIView {
 
 // MARK: - Send Button
 extension ChatView: SendButtonDelegate {
+    func messageTextViewColorConfigure(_ isDarkMode: Bool) {
+        typingAreaView.messageTextViewColorConfigure(isDarkMode)
+    }
+    
     func sendButtonTap(with text: String) {
         chatViewModel.setUpMessages(with: text)
     }
