@@ -104,7 +104,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let message = chatViewModel.sortedMessage(at: indexPath) else { return UITableViewCell()}
+        guard let message = chatViewModel.sortedMessage(at: indexPath) else { return UITableViewCell() }
         if message.userId == chatViewModel.recipientId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell {
                 cell.setup(with: message)

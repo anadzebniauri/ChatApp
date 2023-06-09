@@ -50,9 +50,11 @@ final class SenderMessageView: UIView {
     //MARK: - Internal Method
     func setTextToBubble(with message: MessageEntity) {
         messageLabel.text = message.text
+        messageLabel.textColor = Constants.Color.messageTextBlackColor
         dateLabel.text = message.date
         dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
         if dateLabel.text == Constant.errorMessage {
+            messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
             dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
         }
     }

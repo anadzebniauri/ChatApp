@@ -91,14 +91,68 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		C12FE1E72A1E2E2A00E1A705 /* ChatView */ = {
+		C12FE1E72A1E2E2A00E1A705 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
-				C1863B0A2A2CDFB9007D93DF /* ChatViewModel.swift */,
 				C1D998BA29F17330009B3072 /* ChatAppViewController.swift */,
 			);
-			path = ChatView;
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		C13B85042A3348EB00DFE250 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C1D998B629F17330009B3072 /* AppDelegate.swift */,
+				C1D998B829F17330009B3072 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C13B85052A33492300DFE250 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C1BDD1C52A12822F00AB9AE3 /* CoreData */,
+				C1D998CD29F1745C009B3072 /* Extensions */,
+				C1005DC42A22946B00366401 /* Network */,
+				C1D998D329F174BD009B3072 /* CustomUI */,
+				C1D29AE82A334CF500BE0C99 /* ChatView */,
+				C1D998D229F174B1009B3072 /* Models */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C13B85062A3349B400DFE250 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C13B85072A3349CC00DFE250 /* Launch */,
+				C12FE1E72A1E2E2A00E1A705 /* Chat */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C13B85072A3349CC00DFE250 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				C1D998BC29F17330009B3072 /* Main.storyboard */,
+				C1D998C429F17333009B3072 /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		C13B85082A334A6700DFE250 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C1D998C229F17333009B3072 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C13B85092A334A8000DFE250 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C1D998C729F17333009B3072 /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		C1863B092A2CBD1B007D93DF /* Cell */ = {
@@ -110,14 +164,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		C1BDD1C52A12822F00AB9AE3 /* Core Data */ = {
+		C1BDD1C52A12822F00AB9AE3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				C13B85012A31E79600DFE250 /* ChatApp.xcdatamodeld */,
 				C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */,
 				C1BDD1C92A12827300AB9AE3 /* MessageCoreDataManager.swift */,
 			);
-			path = "Core Data";
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		C1CD1A1F29F95FB40052BEEE /* Recipient */ = {
@@ -143,6 +197,16 @@
 			path = Sender;
 			sourceTree = "<group>";
 		};
+		C1D29AE82A334CF500BE0C99 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
+				C1863B0A2A2CDFB9007D93DF /* ChatViewModel.swift */,
+				C1863B092A2CBD1B007D93DF /* Cell */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
 		C1D998AA29F17330009B3072 = {
 			isa = PBXGroup;
 			children = (
@@ -162,19 +226,11 @@
 		C1D998B529F17330009B3072 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				C1BDD1C52A12822F00AB9AE3 /* Core Data */,
-				C1005DC42A22946B00366401 /* Network */,
-				C1D998CD29F1745C009B3072 /* Extensions */,
-				C1D998D329F174BD009B3072 /* View */,
-				C1863B092A2CBD1B007D93DF /* Cell */,
-				C1D998D229F174B1009B3072 /* User */,
-				C12FE1E72A1E2E2A00E1A705 /* ChatView */,
-				C1D998B629F17330009B3072 /* AppDelegate.swift */,
-				C1D998B829F17330009B3072 /* SceneDelegate.swift */,
-				C1D998C229F17333009B3072 /* Assets.xcassets */,
-				C1D998BC29F17330009B3072 /* Main.storyboard */,
-				C1D998C429F17333009B3072 /* LaunchScreen.storyboard */,
-				C1D998C729F17333009B3072 /* Info.plist */,
+				C13B85042A3348EB00DFE250 /* App */,
+				C13B85052A33492300DFE250 /* Core */,
+				C13B85062A3349B400DFE250 /* Scenes */,
+				C13B85082A334A6700DFE250 /* Resources */,
+				C13B85092A334A8000DFE250 /* SupportingFiles */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -188,16 +244,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C1D998D229F174B1009B3072 /* User */ = {
+		C1D998D229F174B1009B3072 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C11ABAD82A1BA84000167ED0 /* UserModel.swift */,
 				C11ABADA2A1CE89E00167ED0 /* User.swift */,
+				C11ABAD82A1BA84000167ED0 /* UserModel.swift */,
 			);
-			path = User;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		C1D998D329F174BD009B3072 /* View */ = {
+		C1D998D329F174BD009B3072 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
 				C1D998D529F174EE009B3072 /* SwitcheView.swift */,
@@ -205,7 +261,7 @@
 				C1CD1A1F29F95FB40052BEEE /* Recipient */,
 				C1CD1A2029F95FD70052BEEE /* Sender */,
 			);
-			path = View;
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,7 +511,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U7NA35NV7T;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatApp/Info.plist;
+				INFOPLIST_FILE = ChatApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -485,7 +541,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U7NA35NV7T;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChatApp/Info.plist;
+				INFOPLIST_FILE = ChatApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
