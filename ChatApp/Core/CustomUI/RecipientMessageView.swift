@@ -51,7 +51,7 @@ final class RecipientMessageView: UIView {
     //MARK: - Internal Method
     func setTextToBubble(with message: MessageEntity) {
         messageLabel.text = message.text
-        dateLabel.text = message.date
+        dateLabel.text = message.isSent ? message.date?.stringRepresentation : Constant.errorMessage
         messageLabel.textColor = Constants.Color.messageTextBlackColor
         dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
     }

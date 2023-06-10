@@ -37,28 +37,21 @@ class ChatViewModel {
     }
     
     func networkNotConnected(with text: String) {
-        let unsendMessage = messageCoreDataManager.saveMessage(text: text, userId: sender?.userId ?? -1, date: Constant.errorMessage, messageId: Int16(messageCount + 1))
+        let unsendMessage = messageCoreDataManager.saveMessage(text: text, userId: sender?.userId ?? -1, isSent: false)
         updateMessages(unsendMessage)
         delegate?.send(fromTop: sender?.userId == 0)
     }
     
     func setUpMessages(with text: String) {
-        guard Network.shared.isConnected, let sender else {
+        guard !Network.shared.isConnected, let sender else {
             networkNotConnected(with: text)
             return
         }
-        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId, date: getDate(), messageId: Int16(messageCount + 1))
+        let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId)
         updateMessages(newMessage)
         delegate?.send(fromTop: sender.userId == 0)
     }
-    
-    func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, h:mm"
-        let date = dateFormatter.string(from: Date())
-        return date
-    }
-    
+
     func updateMessages(_ messages: MessageEntity) {
         let previousCount = messageCount
         self.sender?.messages.append(messages)
@@ -90,7 +83,7 @@ class ChatViewModel {
     func sortedMessage(at indexPath: IndexPath) -> MessageEntity? {
         guard let sender = sender, let recipient = recipient else { return nil }
         let messages = sender.messages + recipient.messages
-        let sortedMessages = messages.sorted(by: {$0.messageId < $1.messageId})
+        let sortedMessages = messages.sorted(by: {$0.date?.compare($1.date ?? Date()) == .orderedAscending})
         let message = sortedMessages[indexPath.row]
         return message
     }

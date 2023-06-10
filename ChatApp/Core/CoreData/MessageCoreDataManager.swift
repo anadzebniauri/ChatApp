@@ -10,20 +10,20 @@ import Network
 
 class MessageCoreDataManager: CoreDataManager<MessageEntity> {
 
-    func saveMessage(text: String, userId: Int16, date: String, messageId: Int16) -> MessageEntity {
+    func saveMessage(text: String, userId: Int16, date: Date = Date(), isSent: Bool = true ) -> MessageEntity {
         let messageEntity = MessageEntity(context: viewContext)
 
-        if Network.shared.isConnected {
-            messageEntity.setValue(date, forKey: #keyPath(MessageEntity.date))
-        }
-        else {
-            messageEntity.setValue(Constant.errorMessage, forKey: #keyPath(MessageEntity.date))
-        }
+//        if isSent {
+//            messageEntity.setValue(date, forKey: #keyPath(MessageEntity.date))
+//        }
+//        else {
+//            messageEntity.setValue(date, forKey: #keyPath(MessageEntity.date))
+//        }
 
         messageEntity.userId = userId
         messageEntity.text = text
         messageEntity.date = date
-        messageEntity.messageId = messageId
+        messageEntity.isSent = isSent
 
         saveContext()
         return messageEntity
