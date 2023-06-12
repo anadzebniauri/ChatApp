@@ -30,7 +30,7 @@ extension UIView {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
-    /// View should be square at first
+// View should be square at first
     private func becameCircle() {
         layer.cornerRadius = layer.bounds.width / 2
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ChatViewDelegate: AnyObject {
-    func send(fromTop: Bool)
+    func send(fromTop: Bool, messages: MessageEntity)
     func reloadTableView()
     func addActionsToTableView(at indexPaths: [IndexPath])
     func scrollTableView(at indexPath: IndexPath)
@@ -55,8 +55,8 @@ class ChatView: UIView {
         chatViewModel.setUpUsers(sender: sender, recipient: recipient)
     }
 
-    func receivedMessage() {
-        chatViewModel.receivedMessage()
+    func receivedMessage(_ messages: MessageEntity) {
+        chatViewModel.receivedMessage(messages)
     }
     
     //MARK: - Typing Area
@@ -133,8 +133,8 @@ extension ChatView: ChatViewDelegate {
         tableView.endUpdates()
     }
     
-    func send(fromTop: Bool) {
-        delegate?.send(fromTop: fromTop)
+    func send(fromTop: Bool, messages: MessageEntity) {
+        delegate?.send(fromTop: fromTop, messages: messages)
     }
     
     func reloadTableView() {

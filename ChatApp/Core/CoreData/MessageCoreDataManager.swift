@@ -13,13 +13,6 @@ class MessageCoreDataManager: CoreDataManager<MessageEntity> {
     func saveMessage(text: String, userId: Int16, date: Date = Date(), isSent: Bool = true ) -> MessageEntity {
         let messageEntity = MessageEntity(context: viewContext)
 
-//        if isSent {
-//            messageEntity.setValue(date, forKey: #keyPath(MessageEntity.date))
-//        }
-//        else {
-//            messageEntity.setValue(date, forKey: #keyPath(MessageEntity.date))
-//        }
-
         messageEntity.userId = userId
         messageEntity.text = text
         messageEntity.date = date

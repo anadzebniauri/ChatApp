@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ChatAppViewDelegate: AnyObject {
-    func send(fromTop: Bool)
+    func send(fromTop: Bool, messages: MessageEntity)
 }
 
 class ChatAppViewController: UIViewController {
@@ -146,11 +146,11 @@ extension ChatAppViewController: SwitcherDelegate {
 
 //MARK: - Send Delegate
 extension ChatAppViewController: ChatAppViewDelegate {
-    func send(fromTop: Bool) {
+    func send(fromTop: Bool, messages: MessageEntity) {
         if fromTop {
-            bottomChatView.receivedMessage()
+            bottomChatView.receivedMessage(messages)
         } else {
-            topChatView.receivedMessage()
+            topChatView.receivedMessage(messages)
         }
     }
 }

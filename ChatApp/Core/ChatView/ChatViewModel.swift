@@ -25,7 +25,7 @@ class ChatViewModel {
     
     var messageCount: Int {
         guard let sender = sender, let recipient = recipient else { return 0 }
-        return sender.messages.count + recipient.messages.count
+        return sender.messages.count + recipient.messages.filter{$0.isSent}.count
     }
     
     func setUpUsers(sender: User, recipient: User) {
@@ -39,17 +39,16 @@ class ChatViewModel {
     func networkNotConnected(with text: String) {
         let unsendMessage = messageCoreDataManager.saveMessage(text: text, userId: sender?.userId ?? -1, isSent: false)
         updateMessages(unsendMessage)
-        delegate?.send(fromTop: sender?.userId == 0)
     }
     
     func setUpMessages(with text: String) {
-        guard !Network.shared.isConnected, let sender else {
+        guard Network.shared.isConnected, let sender else {
             networkNotConnected(with: text)
             return
         }
         let newMessage = messageCoreDataManager.saveMessage(text: text, userId: sender.userId)
         updateMessages(newMessage)
-        delegate?.send(fromTop: sender.userId == 0)
+        delegate?.send(fromTop: sender.userId == 0, messages: newMessage)
     }
 
     func updateMessages(_ messages: MessageEntity) {
@@ -71,7 +70,8 @@ class ChatViewModel {
         }
     }
     
-    func receivedMessage() {
+    func receivedMessage(_ messages: MessageEntity) {
+        
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let indexPath = IndexPath(row: self.messageCount - 1, section: 0)
@@ -82,7 +82,7 @@ class ChatViewModel {
     
     func sortedMessage(at indexPath: IndexPath) -> MessageEntity? {
         guard let sender = sender, let recipient = recipient else { return nil }
-        let messages = sender.messages + recipient.messages
+        let messages = sender.messages + recipient.messages.filter { $0.isSent }
         let sortedMessages = messages.sorted(by: {$0.date?.compare($1.date ?? Date()) == .orderedAscending})
         let message = sortedMessages[indexPath.row]
         return message
