@@ -48,7 +48,7 @@ final class RecipientMessageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Internal Method
+    //MARK: - Method
     func setTextToBubble(with message: MessageEntity) {
         messageLabel.text = message.text
         dateLabel.text = message.isSent ? message.date?.stringRepresentation : Constant.errorMessage

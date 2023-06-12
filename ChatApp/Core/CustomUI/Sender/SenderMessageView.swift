@@ -14,7 +14,7 @@ final class SenderMessageView: UIView {
     private let mediumBubbleView = SenderMediumBubbleView()
     private let smallBubbleView = SenderSmallBubbleView()
     
-    private lazy var messageLabel: UILabel = {
+    private var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.font = Constants.Font.messageLabelText
         messageLabel.textColor = Constants.Color.messageTextBlackColor
@@ -25,7 +25,7 @@ final class SenderMessageView: UIView {
         return messageLabel
     }()
     
-    private lazy var dateLabel: UILabel = {
+    private var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = Constants.Font.dateLabelText
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -47,15 +47,17 @@ final class SenderMessageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Internal Method
+    //MARK: - Method
     func setTextToBubble(with message: MessageEntity) {
         messageLabel.text = message.text
-        messageLabel.textColor = Constants.Color.messageTextBlackColor
-        dateLabel.text = message.isSent ? message.date?.stringRepresentation : Constant.errorMessage
-        dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
-        if dateLabel.text == Constant.errorMessage {
+        if !message.isSent {
+            dateLabel.text = Constant.errorMessage
             messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
             dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
+        } else {
+             dateLabel.text = message.date?.stringRepresentation
+             dateLabel.textColor = Constants.Color.dateLabelTextGreyColor
+             messageLabel.textColor = Constants.Color.messageTextBlackColor
         }
     }
     

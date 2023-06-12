@@ -12,12 +12,11 @@ enum UserType: Int16 {
 }
 
 class User {
-    var type: UserType
-    var messages: [MessageEntity]  = []
+    var type: UserType = .none
+    var messages: [MessageEntity] = []
     var userId: Int16
     
-    init (type: UserType = .none, userId: Int16) {
-        self.type = type
+    init(userId: Int16) {
         self.userId = userId
     }
 }

@@ -13,7 +13,7 @@ class UserModel {
     private let firstUser = User(userId: 0)
     private let secondUser = User(userId: 1)
     
-    func getUsers(completion: @escaping ((User, User)?) -> Void) {
+    func getUsers(completion: @escaping ((firstUser: User, secondUser: User)?) -> Void) {
         messageCoreDataManager.fetchMessages { [weak self] messages in
             guard let self = self else { return }
             
@@ -23,3 +23,4 @@ class UserModel {
         }
     }
 }
+

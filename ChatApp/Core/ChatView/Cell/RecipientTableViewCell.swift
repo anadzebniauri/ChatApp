@@ -7,10 +7,10 @@
 
 import UIKit
 
-class RecipientTableViewCell: UITableViewCell {
+final class RecipientTableViewCell: UITableViewCell {
     
     //MARK: - Properties
-    private var recipientBubble = RecipientMessageView().forAutoLayout()
+    private let recipientBubble = RecipientMessageView().forAutoLayout()
     
     //MARK: - Methods
     private func setUpRecipientBubbleCell() {
@@ -34,7 +34,7 @@ class RecipientTableViewCell: UITableViewCell {
 }
 
 //MARK: - Constants
-extension RecipientTableViewCell {
+private extension RecipientTableViewCell {
     enum Constants {
         enum RecipientBubbleView {
             static let recipientBubbleHeightPadding = 8.0

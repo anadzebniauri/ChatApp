@@ -10,7 +10,7 @@ import CoreData
 class CoreDataManager<Entity: NSManagedObject> {
 
     var viewContext: NSManagedObjectContext {
-        return AppDelegate.coreDataContainer.viewContext
+        AppDelegate.coreDataContainer.viewContext
     }
 
     // MARK: - Core Data operations
@@ -26,7 +26,7 @@ class CoreDataManager<Entity: NSManagedObject> {
     }
 
     func fetch(entityName: String, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [Entity] {
-        let fetchRequest = NSFetchRequest<Entity>(entityName: "MessageEntity")
+        let fetchRequest = NSFetchRequest<Entity>(entityName: entityName)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortDescriptors
 

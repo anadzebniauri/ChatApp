@@ -36,7 +36,7 @@ class ChatView: UIView {
 
     //MARK: - Init
     override required init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         setUp()
     }
     
@@ -143,7 +143,7 @@ extension ChatView: ChatViewDelegate {
 }
 
 //MARK: - Constants
-extension ChatView {
+private extension ChatView {
     enum Constants{
         enum TypingArea {
             static let typingAreaViewPadding = 16.0

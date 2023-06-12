@@ -41,7 +41,7 @@ class ChatAppViewController: UIViewController {
         let userModel = UserModel()
         userModel.getUsers(completion: { [weak self] users in
             guard let self = self else { return }
-            if let firstUser = users?.0, let secondUser = users?.1 {
+            if let firstUser = users?.firstUser, let secondUser = users?.secondUser {
                 self.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
                 self.bottomChatView.setUpUsers(sender: secondUser, recipient: firstUser)
             }
@@ -91,7 +91,7 @@ class ChatAppViewController: UIViewController {
         dividerView.backgroundColor = Constants.Color.dividerViewYellowBackgroundColor
         
         NSLayoutConstraint.activate([
-            dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor ),
+            dividerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             dividerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             dividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
@@ -130,16 +130,14 @@ extension ChatAppViewController: SwitcherDelegate {
         if isDarkMode {
             statusBar = .lightContent
             switcherView.setUpSwitcherDarkModeColors()
-            topChatView.messageTextViewColorConfigure(true)
-            bottomChatView.messageTextViewColorConfigure(true)
             view.backgroundColor = Constants.Color.darkModeBackgroundColor
         } else {
             statusBar = .darkContent
             view.backgroundColor = .systemBackground
             switcherView.setUpSwitcherLightModeColors()
-            topChatView.messageTextViewColorConfigure(false)
-            bottomChatView.messageTextViewColorConfigure(false)
         }
+        topChatView.messageTextViewColorConfigure(isDarkMode)
+        bottomChatView.messageTextViewColorConfigure(isDarkMode)
         setNeedsStatusBarAppearanceUpdate()
     }
 }

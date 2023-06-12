@@ -15,7 +15,7 @@ final class Network {
     
     static let shared = Network()
     
-    private let queue = DispatchQueue.global()
+    private let globalQueue = DispatchQueue.global()
     private let monitor: NWPathMonitor
     
     public private(set) var isConnected: Bool = false
@@ -32,7 +32,7 @@ final class Network {
     }
     
     func startMonitoring() {
-        monitor.start(queue: queue)
+        monitor.start(queue: globalQueue)
         monitor.pathUpdateHandler = { [weak self] path in
             self?.isConnected = path.status != .unsatisfied
             self?.getConnectionType(path)
