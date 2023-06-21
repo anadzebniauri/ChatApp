@@ -8,11 +8,11 @@
 import Foundation
 
 enum UserType: Int16 {
-    case sender, recipient, none
+    case sender, recipient
 }
 
 class User {
-    var type: UserType = .none
+    var type: UserType?
     var messages: [MessageEntity] = []
     var userId: Int16
     

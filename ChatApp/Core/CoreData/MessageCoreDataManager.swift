@@ -10,16 +10,15 @@ import Network
 
 class MessageCoreDataManager: CoreDataManager<MessageEntity> {
 
-    func saveMessage(text: String, userId: Int16, date: Date = Date(), isSent: Bool = true ) -> MessageEntity {
+    func saveMessage(_ message: Message) {
         let messageEntity = MessageEntity(context: viewContext)
 
-        messageEntity.userId = userId
-        messageEntity.text = text
-        messageEntity.date = date
-        messageEntity.isSent = isSent
+        messageEntity.userId = message.senderUserID
+        messageEntity.text = message.text
+        messageEntity.date = message.date
+        messageEntity.isSent = message.isSent
 
         saveContext()
-        return messageEntity
     }
 
     func fetchMessages(completion: @escaping ([MessageEntity]) -> Void) {

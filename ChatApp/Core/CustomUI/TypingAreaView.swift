@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol SendButtonDelegate: AnyObject {
-    func sendButtonTap(with text: String)
+protocol TypingAreaViewDelegate: AnyObject {
+    func typingAreaView(_ typingAreaView: TypingAreaView, didTryToSendMessage text: String)
     func messageTextViewColorConfigure(_ isDarkMode: Bool)
 }
 
 class TypingAreaView: UIView {
     
-    weak var delegate: SendButtonDelegate?
+    weak var delegate: TypingAreaViewDelegate?
     
     //MARK: - Properties
      private lazy var messageTextView: UITextView = {
@@ -123,7 +123,7 @@ class TypingAreaView: UIView {
     }
     
     @objc private func sendButtonPressed() {
-        delegate?.sendButtonTap(with: messageTextView.text)
+        delegate?.typingAreaView(self, didTryToSendMessage: messageTextView.text)
         messageTextView.text = ""
     }
 }

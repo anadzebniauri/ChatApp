@@ -7,21 +7,25 @@
 
 import UIKit
 
-protocol ChatAppViewDelegate: AnyObject {
-    func send(fromTop: Bool, messages: MessageEntity)
+// MARK: - Delegate
+protocol ChatAppViewControllerDelegate: AnyObject {
+    func chatAppViewController(_ chatAppViewController: ChatAppViewController, shouldSentMessage: Message)
 }
 
-class ChatAppViewController: UIViewController {
-    
-    //MARK: - Properties
+final class ChatAppViewController: UIViewController {
+
+    // MARK: - Properties
     let topChatView = ChatView().forAutoLayout()
     let bottomChatView = ChatView().forAutoLayout()
     
     private let dividerView = UIView().forAutoLayout()
     private let switcherView = SwitcherView().forAutoLayout()
-    
     private var statusBar: UIStatusBarStyle = .darkContent
+    
+    private let firstUser = User(userId: 0)
+    private let secondUser = User(userId: 1)
 
+    weak var delegate: ChatAppViewControllerDelegate?
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -38,9 +42,9 @@ class ChatAppViewController: UIViewController {
     
     //MARK: - View Model
     private func setUpViewModel() {
-        let userModel = UserModel()
+        let userModel = ApplicationModel()
         userModel.getUsers(completion: { [weak self] users in
-            guard let self = self else { return }
+            guard let self else { return }
             if let firstUser = users?.firstUser, let secondUser = users?.secondUser {
                 self.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
                 self.bottomChatView.setUpUsers(sender: secondUser, recipient: firstUser)
@@ -48,7 +52,7 @@ class ChatAppViewController: UIViewController {
         })
     }
     
-    //MARK: - Status Bar  Style
+    // MARK: - Status Bar  Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBar
     }
@@ -142,19 +146,33 @@ extension ChatAppViewController: SwitcherDelegate {
     }
 }
 
-//MARK: - Send Delegate
-extension ChatAppViewController: ChatAppViewDelegate {
-    func send(fromTop: Bool, messages: MessageEntity) {
-        if fromTop {
-            bottomChatView.receivedMessage(messages)
-        } else {
-            topChatView.receivedMessage(messages)
-        }
+// MARK: - ChatViewDelegate
+extension ChatAppViewController: ChatViewDelegate {
+    func chatView(_ chatView: ChatView, shouldSendMessage text: String) {
+        let isTopChat = (chatView === topChatView)
+        let message = Message(
+            senderUserID: (isTopChat ? firstUser : secondUser).userId,
+            recipientUserID: (isTopChat ? secondUser : firstUser).userId,
+            text: text,
+            date: Date(),
+            isSent: false
+        )
+        delegate?.chatAppViewController(self, shouldSentMessage: message)
+    }
+}
+
+extension ChatAppViewController: ChatAppViewModelDelegate {
+    func chatAppViewModelMessageDidSent(_ chatAppViewModel: ChatAppViewModel) {
+        
+    }
+    
+    func chatAppViewModelMessageDidFail(_ chatAppViewModel: ChatAppViewModel) {
+        
     }
 }
 
 //MARK: - Constants
-extension ChatAppViewController {
+private extension ChatAppViewController {
     enum Constants {
         enum ChatView {
             static let bottomChatViewPadding = -30.0
