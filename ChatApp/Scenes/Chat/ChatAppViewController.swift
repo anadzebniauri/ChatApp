@@ -7,8 +7,11 @@
 
 import UIKit
 
-protocol ChatAppViewDelegate: AnyObject {
+protocol ChatAppViewControllerDelegate: AnyObject {
     func send(fromTop: Bool, messages: MessageEntity)
+    func reloadTableView()
+    func scrollTableView(at indexPath: IndexPath)
+    func addActionsToTableView(at indexPaths: [IndexPath])
 }
 
 class ChatAppViewController: UIViewController {
@@ -21,8 +24,10 @@ class ChatAppViewController: UIViewController {
     private let switcherView = SwitcherView().forAutoLayout()
     
     private var statusBar: UIStatusBarStyle = .darkContent
-
     
+    private let chatAppViewModel = ChatAppViewModel()
+    weak var delegate: ChatViewDelegate?
+
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,8 +147,49 @@ extension ChatAppViewController: SwitcherDelegate {
     }
 }
 
-//MARK: - Send Delegate
-extension ChatAppViewController: ChatAppViewDelegate {
+//MARK: - Delegate
+extension ChatAppViewController: ChatViewDelegate {
+    func sortedMessage(at indexPath: IndexPath) -> MessageEntity? {
+        chatAppViewModel.sortedMessage(at: indexPath)
+    }
+    
+    func setUpUsers(sender: User, recipient: User) {
+        chatAppViewModel.setUpUsers(sender: sender, recipient: recipient)
+    }
+    
+    func setUpMessages(with text: String) {
+        chatAppViewModel.setUpMessages(with: text)
+    }
+    
+    func receivedMessage(_ messages: MessageEntity) {
+        chatAppViewModel.receivedMessage(messages)
+    }
+    
+//    func send(fromTop: Bool, messages: MessageEntity) {
+//        if fromTop {
+//            bottomChatView.receivedMessage(messages)
+//        } else {
+//            topChatView.receivedMessage(messages)
+//        }
+//    }
+}
+
+extension ChatAppViewController: ChatAppViewModelDelegate {
+    func scrollTableView(at indexPath: IndexPath) {
+        topChatView.scrollTableView(at: indexPath)
+        bottomChatView.scrollTableView(at: indexPath)
+    }
+    
+    func addActionsToTableView(at indexPaths: [IndexPath]) {
+        topChatView.addActionsToTableView(at: indexPaths)
+        bottomChatView.addActionsToTableView(at: indexPaths)
+    }
+    
+    func reloadTableView() {
+        topChatView.reloadTableView()
+        bottomChatView.reloadTableView()
+    }
+
     func send(fromTop: Bool, messages: MessageEntity) {
         if fromTop {
             bottomChatView.receivedMessage(messages)

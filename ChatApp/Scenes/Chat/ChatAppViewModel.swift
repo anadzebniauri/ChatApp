@@ -7,9 +7,17 @@
 
 import Foundation
 
-class ChatViewModel {
+protocol ChatAppViewModelDelegate: AnyObject {
+    func send(fromTop: Bool, messages: MessageEntity)
+    func reloadTableView()
+    func scrollTableView(at indexPath: IndexPath)
+    func addActionsToTableView(at indexPaths: [IndexPath])
+}
     
-    weak var delegate: ChatViewDelegate?
+
+class ChatAppViewModel {
+    
+    weak var delegate: ChatAppViewModelDelegate?
     private let messageCoreDataManager = MessageCoreDataManager()
     
     private var sender: User?
@@ -22,7 +30,7 @@ class ChatViewModel {
     var recipientId: Int16? {
         recipient?.userId
     }
-    
+
     var messageCount: Int {
         guard let sender = sender, let recipient = recipient else { return 0 }
         return sender.messages.count + recipient.messages.filter{$0.isSent}.count
@@ -71,7 +79,6 @@ class ChatViewModel {
     }
     
     func receivedMessage(_ messages: MessageEntity) {
-        
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let indexPath = IndexPath(row: self.messageCount - 1, section: 0)
