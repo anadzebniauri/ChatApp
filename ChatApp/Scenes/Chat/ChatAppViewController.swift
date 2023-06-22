@@ -7,30 +7,25 @@
 
 import UIKit
 
-protocol ChatAppViewControllerDelegate: AnyObject {
-    func send(fromTop: Bool, messages: MessageEntity)
-    func reloadTableView()
-    func scrollTableView(at indexPath: IndexPath)
-    func addActionsToTableView(at indexPaths: [IndexPath])
-}
-
 class ChatAppViewController: UIViewController {
     
     //MARK: - Properties
-    let topChatView = ChatView().forAutoLayout()
-    let bottomChatView = ChatView().forAutoLayout()
+        
+    private let chatAppViewModel = ChatAppViewModel()
+    private var dataSource: [MessageEntity] = []
+    
+    private let topChatView = ChatView().forAutoLayout()
+    private let bottomChatView = ChatView().forAutoLayout()
     
     private let dividerView = UIView().forAutoLayout()
     private let switcherView = SwitcherView().forAutoLayout()
     
     private var statusBar: UIStatusBarStyle = .darkContent
     
-    private let chatAppViewModel = ChatAppViewModel()
-    weak var delegate: ChatViewDelegate?
-
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpSwitcherView()
         setUpDividerView()
         
@@ -39,16 +34,30 @@ class ChatAppViewController: UIViewController {
         
         keyboardDismiss()
         setUpViewModel()
+        
+        getDataSource()
     }
     
-    //MARK: - View Model
+    
+    private func getDataSource() {
+        chatAppViewModel.getDataSource { [weak self] messages in
+            guard let self else { return }
+            
+            self.dataSource = messages
+            
+            self.topChatView.updateView(using: messages)
+            self.bottomChatView.updateView(using: messages)
+        }
+    }
+    
+    //MARK: - User Model
     private func setUpViewModel() {
         let userModel = UserModel()
         userModel.getUsers(completion: { [weak self] users in
-            guard let self = self else { return }
+            guard self != nil else { return }
             if let firstUser = users?.firstUser, let secondUser = users?.secondUser {
-                self.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
-                self.bottomChatView.setUpUsers(sender: secondUser, recipient: firstUser)
+                self?.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
+                self?.bottomChatView.setUpUsers(sender: secondUser, recipient: firstUser)
             }
         })
     }
@@ -106,7 +115,7 @@ class ChatAppViewController: UIViewController {
     private func setUpSwitcherView() {
         view.addSubview(switcherView)
         switcherView.delegate = self
-
+        
         NSLayoutConstraint.activate([
             switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.SwitcherView.switcherTopAnchor),
             switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
@@ -149,52 +158,28 @@ extension ChatAppViewController: SwitcherDelegate {
 
 //MARK: - Delegate
 extension ChatAppViewController: ChatViewDelegate {
-    func sortedMessage(at indexPath: IndexPath) -> MessageEntity? {
-        chatAppViewModel.sortedMessage(at: indexPath)
-    }
-    
-    func setUpUsers(sender: User, recipient: User) {
-        chatAppViewModel.setUpUsers(sender: sender, recipient: recipient)
-    }
-    
-    func setUpMessages(with text: String) {
-        chatAppViewModel.setUpMessages(with: text)
-    }
-    
-    func receivedMessage(_ messages: MessageEntity) {
-        chatAppViewModel.receivedMessage(messages)
-    }
-    
-//    func send(fromTop: Bool, messages: MessageEntity) {
-//        if fromTop {
-//            bottomChatView.receivedMessage(messages)
-//        } else {
-//            topChatView.receivedMessage(messages)
-//        }
-//    }
-}
-
-extension ChatAppViewController: ChatAppViewModelDelegate {
-    func scrollTableView(at indexPath: IndexPath) {
-        topChatView.scrollTableView(at: indexPath)
-        bottomChatView.scrollTableView(at: indexPath)
-    }
-    
-    func addActionsToTableView(at indexPaths: [IndexPath]) {
-        topChatView.addActionsToTableView(at: indexPaths)
-        bottomChatView.addActionsToTableView(at: indexPaths)
-    }
-    
-    func reloadTableView() {
-        topChatView.reloadTableView()
-        bottomChatView.reloadTableView()
-    }
-
-    func send(fromTop: Bool, messages: MessageEntity) {
-        if fromTop {
-            bottomChatView.receivedMessage(messages)
+    func send(_ chatView: ChatView, text: String) {
+        
+        if topChatView.isFirstResponder {
+            let message = chatAppViewModel.setUpMessages(
+                with: text,
+                userId: chatView.senderId ?? -1
+            )
+            dataSource.append(message)
         } else {
-            topChatView.receivedMessage(messages)
+            let message = chatAppViewModel.setUpMessages(
+                with: text,
+                userId: chatView.senderId ?? -1
+            )
+            dataSource.append(message)
+        }
+    
+        chatView.updateView(using: dataSource)
+        
+        if chatView == topChatView {
+            bottomChatView.updateView(using: dataSource.filter { $0.isSent })
+        } else {
+            topChatView.updateView(using: dataSource.filter { $0.isSent })
         }
     }
 }

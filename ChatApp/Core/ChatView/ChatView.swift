@@ -8,14 +8,12 @@
 import UIKit
 
 protocol ChatViewDelegate: AnyObject {
-    func send(fromTop: Bool, messages: MessageEntity)
-    func receivedMessage(_ messages: MessageEntity)
-    func setUpMessages(with text: String)
-    func setUpUsers(sender: User, recipient: User)
-    func sortedMessage(at indexPath: IndexPath) -> MessageEntity?
+    func send(_ chatView: ChatView, text: String)
 }
 
 class ChatView: UIView {
+    
+    weak var delegate: ChatViewDelegate?
     
     //MARK: - Properties
     private lazy var tableView: UITableView = {
@@ -30,15 +28,24 @@ class ChatView: UIView {
         return tableView
     }()
     
+    private var dataSource: [MessageEntity] = []
     private var typingAreaView = TypingAreaView()
     
-    weak var delegate: ChatViewDelegate?
+    //MARK: - Users
+    private var sender: User?
+    private var recipient: User?
     
-    private let chatViewModel = ChatAppViewModel()
-
+    var senderId: Int16? {
+        sender?.userId
+    }
+    
+    var recipientId: Int16? {
+        recipient?.userId
+    }
+    
     //MARK: - Init
     override required init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: .zero)
         setUp()
     }
     
@@ -46,21 +53,35 @@ class ChatView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Methods
+    //MARK: - Set Ups
     private func setUp() {
         setUpTableView()
         setUpTypingAreaView()
-
     }
     
     func setUpUsers(sender: User, recipient: User) {
-        delegate?.setUpUsers(sender: sender, recipient: recipient)
-    }
-
-    func receivedMessage(_ messages: MessageEntity) {
-        delegate?.receivedMessage(messages)
+        self.sender = sender
+        self.recipient = recipient
+        sender.type = .sender
+        recipient.type = .recipient
+        tableView.reloadData()
     }
     
+    func scrollTableView() {
+        guard dataSource.count > 0 else { return }
+        
+        let lastIndexPath = IndexPath(row: dataSource.count - 1, section: 0)
+        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+    }
+    
+    func updateView(using dataSource: [MessageEntity]) {
+        guard dataSource.last != nil else { return }
+
+        self.dataSource = dataSource
+        tableView.reloadData()
+        scrollTableView()
+    }
+
     //MARK: - Typing Area
     private func setUpTypingAreaView() {
         addSubview(typingAreaView)
@@ -94,7 +115,8 @@ extension ChatView: SendButtonDelegate {
     }
     
     func sendButtonTap(with text: String) {
-        delegate?.setUpMessages(with: text)
+        delegate?.send(self, text: text)
+        
     }
 }
 
@@ -102,17 +124,18 @@ extension ChatView: SendButtonDelegate {
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        chatViewModel.messageCount
+        dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let message = delegate?.sortedMessage(at: indexPath) else { return UITableViewCell() }
-        if message.userId == chatViewModel.recipientId {
+        let message = dataSource[indexPath.row]
+        if message.userId == recipientId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell {
                 cell.setup(with: message)
                 return cell
             }
-        } else if message.userId == chatViewModel.senderId {
+        }
+        else if message.userId == senderId {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SenderTableView.cell, for: indexPath) as? SenderTableViewCell {
                 cell.setup(with: message)
                 return cell
@@ -121,30 +144,6 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
 }
-
-//MARK: - Chat View Delegate Methods
-extension ChatView: ChatAppViewControllerDelegate {
-    
-    func scrollTableView(at indexPath: IndexPath) {
-        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-    }
-
-    func addActionsToTableView(at indexPaths: [IndexPath]) {
-        tableView.beginUpdates()
-        tableView.insertRows(at: indexPaths, with: .automatic)
-        tableView.endUpdates()
-    }
-
-    func reloadTableView() {
-        tableView.reloadData()
-    }
-    
-    func send(fromTop: Bool, messages: MessageEntity) {
-        delegate?.send(fromTop: fromTop, messages: messages)
-    }
-}
-
-
 //MARK: - Constants
 private extension ChatView {
     enum Constants{
@@ -159,3 +158,4 @@ private extension ChatView {
         }
     }
 }
+
