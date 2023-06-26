@@ -64,7 +64,6 @@ class ChatView: UIView {
         self.recipient = recipient
         sender.type = .sender
         recipient.type = .recipient
-        tableView.reloadData()
     }
     
     func scrollTableView() {

@@ -10,7 +10,7 @@ import UIKit
 class ChatAppViewController: UIViewController {
     
     //MARK: - Properties
-        
+    
     private let chatAppViewModel = ChatAppViewModel()
     private var dataSource: [MessageEntity] = []
     
@@ -44,7 +44,6 @@ class ChatAppViewController: UIViewController {
             guard let self else { return }
             
             self.dataSource = messages
-            
             self.topChatView.updateView(using: messages)
             self.bottomChatView.updateView(using: messages)
         }
@@ -92,7 +91,10 @@ class ChatAppViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             bottomChatView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
-            bottomChatView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.ChatView.bottomChatViewPadding),
+            bottomChatView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: Constants.ChatView.bottomChatViewPadding
+            ),
             bottomChatView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomChatView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
@@ -117,8 +119,14 @@ class ChatAppViewController: UIViewController {
         switcherView.delegate = self
         
         NSLayoutConstraint.activate([
-            switcherView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.SwitcherView.switcherTopAnchor),
-            switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.SwitcherView.switcherRightAnchor)
+            switcherView.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: Constants.SwitcherView.switcherTopAnchor
+            ),
+            switcherView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: Constants.SwitcherView.switcherRightAnchor
+            )
         ])
         
         let darkModeEnabled = UserDefaults.standard.bool(forKey: Constants.UserDefaults.key)
@@ -173,16 +181,19 @@ extension ChatAppViewController: ChatViewDelegate {
             )
             dataSource.append(message)
         }
-    
-        chatView.updateView(using: dataSource)
         
-        if chatView == topChatView {
-            bottomChatView.updateView(using: dataSource.filter { $0.isSent })
-        } else {
-            topChatView.updateView(using: dataSource.filter { $0.isSent })
-        }
+        chatView.updateView(using: dataSource)
+
+        topChatView.updateView(using: chatAppViewModel.filterMessages(
+            messages: dataSource, userID: topChatView.senderId ?? -1)
+        )
+        bottomChatView.updateView(using: chatAppViewModel.filterMessages(
+            messages: dataSource, userID: bottomChatView.senderId ?? -1)
+        )
+
     }
 }
+
 
 //MARK: - Constants
 extension ChatAppViewController {
