@@ -115,7 +115,6 @@ extension ChatView: SendButtonDelegate {
     
     func sendButtonTap(with text: String) {
         delegate?.send(self, text: text)
-        
     }
 }
 

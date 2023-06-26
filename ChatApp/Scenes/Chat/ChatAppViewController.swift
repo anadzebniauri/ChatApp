@@ -164,7 +164,7 @@ extension ChatAppViewController: SwitcherDelegate {
     }
 }
 
-//MARK: - Delegate
+//MARK: - ChatView Delegate
 extension ChatAppViewController: ChatViewDelegate {
     func send(_ chatView: ChatView, text: String) {
         
@@ -190,10 +190,8 @@ extension ChatAppViewController: ChatViewDelegate {
         bottomChatView.updateView(using: chatAppViewModel.filterMessages(
             messages: dataSource, userID: bottomChatView.senderId ?? -1)
         )
-
     }
 }
-
 
 //MARK: - Constants
 extension ChatAppViewController {
