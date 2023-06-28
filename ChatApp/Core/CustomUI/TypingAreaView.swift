@@ -69,11 +69,7 @@ class TypingAreaView: UIView {
     }
     
     func messageTextViewColorConfigure(_ isDarkMode: Bool) {
-        if isDarkMode {
-            messageTextView.textColor = .white
-        } else {
-            messageTextView.textColor = .black
-        }
+        messageTextView.textColor = isDarkMode ? .white :  .black
     }
     
     private func setUpMessageTextViewConstraints() {

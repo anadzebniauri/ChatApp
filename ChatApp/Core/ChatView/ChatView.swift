@@ -67,20 +67,18 @@ class ChatView: UIView {
     }
     
     func scrollTableView() {
-        guard dataSource.count > 0 else { return }
-        
         let lastIndexPath = IndexPath(row: dataSource.count - 1, section: 0)
         tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
     }
     
     func updateView(using dataSource: [MessageEntity]) {
         guard dataSource.last != nil else { return }
-
+        
         self.dataSource = dataSource
         tableView.reloadData()
         scrollTableView()
     }
-
+    
     //MARK: - Typing Area
     private func setUpTypingAreaView() {
         addSubview(typingAreaView)

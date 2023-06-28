@@ -9,8 +9,11 @@ import Foundation
 
 class ChatAppViewModel {
     
+    //MARK: - Properties
+    var dataSource: [MessageEntity] = []
     private let messageCoreDataManager = MessageCoreDataManager()
     
+    //MARK: - Methods
     func setUpMessages(with text: String, userId: Int16) -> MessageEntity {
         guard Network.shared.isConnected else {
             return messageCoreDataManager.saveMessage(text: text, userId: userId, isSent: false)
@@ -19,9 +22,7 @@ class ChatAppViewModel {
     }
     
     func getDataSource(completion: @escaping ([MessageEntity])-> Void) {
-        messageCoreDataManager.fetchMessages { messages in
-            completion(messages)
-        }
+        messageCoreDataManager.fetchMessages(completion: completion)
     }
     
     private func isSentMessage (message: MessageEntity, userID: Int16) -> Bool {

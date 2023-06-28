@@ -14,7 +14,7 @@ final class SenderMessageView: UIView {
     private let mediumBubbleView = SenderMediumBubbleView()
     private let smallBubbleView = SenderSmallBubbleView()
     
-    private var messageLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.font = Constants.Font.messageLabelText
         messageLabel.textColor = Constants.Color.messageTextBlackColor
@@ -25,7 +25,7 @@ final class SenderMessageView: UIView {
         return messageLabel
     }()
     
-    private var dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = Constants.Font.dateLabelText
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,7 @@ final class SenderMessageView: UIView {
     func setTextToBubble(with message: MessageEntity) {
         messageLabel.text = message.text
         if !message.isSent {
-            dateLabel.text = Constant.errorMessage
+            dateLabel.text = Constants.DateLabel.errorMessage
             messageLabel.textColor = Constants.Color.messageTextNoConnectionColor
             dateLabel.textColor = Constants.Color.dateLabelErrorTextRedColor
         } else {
@@ -171,6 +171,7 @@ private extension SenderMessageView {
         enum DateLabel {
             static let dateLabelHeight = 10.0
             static let dateLabelRightPadding = -30.0
+            static let errorMessage = "არ გაიგზავნა"
         }
         
         enum Font {

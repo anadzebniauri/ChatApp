@@ -10,9 +10,7 @@ import UIKit
 class ChatAppViewController: UIViewController {
     
     //MARK: - Properties
-    
     private let chatAppViewModel = ChatAppViewModel()
-    private var dataSource: [MessageEntity] = []
     
     private let topChatView = ChatView().forAutoLayout()
     private let bottomChatView = ChatView().forAutoLayout()
@@ -38,12 +36,12 @@ class ChatAppViewController: UIViewController {
         getDataSource()
     }
     
-    
+    //MARK: - Fetch Data
     private func getDataSource() {
         chatAppViewModel.getDataSource { [weak self] messages in
             guard let self else { return }
             
-            self.dataSource = messages
+            chatAppViewModel.dataSource = messages
             self.topChatView.updateView(using: messages)
             self.bottomChatView.updateView(using: messages)
         }
@@ -53,7 +51,6 @@ class ChatAppViewController: UIViewController {
     private func setUpViewModel() {
         let userModel = UserModel()
         userModel.getUsers(completion: { [weak self] users in
-            guard self != nil else { return }
             if let firstUser = users?.firstUser, let secondUser = users?.secondUser {
                 self?.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
                 self?.bottomChatView.setUpUsers(sender: secondUser, recipient: firstUser)
@@ -63,7 +60,7 @@ class ChatAppViewController: UIViewController {
     
     //MARK: - Status Bar  Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBar
+        statusBar
     }
     
     //MARK: - KeyBoard
@@ -129,7 +126,7 @@ class ChatAppViewController: UIViewController {
             )
         ])
         
-        let darkModeEnabled = UserDefaults.standard.bool(forKey: Constants.UserDefaults.key)
+        let darkModeEnabled = isDarkMode
         setUpSwitcherMode(darkModeEnabled)
     }
 }
@@ -141,10 +138,10 @@ extension ChatAppViewController: SwitcherDelegate {
         switch state {
         case .light:
             setUpSwitcherMode(false)
-            UserDefaults.standard.set(false, forKey: Constants.UserDefaults.key)
+            isDarkMode = false
         case .dark:
             setUpSwitcherMode(true)
-            UserDefaults.standard.set(true, forKey: Constants.UserDefaults.key)
+            isDarkMode = true
         }
     }
     
@@ -173,22 +170,22 @@ extension ChatAppViewController: ChatViewDelegate {
                 with: text,
                 userId: chatView.senderId ?? -1
             )
-            dataSource.append(message)
+            chatAppViewModel.dataSource.append(message)
         } else {
             let message = chatAppViewModel.setUpMessages(
                 with: text,
                 userId: chatView.senderId ?? -1
             )
-            dataSource.append(message)
+            chatAppViewModel.dataSource.append(message)
         }
         
-        chatView.updateView(using: dataSource)
-
+        chatView.updateView(using: chatAppViewModel.dataSource)
+        
         topChatView.updateView(using: chatAppViewModel.filterMessages(
-            messages: dataSource, userID: topChatView.senderId ?? -1)
+            messages: chatAppViewModel.dataSource, userID: topChatView.senderId ?? -1)
         )
         bottomChatView.updateView(using: chatAppViewModel.filterMessages(
-            messages: dataSource, userID: bottomChatView.senderId ?? -1)
+            messages: chatAppViewModel.dataSource, userID: bottomChatView.senderId ?? -1)
         )
     }
 }
@@ -205,9 +202,6 @@ extension ChatAppViewController {
         }
         enum DividerView {
             static let dividerViewHeight = 6.0
-        }
-        enum UserDefaults {
-            static let key = "DarkModeEnabled"
         }
         enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)

@@ -201,8 +201,3 @@ private extension SwitcherView {
         }
     }
 }
-
-enum SwitcherState {
-    case light
-    case dark
-}

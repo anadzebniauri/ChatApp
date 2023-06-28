@@ -23,11 +23,14 @@ class MessageCoreDataManager: CoreDataManager<MessageEntity> {
     }
 
     func fetchMessages(completion: @escaping ([MessageEntity]) -> Void) {
-        let result = fetch(entityName: "MessageEntity", predicate: nil, sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)])
+        let result = fetch(entityName: Constants.entityName, predicate: nil, sortDescriptors: [NSSortDescriptor(key: Constants.key, ascending: true)])
         completion(result)
     }
 }
 
-enum Constant {
-    static let errorMessage = "არ გაიგზავნა"
+private extension MessageCoreDataManager {
+    enum Constants {
+       static let entityName = "MessageEntity"
+       static let key = "date"
+   }
 }
