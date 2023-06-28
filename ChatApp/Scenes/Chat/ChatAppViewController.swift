@@ -42,14 +42,22 @@ class ChatAppViewController: UIViewController {
             guard let self else { return }
             
             chatAppViewModel.dataSource = messages
-            self.topChatView.updateView(using: messages)
-            self.bottomChatView.updateView(using: messages)
+            filterMessages()
         }
+    }
+    
+    private func filterMessages() {
+        topChatView.updateView(using: chatAppViewModel.filterMessages(
+            messages: chatAppViewModel.dataSource, userID: topChatView.senderId ?? -1)
+        )
+        bottomChatView.updateView(using: chatAppViewModel.filterMessages(
+            messages: chatAppViewModel.dataSource, userID: bottomChatView.senderId ?? -1)
+        )
     }
     
     //MARK: - User Model
     private func setUpViewModel() {
-        let userModel = UserModel()
+        let userModel = UserManager()
         userModel.getUsers(completion: { [weak self] users in
             if let firstUser = users?.firstUser, let secondUser = users?.secondUser {
                 self?.topChatView.setUpUsers(sender: firstUser, recipient: secondUser)
@@ -126,7 +134,7 @@ class ChatAppViewController: UIViewController {
             )
         ])
         
-        let darkModeEnabled = isDarkMode
+        let darkModeEnabled = UserDefaults.standard.bool(forKey: Constants.UserDefaults.key)
         setUpSwitcherMode(darkModeEnabled)
     }
 }
@@ -138,11 +146,12 @@ extension ChatAppViewController: SwitcherDelegate {
         switch state {
         case .light:
             setUpSwitcherMode(false)
-            isDarkMode = false
+            UserDefaults.standard.set(false, forKey: Constants.UserDefaults.key)
         case .dark:
             setUpSwitcherMode(true)
-            isDarkMode = true
+            UserDefaults.standard.set(true, forKey: Constants.UserDefaults.key)
         }
+        UserDefaults.standard.synchronize()
     }
     
     func setUpSwitcherMode(_ isDarkMode: Bool) {
@@ -180,13 +189,7 @@ extension ChatAppViewController: ChatViewDelegate {
         }
         
         chatView.updateView(using: chatAppViewModel.dataSource)
-        
-        topChatView.updateView(using: chatAppViewModel.filterMessages(
-            messages: chatAppViewModel.dataSource, userID: topChatView.senderId ?? -1)
-        )
-        bottomChatView.updateView(using: chatAppViewModel.filterMessages(
-            messages: chatAppViewModel.dataSource, userID: bottomChatView.senderId ?? -1)
-        )
+        filterMessages()
     }
 }
 
@@ -202,6 +205,9 @@ extension ChatAppViewController {
         }
         enum DividerView {
             static let dividerViewHeight = 6.0
+        }
+        enum UserDefaults {
+            static let key = "DarkModeEnabled"
         }
         enum Color {
             static let dividerViewYellowBackgroundColor = UIColor(red: 247, green: 206, blue: 127, alpha: 1)

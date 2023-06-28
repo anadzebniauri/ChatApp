@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserModel {
+class UserManager {
     
     private let messageCoreDataManager = MessageCoreDataManager()
     private let firstUser = User(userId: 0)
