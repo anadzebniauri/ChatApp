@@ -54,6 +54,8 @@ class SwitcherView: UIView {
     private func setUpView() {
         layer.cornerRadius = Constants.cornerRadius
         backgroundColor = Constants.Color.switcherLightModeBackgroundColor
+        setHeight(Constants.viewHeight)
+        setWidth(Constants.viewWidth)
     }
     
     //MARK: - Light Mode
@@ -64,7 +66,6 @@ class SwitcherView: UIView {
         lightModeItemBackgroundView.tintColor = Constants.Color.switcherBackgroundItemViewColor
         
         lightModeItemBackgroundView.setHeight(Constants.LightMode.lightModeItemBackgroundViewHeight)
-        lightModeItemBackgroundView.setWidth(Constants.LightMode.lightModeItemBackgroundViewWidth)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         lightModeItemBackgroundView.addGestureRecognizer(tapGestureRecognizer)
@@ -91,7 +92,6 @@ class SwitcherView: UIView {
         darkModeItemBackgroundView.image = Constants.Image.circleImage
         darkModeItemBackgroundView.tintColor = .clear
         
-        darkModeItemBackgroundView.setWidth(Constants.DarkMode.darkModeItemBackgroundViewWidth)
         darkModeItemBackgroundView.setHeight(Constants.DarkMode.darkModeItemBackgroundViewHeight)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
@@ -120,13 +120,11 @@ class SwitcherView: UIView {
         switchingItemStackView.addArrangedSubview(darkModeItemBackgroundView)
         switchingItemStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        switchingItemStackView.setHeight(Constants.StackView.switchingItemStackViewHeight)
-        switchingItemStackView.setWidth(Constants.StackView.switchingItemStackViewWidth)
-        
         switchingItemStackView.spacing = Constants.StackView.switchingItemStackViewSpacing
         switchingItemStackView.distribution = .fillEqually
         switchingItemStackView.axis = .horizontal
-        
+        switchingItemStackView.alignment = .center
+        switchingItemStackView.isUserInteractionEnabled = true
         switchingItemStackView.isLayoutMarginsRelativeArrangement = true
         switchingItemStackView.layoutMargins = Constants.StackView.switchingItemStackViewUIEdgeInsets
     }
@@ -164,6 +162,8 @@ class SwitcherView: UIView {
 private extension SwitcherView {
     enum Constants {
         static let cornerRadius = 12.0
+        static let viewHeight = 27.0
+        static let viewWidth = 54.0
         
         enum LightMode {
             static let lightModeItemBackgroundViewHeight = 21.0
@@ -180,8 +180,6 @@ private extension SwitcherView {
         }
         
         enum StackView {
-            static let switchingItemStackViewHeight = 27.0
-            static let switchingItemStackViewWidth = 54.0
             static let switchingItemStackViewSpacing = 3.0
             static let switchingItemStackViewUIEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         }

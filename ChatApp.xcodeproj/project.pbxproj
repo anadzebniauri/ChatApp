@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C1005DC62A22948700366401 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1005DC52A22948700366401 /* Network.swift */; };
-		C1005DCC2A22B08000366401 /* RecipientTypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1005DCB2A22B08000366401 /* RecipientTypingIndicator.swift */; };
 		C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */; };
 		C11ABAD92A1BA84000167ED0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABAD82A1BA84000167ED0 /* UserManager.swift */; };
 		C11ABADB2A1CE89E00167ED0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11ABADA2A1CE89E00167ED0 /* User.swift */; };
@@ -42,7 +41,6 @@
 
 /* Begin PBXFileReference section */
 		C1005DC52A22948700366401 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		C1005DCB2A22B08000366401 /* RecipientTypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientTypingIndicator.swift; sourceTree = "<group>"; };
 		C11ABAD22A155A7A00167ED0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C11ABAD82A1BA84000167ED0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C11ABADA2A1CE89E00167ED0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -120,7 +118,7 @@
 				C1D998CD29F1745C009B3072 /* Extensions */,
 				C1005DC42A22946B00366401 /* Network */,
 				C1D998D329F174BD009B3072 /* CustomUI */,
-				C1D29AE82A334CF500BE0C99 /* ChatView */,
+				C1863B092A2CBD1B007D93DF /* Cell */,
 				C1D998D229F174B1009B3072 /* Models */,
 			);
 			path = Core;
@@ -186,7 +184,6 @@
 				C1CD1A302A03CF040052BEEE /* RecipientMediumBubbleView.swift */,
 				C1CD1A322A03CF120052BEEE /* RecipientSmallBubbleView.swift */,
 				C1F205BE29F2A9B5005C2171 /* RecipientMessageView.swift */,
-				C1005DCB2A22B08000366401 /* RecipientTypingIndicator.swift */,
 			);
 			name = Recipient;
 			sourceTree = "<group>";
@@ -200,15 +197,6 @@
 				C1F205E529F7F103005C2171 /* SenderMessageView.swift */,
 			);
 			path = Sender;
-			sourceTree = "<group>";
-		};
-		C1D29AE82A334CF500BE0C99 /* ChatView */ = {
-			isa = PBXGroup;
-			children = (
-				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
-				C1863B092A2CBD1B007D93DF /* Cell */,
-			);
-			path = ChatView;
 			sourceTree = "<group>";
 		};
 		C1D998AA29F17330009B3072 = {
@@ -262,6 +250,7 @@
 		C1D998D329F174BD009B3072 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				C1CD1A2E29FFBAFD0052BEEE /* ChatView.swift */,
 				C1D998D529F174EE009B3072 /* SwitcheView.swift */,
 				C1F205C029F40D2E005C2171 /* TypingAreaView.swift */,
 				C1CD1A1F29F95FB40052BEEE /* Recipient */,
@@ -348,7 +337,6 @@
 				C1CD1A332A03CF120052BEEE /* RecipientSmallBubbleView.swift in Sources */,
 				C11ABAD92A1BA84000167ED0 /* UserManager.swift in Sources */,
 				C11ABAD32A155A7A00167ED0 /* CoreDataManager.swift in Sources */,
-				C1005DCC2A22B08000366401 /* RecipientTypingIndicator.swift in Sources */,
 				C168F34F2A4B454C001B434D /* SwitcherState.swift in Sources */,
 				C1D29AEA2A34B79B00BE0C99 /* Date+Extension.swift in Sources */,
 				C1CD1A2F29FFBAFD0052BEEE /* ChatView.swift in Sources */,

@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol SendButtonDelegate: AnyObject {
+protocol TypingAreaViewDelegate: AnyObject {
     func sendButtonTap(with text: String)
     func messageTextViewColorConfigure(_ isDarkMode: Bool)
 }
 
 class TypingAreaView: UIView {
     
-    weak var delegate: SendButtonDelegate?
+    weak var delegate: TypingAreaViewDelegate?
     
     //MARK: - Properties
      private lazy var messageTextView: UITextView = {

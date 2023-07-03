@@ -26,6 +26,7 @@ class MessageCoreDataManager: CoreDataManager<MessageEntity> {
         let result = fetch(entityName: Constants.entityName, predicate: nil, sortDescriptors: [NSSortDescriptor(key: Constants.key, ascending: true)])
         completion(result)
     }
+
 }
 
 private extension MessageCoreDataManager {

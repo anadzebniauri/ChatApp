@@ -200,7 +200,7 @@ extension ChatAppViewController {
             static let bottomChatViewPadding = -30.0
         }
         enum SwitcherView {
-            static let switcherTopAnchor = 52.0
+            static let switcherTopAnchor = 54.0
             static let switcherRightAnchor = -12.0
         }
         enum DividerView {

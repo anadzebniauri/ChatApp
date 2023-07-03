@@ -28,8 +28,14 @@ class ChatView: UIView {
         return tableView
     }()
     
+    private lazy var typingAreaView: TypingAreaView = {
+        let typingAreaView = TypingAreaView()
+        typingAreaView.delegate = self
+        typingAreaView.translatesAutoresizingMaskIntoConstraints = false
+        return typingAreaView
+    }()
+    
     private var dataSource: [MessageEntity] = []
-    private var typingAreaView = TypingAreaView()
     
     //MARK: - Users
     private var sender: User?
@@ -82,8 +88,6 @@ class ChatView: UIView {
     //MARK: - Typing Area
     private func setUpTypingAreaView() {
         addSubview(typingAreaView)
-        typingAreaView.delegate = self
-        typingAreaView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             typingAreaView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
@@ -106,7 +110,7 @@ class ChatView: UIView {
 }
 
 // MARK: - Send Button
-extension ChatView: SendButtonDelegate {
+extension ChatView: TypingAreaViewDelegate {
     func messageTextViewColorConfigure(_ isDarkMode: Bool) {
         typingAreaView.messageTextViewColorConfigure(isDarkMode)
     }
@@ -125,19 +129,25 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = dataSource[indexPath.row]
-        if message.userId == recipientId {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.RecipientTableView.cell, for: indexPath) as? RecipientTableViewCell {
-                cell.setup(with: message)
-                return cell
-            }
+        
+        guard let recipientCell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.RecipientTableView.cell, for: indexPath)
+                as? RecipientTableViewCell else { return UITableViewCell() }
+        
+        guard let senderCell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.SenderTableView.cell, for: indexPath)
+                as? SenderTableViewCell else { return UITableViewCell() }
+        
+        switch message.userId {
+        case recipientId:
+            recipientCell.setup(with: message)
+            return recipientCell
+        case senderId:
+            senderCell.setup(with: message)
+            return senderCell
+        default:
+            return UITableViewCell()
         }
-        else if message.userId == senderId {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SenderTableView.cell, for: indexPath) as? SenderTableViewCell {
-                cell.setup(with: message)
-                return cell
-            }
-        }
-        return UITableViewCell()
     }
 }
 //MARK: - Constants
