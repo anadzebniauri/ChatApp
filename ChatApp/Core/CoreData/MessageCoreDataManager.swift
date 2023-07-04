@@ -21,12 +21,12 @@ class MessageCoreDataManager: CoreDataManager<MessageEntity> {
         saveContext()
         return messageEntity
     }
-
-    func fetchMessages(completion: @escaping ([MessageEntity]) -> Void) {
-        let result = fetch(entityName: Constants.entityName, predicate: nil, sortDescriptors: [NSSortDescriptor(key: Constants.key, ascending: true)])
+    
+    func fetchMessages(withPredicate predicate: NSPredicate? = nil, completion: @escaping ([MessageEntity]) -> Void) {
+        let sortDescriptor = NSSortDescriptor(key: Constants.key, ascending: true)
+        let result = fetch(entityName: Constants.entityName, predicate: predicate, sortDescriptors: [sortDescriptor])
         completion(result)
     }
-
 }
 
 private extension MessageCoreDataManager {
