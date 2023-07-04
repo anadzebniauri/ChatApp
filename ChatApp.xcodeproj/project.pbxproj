@@ -161,6 +161,7 @@
 		C1863B092A2CBD1B007D93DF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C11ABADA2A1CE89E00167ED0 /* User.swift */,
 				C1CD1A2B29FC3F3F0052BEEE /* RecipientTableViewCell.swift */,
 				C1CD1A2729FB16350052BEEE /* SenderTableViewCell.swift */,
 			);
@@ -240,7 +241,6 @@
 		C1D998D229F174B1009B3072 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C11ABADA2A1CE89E00167ED0 /* User.swift */,
 				C11ABAD82A1BA84000167ED0 /* UserManager.swift */,
 				C168F34E2A4B454C001B434D /* SwitcherState.swift */,
 			);

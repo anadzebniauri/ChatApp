@@ -38,12 +38,11 @@ class ChatAppViewController: UIViewController {
     
     //MARK: - Fetch Data
     private func getDataSource() {
-        chatAppViewModel.getDataSource { [weak self] messages in
-            guard let self else { return }
-            
-            chatAppViewModel.dataSource = messages
-            filterMessages()
-        }
+        chatAppViewModel.getDataSource(completion: {
+            DispatchQueue.main.async {
+                self.filterMessages()
+            }
+        })
     }
     
     private func filterMessages() {

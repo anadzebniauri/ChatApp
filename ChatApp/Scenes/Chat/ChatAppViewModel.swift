@@ -21,8 +21,12 @@ class ChatAppViewModel {
         return messageCoreDataManager.saveMessage(text: text, userId: userId)
     }
     
-    func getDataSource(completion: @escaping ([MessageEntity])-> Void) {
-        messageCoreDataManager.fetchMessages(completion: completion)
+    func getDataSource(completion: @escaping () -> Void) {
+        messageCoreDataManager.fetchMessages(completion: { [ weak self ] messages in
+            guard let self else { return }
+            self.dataSource = messages
+            completion()
+        })
     }
     
     private func isSentMessage (message: MessageEntity, userID: Int16) -> Bool {

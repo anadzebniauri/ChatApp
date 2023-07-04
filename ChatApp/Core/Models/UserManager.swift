@@ -18,13 +18,13 @@ class UserManager {
         let secondUser = NSPredicate(format: "userId == %d", secondUser.userId)
         
         messageCoreDataManager.fetchMessages(withPredicate: firstUser) { [weak self] firstUserMessages in
-            guard let self = self else { return }
+            guard let self else { return }
             self.firstUser.messages = firstUserMessages
-            
-            self.messageCoreDataManager.fetchMessages(withPredicate: secondUser) { secondUserMessages in
-                self.secondUser.messages = secondUserMessages
-                completion((self.firstUser, self.secondUser))
-            }
         }
+        messageCoreDataManager.fetchMessages(withPredicate: secondUser) { [ weak self ] secondUserMessages in
+            guard let self else { return }
+            self.secondUser.messages = secondUserMessages
+        }
+        completion((self.firstUser, self.secondUser))
     }
 }
